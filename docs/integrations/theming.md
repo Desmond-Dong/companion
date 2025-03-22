@@ -1,29 +1,29 @@
 ---
-title: Theming
+title: 主题
 id: 'theming'
 ---
 
-## Colors used
+## 使用的颜色
 
 ![Android](/assets/android.svg) &nbsp; Android<br /><br />
-Colors should be specified in hex format (e.g. `#0099ff`) and defining element colors through variable names is not supported.
-- `primary-background-color` for the navigation bar background color ![Android](/assets/android.svg)
-- `app-header-background-color` for the status bar background color ![Android](/assets/android.svg)
+颜色应以十六进制格式指定（例如 `#0099ff`），并不支持通过变量名称定义元素颜色。
+- `primary-background-color` 用于导航栏背景颜色 ![Android](/assets/android.svg)
+- `app-header-background-color` 用于状态栏背景颜色 ![Android](/assets/android.svg)
 
 ![iOS](/assets/iOS.svg)<br /><br />
-As of version 2020.3, the iOS app will accept colors specified in hex, rgb, hsl, rgba, hsla formats or using a valid [HTML color name](https://www.w3schools.com/colors/colors_names.asp); although formats with alpha values are recognized, using alpha values less than 100 % (or 1) will currently lead to a color mismatch. 2020.2 and earlier versions of the app require colors to be specified in hex.
-- `primary-background-color` for the background color of the web view ![iOS](/assets/iOS.svg)
-- `app-header-background-color` for the status bar background color ![iOS](/assets/iOS.svg)
-- `primary-color` for the pull-to-refresh control/spinner ![iOS](/assets/iOS.svg)
+从版本 2020.3 开始，iOS 应用将接受以十六进制、rgb、hsl、rgba、hsla 格式指定的颜色或使用有效的 [HTML 颜色名称](https://www.w3schools.com/colors/colors_names.asp)；虽然识别带有 alpha 值的格式，但当前使用少于 100%（或 1）的 alpha 值会导致颜色不匹配。2020.2 及更早版本的应用要求颜色以十六进制指定。
+- `primary-background-color` 用于网页视图的背景颜色 ![iOS](/assets/iOS.svg)
+- `app-header-background-color` 用于状态栏背景颜色 ![iOS](/assets/iOS.svg)
+- `primary-color` 用于下拉刷新控件/旋转器 ![iOS](/assets/iOS.svg)
 
-## Setting the app theme
+## 设置应用主题
 
-The process needed to get the app to match the Home Assistant theme is different depending on the app version used.
+使应用与 Home Assistant 主题匹配所需的过程因所使用的应用版本而异。
 
-### iOS apps after version 2020.2
+### 2020.2 之后的 iOS 应用
 
-The app will automatically match the selected theme in Home Assistant and will update in real time when the theme is changed.
+该应用将自动匹配 Home Assistant 中选择的主题，并在主题更改时实时更新。
 
-### iOS app version 2020.1 or older and Android app
+### 2020.1 或更早版本的 iOS 应用和 Android 应用
 
-To change the theme of the app you must use a [service call](https://www.home-assistant.io/docs/scripts/service-calls/) to `frontend.set_theme` in Home Assistant to change them. This will fire an event which the app can detect.
+要更改应用的主题，必须在 Home Assistant 中使用 [服务调用](https://www.home-assistant.io/docs/scripts/service-calls/) 调用 `frontend.set_theme` 来进行更改。这将触发一个应用可以检测到的事件。

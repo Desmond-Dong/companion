@@ -1,6 +1,6 @@
----
-title: Integrations
-id: 'troubleshooting-integrations'
----
+---  
+title: 集成  
+id: '故障排除-集成'  
+---  
 
-Troubleshooting integrations
+故障排除集成  

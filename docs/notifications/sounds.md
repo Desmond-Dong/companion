@@ -1,18 +1,18 @@
 ---
-title: "Sounds"
+title: "声音"
 id: "notification-sounds"
 ---
 
-Adding a custom sound to a notification allows you to easily identify the notification without even looking at your device. How to set a custom sound, depends on the operating system.
+为通知添加自定义声音使您能够轻松识别通知，而无需查看设备。如何设置自定义声音取决于操作系统。
 
- - ![Android](/assets/android.svg) On Android, notification sounds are linked to [notification channels/categories](basic.md#notification-channels). On your device, edit the channel settings to change the notification sound to another system sound or choose your own.
- - ![iOS](/assets/iOS.svg) Home Assistant for iOS comes with some notification sounds pre-installed, but you can also upload your own.
+ - ![Android](/assets/android.svg) 在Android上，通知声音与[通知渠道/类别](basic.md#notification-channels)相关联。在您的设备上，编辑频道设置以将通知声音更改为其他系统声音或选择您自己的声音。
+ - ![iOS](/assets/iOS.svg) Home Assistant for iOS 带有一些预安装的通知声音，但您也可以上传自己的声音。
 
 :::info
-The information below describes using custom notification sounds on iOS. For Android, go to [Settings](https://my.home-assistant.io/redirect/config/) > Companion app > Notification channels to change the sounds and refer to your device settings.
+以下信息描述了在iOS上使用自定义通知声音的方法。对于Android，前往[设置](https://my.home-assistant.io/redirect/config/) > 版权应用 > 通知渠道以更改声音并参考您的设备设置。
 :::
 
-Here is an example notification that uses one of the pre-installed sounds.
+这是一个使用预安装声音的通知示例。
 
 ```yaml
 automation:
@@ -22,64 +22,64 @@ automation:
   action:
     - action: notify.mobile_app_<your_device_id_here>
       data:
-        message: “Your Roommate arrived”
+        message: “你的室友到了”
         data:
           push:
             sound: "US-EN-Morgan-Freeman-Roommate-Is-Arriving.wav"
 ```
 
-> You must use the full filename (including extension) in the payload.
+> 您必须在有效负载中使用完整的文件名（包括扩展名）。
 
-## Custom push notification sounds
+## 自定义推送通知声音
 
-The iOS app allows you to use your own custom sounds in push notifications. The sounds must be formatted as 32bit float 48000Hz wav files. Make sure you know the filename of the sound as you will need to reference it in the `sound` field of the notification payload. To add sounds follow either of the two following methods:
+iOS应用允许您在推送通知中使用自定义声音。声音必须格式化为32位浮点48000Hz的wav文件。确保您知道声音的文件名，因为您需要在通知有效负载的`sound`字段中引用它。添加声音时可以通过以下两种方式之一进行：
 
-> *   You may need to restart your entire device before notification sounds can be played.
-> *   Uploading a file with the same name as an existing one will overwrite the original.
+> *   在通知声音播放之前，您可能需要重新启动整个设备。
+> *   上传一个与现有文件同名的文件将覆盖原文件。
 
-### Via iTunes
+### 通过iTunes
 
-1.  Connect the device to a PC or Mac running the latest version of iTunes.
-2.  Go to the device in iTunes.
-3.  Select "File Sharing" in the left-hand menu.
-4.  Select Home Assistant.
-5.  Drag and drop properly formatted sounds (32bit float 48000Hz wav files).
-6.  Click Sync in the lower right.
-7.  Once the sync is complete, disconnect the device from the computer.
-8.  On your iOS device, open the Home Assistant app.
-9.  Go to [Configuration](https://my.home-assistant.io/redirect/config/) -> Companion App -> Notifications -> Sounds.
-10. Tap the "Import sounds from iTunes File Sharing" button.
+1.  将设备连接到运行最新版本iTunes的PC或Mac。
+2.  在iTunes中选择设备。
+3.  在左侧菜单中选择“文件共享”。
+4.  选择Home Assistant。
+5.  拖放正确格式化的声音文件（32位浮点48000Hz的wav文件）。
+6.  点击右下角的同步。
+7.  一旦同步完成，断开设备与计算机的连接。
+8.  在您的iOS设备上，打开Home Assistant应用。
+9.  转到[配置](https://my.home-assistant.io/redirect/config/) -> 版权应用 -> 通知 -> 声音。
+10. 点击“从iTunes文件共享导入声音”按钮。
 
-Assuming that you correctly formatted the sounds they are now available to use in push notifications.
+假设您正确格式化了声音，现在可以在推送通知中使用。
 
-### Via Cloud Storage:
+### 通过云存储：
 
-For this method you need to have a cloud storage app (such as [Dropbox](https://www.dropbox.com), [Google Drive](https://www.google.com/drive/), [iCloud](https://www.icloud.com/), [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) etc.).
+对于这种方法，您需要有一个云存储应用（例如[Dropbox](https://www.dropbox.com)、[Google Drive](https://www.google.com/drive/)、[iCloud](https://www.icloud.com/)、[OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage)等）。
 
-1.  If you don't already have the iOS app for your cloud storage setup, find the appropriate app in the App Store, install and log in to it.
-2.  Upload your desired notification sounds to a convenient location on your cloud storage.
-3.  In the Home Assistant companion app, open the [Configuration](https://my.home-assistant.io/redirect/config/) menu from the sidebar and go to the Companion App section.
-4.  Under Settings, tap Notifications and then Sounds.
-5.  Tap "Import custom sound".
-6.  Navigate to the folder containing the sound or sounds you wish to add. Note you can switch between cloud providers using the Locations button in the upper-left corner.
-7.  Tap Select and then the files you wish to add. When you've selected all the files you want tap Done.
-8.  Restart your device.
+1.  如果您尚未为您的云存储设置iOS应用，请在App Store中找到适当的应用，安装并登录。
+2.  将您想要的通知声音上传到云存储的便捷位置。
+3.  在Home Assistant伴侣应用中，从侧边栏打开[配置](https://my.home-assistant.io/redirect/config/)菜单并转到伴侣应用部分。
+4.  在设置下，点击通知，然后点击声音。
+5.  点击“导入自定义声音”。
+6.  导航到您希望添加的声音文件所在的文件夹。注意，您可以使用左上角的“位置”按钮在云提供商之间切换。
+7.  点击选择，然后点击您希望添加的文件。当您选择完所有想要的文件后点击完成。
+8.  重启您的设备。
 
-## Importing sounds from iOS
+## 从iOS导入声音
 
-Apart from the tri-tone—the default text tone, which can be accessed with `sound: default`—the iOS system sounds are not imported into the Home Assistant companion app. These can however be imported through the following steps:
+除了三音调——默认文本音调，可以通过`sound: default`访问，iOS系统声音不会被导入到Home Assistant伴侣应用中。不过，可以通过以下步骤进行导入：
 
-1.  In the Home Assistant companion app, open the Companion App page from the Home Assistant [Configuration menu](https://my.home-assistant.io/redirect/config/).
-2.  Under Settings, tap Notifications and then Sounds.
-3.  Tap the "System" tab and then "Import system sounds".
-4.  After a few seconds you should be informed the files have been successfully imported.
-5.  Restart your device.
-6.  iOS sounds can now be used.
+1.  在Home Assistant伴侣应用中，从Home Assistant的[配置菜单](https://my.home-assistant.io/redirect/config/)打开伴侣应用页面。
+2.  在设置下，点击通知，然后点击声音。
+3.  点击“系统”标签，然后点击“导入系统声音”。
+4.  几秒钟后，您应该会收到文件已成功导入的通知。
+5.  重启您的设备。
+6.  现在可以使用iOS声音。
 
 <details>
-<summary>For a full list of sounds imported from iOS, click here.</summary>
+<summary>要查看从iOS导入的声音的完整列表，请点击这里。</summary>
 
-This list is representative for iOS 12, the actual list of imported sounds may vary depending on the configuration of your device and iOS version.
+此列表适用于iOS 12，实际导入的声音列表可能因您的设备和iOS版本的配置而有所不同。
 
 ```text
 3rdParty_DirectionDown_Haptic.caf
@@ -348,10 +348,10 @@ WorkoutStartAutoDetect.caf
 ```
 </details>
 
-## Pre-installed notification sounds
+## 预安装的通知声音
 
 <details>
-<summary>For a full list of sounds installed with the app, click here.</summary>
+<summary>要查看与应用一起安装的声音的完整列表，请点击这里。</summary>
 
 ```text
 US-EN-Alexa-Back-Door-Opened.wav

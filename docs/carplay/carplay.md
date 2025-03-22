@@ -1,31 +1,31 @@
 ---
-title: "Overview"
+title: "概述"
 id: "carplay"
 ---
 
 ![iOS](/assets/iOS.svg)
 
-Home Assistant offers a CarPlay experience. This will allow you to interact with various entities safely while driving your vehicle.
+Home Assistant 提供了一种 CarPlay 体验。这将允许您在驾驶车辆时安全地与各种实体进行交互。
 
-### Setup
+### 设置
 
-In order to use this integration you will need an iPhone as well as a vehicle with a head unit that supports CarPlay. Once you are signed in with your iPhone, you should be all set to use the Home Assistant icon on the CarPlay home screen.
+要使用此集成，您需要一部 iPhone 以及一辆支持 CarPlay 的车辆。一旦您在 iPhone 上登录，您应该可以使用 CarPlay 主屏幕上的 Home Assistant 图标。
 
-By default you won't see any relevant information in CarPlay, you need to open ***Companion App Settings → CarPlay***, and create your configuration. You can choose what tabs to display.
+默认情况下，您在 CarPlay 中不会看到任何相关信息，您需要打开 ***Companion App Settings → CarPlay*** 并创建您的配置。您可以选择显示哪些选项卡。
 
-### Tabs
+### 选项卡
 
-CarPlay has 4 tabs:
+CarPlay 有 4 个选项卡：
 
-- **Quick Access:** In your CarPlay configuration, you can decide what entities to display on the **Quick access** tab.
+- **快速访问：** 在您的 CarPlay 配置中，您可以决定在 **快速访问** 选项卡上显示哪些实体。
 
-- **Areas:** Brings easy access to your entities from the area in your home.
-- **Control:** Let's you access entities grouped by their domain.
-- **Servers:** Allows you to switch between servers.
+- **区域：** 轻松访问您家中区域的实体。
+- **控制：** 让您按域访问分组的实体。
+- **服务器：** 允许您在服务器之间切换。
 
 ![CarPlay](/assets/ios/CarPlay.png)
 
-### Supported Actionable Domains
+### 支持的可操作域
 
 - `button`
 - `cover`

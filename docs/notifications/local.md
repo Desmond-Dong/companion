@@ -1,49 +1,49 @@
 ---
-title: "Local Push"
+title: "本地推送"
 id: "notification-local"
 ---
 
-Local Push uses the [WebSocket API](https://developers.home-assistant.io/docs/api/websocket) to deliver notifications to your device instead of using Apple's Push Notification Service or Google's Firebase Cloud Messaging.
+本地推送使用 [WebSocket API](https://developers.home-assistant.io/docs/api/websocket) 来将通知发送到您的设备，而不是使用苹果的推送通知服务或谷歌的 Firebase 云消息传递。
 
-| Platform | Version |
+| 平台 | 版本 |
 | -------- | ------- |
 | ![iOS](/assets/iOS.svg) | 2021.7 |
 | ![macOS](/assets/macOS.svg) | 2021.7 |
 | ![Android](/assets/android.svg) | 2022.2 |
 
 :::info
-Local Push requires HA core-2021.6 or later in combination with a supported platform above.
+本地推送要求 HA core-2021.6 或更高版本，并结合上述受支持的平台。
 :::
 
-## Requirements
+## 需求
 
-![iOS](/assets/iOS.svg) has a few limitations:
+![iOS](/assets/iOS.svg) 有一些限制：
 
-1. Local Push will only occur when connected via Internal URL, and requires configuring SSIDs to consider internal. This is an Operating System limitation as this feature is designed for low or minimal connectivity situations.
-2. Although small, battery usage will be increased by a small amount when Local Push is enabled as it maintains an ongoing connection to your HA server. You can disable it in the connection settings for your server.
+1. 本地推送仅在通过内部 URL 连接时发生，并且需要配置 SSID 以被视为内部。这是一个操作系统限制，因为此功能旨在用于低或最小连接情况。
+2. 尽管很小，但启用本地推送时，电池使用量会略有增加，因为它与您的 HA 服务器保持持续连接。您可以在服务器的连接设置中禁用它。
 
-![macOS](/assets/macOS.svg) will always maintain a Local Push connection as long as the app is running and has no additional battery impact.
+![macOS](/assets/macOS.svg) 只要应用程序正在运行，将始终保持本地推送连接，并且不会对电池产生额外影响。
 
-![Android](/assets/android.svg) will maintain a Local Push connection as specified by your configuration. In order to keep this connection the app will need to create a persistent notification, you will be able to minimize the notification channel for `Persistent Connection` on your device to hide it. Depending on your setting this may have adverse affects on battery life. If you are using the minimal flavor you will want to keep this setting as "Always" and consider granting the app background access to make the connection more reliable.
+![Android](/assets/android.svg) 将根据您的配置保持本地推送连接。为了保持此连接，应用程序需要创建一个持久通知，您可以最小化设备上的 `持久连接` 通知频道以隐藏它。根据您的设置，这可能对电池寿命产生不利影响。如果您使用的是最小版本，您将希望将此设置保持为“始终”，并考虑授予应用程序后台访问权限，以使连接更加可靠。
 
-## Rate limits
+## 速率限制
 
-Notifications delivered via Local Push do not count against [Rate Limits](details.md).
+通过本地推送发送的通知不计入 [速率限制](details.md)。
 
-## Configuration
+## 配置
 
-![iOS](/assets/iOS.svg) can disable Local Push by editing the internal connection settings for the server. Go to [Settings](https://my.home-assistant.io/redirect/config/) then Companion App and tap on the server row, then tap Internal URL.
+![iOS](/assets/iOS.svg) 可以通过编辑服务器的内部连接设置来禁用本地推送。转到 [设置](https://my.home-assistant.io/redirect/config/)，然后选择“伴侣应用”，点击服务器行，然后点击内部 URL。
 
-![macOS](/assets/macOS.svg) does not have an option to disable Local Push, see requirements above for more information.
+![macOS](/assets/macOS.svg) 没有禁用本地推送的选项，请参阅上面的要求以获取更多信息。
 
-![Android](/assets/android.svg) can configure Local Push settings in [Settings](https://my.home-assistant.io/redirect/config/) then Companion App and tap on the server row, then select Persistent Connection.
+![Android](/assets/android.svg) 可以在 [设置](https://my.home-assistant.io/redirect/config/) 中配置本地推送设置，然后选择“伴侣应用”，点击服务器行，然后选择“持久连接”。
 
-## Viewing Status
-![iOS](/assets/iOS.svg) and ![macOS](/assets/macOS.svg):
-You can view the status of Local Push in the Server section Companion App in [Settings](https://my.home-assistant.io/redirect/config/). This will show one of a few statuses:
+## 查看状态
+![iOS](/assets/iOS.svg) 和 ![macOS](/assets/macOS.svg):
+您可以在 [设置](https://my.home-assistant.io/redirect/config/) 中的服务器部分伴侣应用中查看本地推送的状态。这将显示几种状态之一：
 
-* Disabled, when toggled off by the connection setting or not currently on the internal network.
-* Unsupported, when the iOS version does not support Local Push.
-* Unavailable, when the core version does not support Local Push.
-* Establishing, when it is initially connecting to the server.
-* Available, when it is connected and ready for pushes. The number after indicates the number of messages received since the connection began, which can be useful for debugging.
+* 禁用，当通过连接设置关闭或当前不在内部网络上时。
+* 不支持，当 iOS 版本不支持本地推送时。
+* 不可用，当核心版本不支持本地推送时。
+* 正在建立，当它正在初次连接到服务器时。
+* 可用，当它已连接并准备好接受推送时。后面的数字表示自连接开始以来接收到的消息数量，这在调试时可能很有用。

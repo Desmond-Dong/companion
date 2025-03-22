@@ -1,49 +1,49 @@
 ---
-title: "Actions"
+title: "操作"
 id: "actions"
 ---
 
-![Apple](/assets/apple.svg) Specific
+![Apple](/assets/apple.svg) 具体
 
-Actions is a generic system that allows you to easily integrate the Home Assistant automations system into multiple areas of iOS, [Apple Watch](/apple-watch/apple-watch.md), and CarPlay.
+操作是一个通用系统，允许您轻松将Home Assistant自动化系统集成到iOS的多个领域、[Apple Watch](/apple-watch/apple-watch.md)和CarPlay中。
 
-## Creating Actions
+## 创建操作
 
-You can create actions either from within the app itself or in your Home Assistant `configuration.yaml`
+您可以在应用程序内部或在Home Assistant的`configuration.yaml`中创建操作。
 
-### Creating Actions in the App
+### 在应用程序中创建操作
 
-Actions are created from the Actions section of Companion App in [Configuration](https://my.home-assistant.io/redirect/config/) page within the companion App for iOS. Each action has required fields depending on your device:
+操作从Companion App的操作部分创建，在iOS的[配置](https://my.home-assistant.io/redirect/config/)页面中。每个操作都有根据设备所需的字段：
 
-- `Name`: the name of the action, this will be returned in the [Home Assistant event](https://www.home-assistant.io/docs/configuration/events/) fired by the app.
-- `Server`: if you have multiple Home Assistant servers connected, select the server the action should be sent to.
-- `Text`: the descriptive text shown on the phone and watch. It is best to keep this relatively short as there is limited space on each action's button.
-- `Text Color`*: the color of the text defined above.
-- `Background Color`*: the color of the button created for the action. **(Requires `use_custom_colors`)**
-- `Icon`: an icon to display to the left of the text on the action's button.
-- `Icon Color`: the color of the icon on the action's button.
-- `Show in CarPlay`: boolean to display or hide action in CarPlay.
-- `Show in Watch`: boolean to display or hide action in Apple Watch.
-- `Use custom colors`**: boolean to enable custom colors in widgets and Apple watch, initially it is offered a tile-card UI, enabling this allows you to change background and text color. (Available from iOS App v2024.7.1)
+- `名称`: 操作的名称，这将在应用触发的[Home Assistant事件](https://www.home-assistant.io/docs/configuration/events/)中返回。
+- `服务器`: 如果您连接了多个Home Assistant服务器，请选择操作应发送到的服务器。
+- `文本`: 在手机和手表上显示的描述性文本。最好保持相对简短，因为每个操作的按钮上空间有限。
+- `文本颜色`*: 上述定义的文本颜色。
+- `背景颜色`*: 为操作创建的按钮的颜色。 **(需要`use_custom_colors`)**
+- `图标`: 显示在操作按钮文本左侧的图标。
+- `图标颜色`: 操作按钮上图标的颜色。
+- `在CarPlay中显示`: 布尔值，用于在CarPlay中显示或隐藏操作。
+- `在手表中显示`: 布尔值，用于在Apple Watch中显示或隐藏操作。
+- `使用自定义颜色`**: 布尔值，用于启用小部件和Apple手表中的自定义颜色，最初提供的是瓦片卡片UI，启用后可以更改背景和文本颜色。 （可从iOS App v2024.7.1开始提供）
 
-\* Requires `use_custom_colors` **true**
+\* 需要`use_custom_colors` **true**
 
-** Available from iOS App v2024.7.1  
+** 从iOS App v2024.7.1可用  
 
-For the three color fields, the color is selected by tapping the color-picker circle in each field.
+对于这三个颜色字段，可通过点击每个字段中的颜色选择器圆圈选择颜色。
 
-### Creating Actions in Home Assistant
+### 在Home Assistant中创建操作
 
-You can define actions in your Home Assistant `configuration.yaml`. This requires at least Home Assistant 0.115 and version 2020.6. The following is an example entry.
+您可以在Home Assistant的`configuration.yaml`中定义操作。这需要至少Home Assistant 0.115和2020.6版本。以下是一个示例条目。
 
 ```yaml
 ios:
   actions:
     - name: Fred
-      background_color: "#000000" # Requires `use_custom_colors`
+      background_color: "#000000" # 需要 `use_custom_colors`
       label:
         text: "Hello, World"
-        color: "#ff0000" # Requires `use_custom_colors`
+        color: "#ff0000" # 需要 `use_custom_colors`
       icon:
         icon: earth
         color: "#ffffff"
@@ -52,84 +52,84 @@ ios:
       use_custom_colors: true
 ```
 
-Colors should be in hex format and icons should be from the [mdi](https://materialdesignicons.com/) set.
+颜色应为十六进制格式，图标应来自[mdi](https://materialdesignicons.com/)集合。
 
-After saving these changes you will need to restart Home Assistant and then, in the Companion App, go to the Actions section of the Companion App section of [Configuration](https://my.home-assistant.io/redirect/config/). It should sync automatically, but you can also pull-to-refresh to sync.
+保存这些更改后，您需要重启Home Assistant，然后在Companion App中，前往[配置](https://my.home-assistant.io/redirect/config/)中Companion App的操作部分。它应该自动同步，但您也可以下拉刷新以同步。
 
-When multiple servers are connected to the app there is no need to specify the `server` value in `configuration.yaml`, the app will automatically detect the origin of the action when imported.
+当多个服务器连接到该应用程序时，无需在`configuration.yaml`中指定`server`值，应用程序将自动检测导入操作的来源。
 
-## Using Actions
+## 使用操作
 
-After having filled in all action data (text, name, etc.), tap the **Create automation** button.
+在填写完所有操作数据（文本、名称等）后，点击**创建自动化**按钮。
 
-*Alternatively:*
+*或者：*
 
-When an action button is pressed a `ios.action_fired` event is fired on Home Assistant's event bus. The event data consists of a JSON-formatted dictionary of attributes relating to the action.
+当按下操作按钮时，会在Home Assistant的事件总线上触发一个`ios.action_fired`事件。事件数据由一个JSON格式的包含与该操作相关的属性的字典组成。
 
-| Attribute    | Value                                                                                                                                                                                                                             |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`    | Child dictionary relating the user that triggered the event and the ID of the event                                                                                                                                               |
-| `data`       | Child dictionary containing key information about the action and its origin                                                                                                                                                       |
-| `event_type` | Always `ios.action_fired`                                                                                                                                                                                                         |
-| `origin`     | Always `REMOTE`                                                                                                                                                                                                                   |
-| `time_fired` | Data and time the action was fired, formatted as an [ISO timestamp](https://en.wikipedia.org/wiki/ISO_8601) , e.g. midnight on Christmas day in Lapland (Eastern European Time, UTC+2), would be `2019-12-25T00:00.000000+02:00`. |
+| 属性        | 值                                                                                                                                                                                                                             |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `context`   | 与触发事件的用户及事件ID相关的子字典                                                                                                                                                                                                      |
+| `data`      | 包含关于操作及其来源的关键信息的子字典                                                                                                                                                                                                 |
+| `event_type`| 始终为`ios.action_fired`                                                                                                                                                                                                          |
+| `origin`    | 始终为`REMOTE`                                                                                                                                                                                                                  |
+| `time_fired`| 触发操作的日期和时间，格式为[ISO时间戳](https://en.wikipedia.org/wiki/ISO_8601)，例如，在拉普兰的圣诞节午夜（东欧时间，UTC+2）将为`2019-12-25T00:00.000000+02:00`。 |
 
-The attributes contained within `data` are:
+`data`中包含的属性为：
 
-| Attribute | Value |
-| ------ | ------ |
-| `actionID` | A unique identifier for the action. |
-| `actionName` | The name of the action as given in the `Name` field when creating the action in iOS or `action` field when using Android. |
-| `sourceDeviceID` | The device ID set in the Companion App section of [Configuration](https://my.home-assistant.io/redirect/config/) on your device. |
-| `sourceDeviceName` | The name of the device from which the action was triggered. This is the Device Name set in iOS under Settings App>General>About or for Android it is set in Settings > About Phone. |
-| `sourceDevicePermanentID` | A unique identifier of the device through which the action was triggered |
-| `triggerSource` | What part of iOS the action with fired from. Either: `widget` for the Today screen, `appShortcut` for quick actions accessed through 3D touch or `watch` if fired from an Apple Watch. When triggering from Apple's CarPlay the source will be `carPlay`. |
+| 属性              | 值                                                                                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `actionID`       | 操作的唯一标识符。                                                                                                                                           |
+| `actionName`     | 在iOS中创建操作时在`名称`字段中给定的操作名称或在Android中使用的`操作`字段。                                                                                       |
+| `sourceDeviceID` | 在您的设备的Companion App的[配置](https://my.home-assistant.io/redirect/config/)部分中设置的设备ID。                                                             |
+| `sourceDeviceName`| 触发操作的设备名称。此设备名称在iOS的设置应用程序中设置，路径为设置>通用>关于；在Android设备中设置在设置>关于手机中。 |
+| `sourceDevicePermanentID` | 通过该设备触发操作的唯一标识符。                                                                                                           |
+| `triggerSource`  | 操作的触发来源。可以是：`widget`（来自今日视图）、`appShortcut`（通过3D触摸访问的快速操作）或`watch`（如果是来自Apple Watch触发）。触发自Apple的CarPlay时，来源将是`carPlay`。 |
 
-The attributes contained within `context` are:
+`context`中包含的属性为：
 
-| Attribute   | Value                                                                                                                                                   |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`        | A unique one-time ID for the event.                                                                                                                     |
-| `parent_id` | Always `null`.                                                                                                                                          |
-| `user_id`   | The Home Assistant [user ID](https://www.home-assistant.io/docs/authentication/#user-accounts) used to authorise the companion app with Home Assistant. |
+| 属性          | 值                                                                                                                                                  |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | 事件的唯一一次性ID。                                                                                                                                 |
+| `parent_id`   | 始终为`null`。                                                                                                                                      |
+| `user_id`     | 用于授权Companion App与Home Assistant连接的Home Assistant [用户ID](https://www.home-assistant.io/docs/authentication/#user-accounts)。 |
 
-Actions can be used to trigger automations within Home Assistant. An example `configuration.yaml` entry might be:
+操作可以用来触发Home Assistant中的自动化。一个示例的`configuration.yaml`条目可能是：
 
-Example
+示例
 
 ```yaml
 automation:
-  - alias: "Action Turn Lights Off"
+  - alias: "操作关闭灯光"
     initial_state: true
     trigger:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: "Bed Time"
+          actionName: "就寝时间"
     action:
       - action: light.turn_off
         entity_id: group.all_lights
 ```
 
-Note that attributes located in the `data` and `context` are accessed through `event_data` and `event_context` respectively within the automation.
+请注意，位于`data`和`context`中的属性通过`event_data`和`event_context`分别访问。
 
-You can use the Events page within Home Assistant's developer tools to show all information contained with the event for a particular event by subscribing to `ios.action_fired` and triggering the action from you device.
+您可以使用Home Assistant开发者工具中的事件页面通过订阅`ios.action_fired`并从您的设备触发操作，显示特定事件包含的所有信息。
 
 ## Apple Watch
 
-The [Apple Watch App](/apple-watch/apple-watch.md) provides access to actions you have created. Once you have created an action within the Actions page, open the Home Assistant watch and the action list should sync. Actions triggered on Apple Watch carry a [slightly different payload](/apple-watch/actions.md).
+[Apple Watch应用](/apple-watch/apple-watch.md)提供对您创建的操作的访问。一旦您在操作页面中创建了操作，打开Home Assistant手表，操作列表应该会同步。在Apple Watch上触发的操作携带[稍微不同的有效载荷](/apple-watch/actions.md)。
 
-## Home Screen Quick Actions
+## 主屏幕快捷操作
 
-[Home Screen Quick Actions](https://support.apple.com/guide/iphone/keep-apps-handy-iph414564dba/ios#iph1ffcbd691) provides a convenient shortcut to your actions. To access it, press and hold the Home Assistant companion app icon on your home screen.
+[主屏幕快捷操作](https://support.apple.com/guide/iphone/keep-apps-handy-iph414564dba/ios#iph1ffcbd691)为您的操作提供了方便的快捷方式。要访问它，请长按主屏幕上的Home Assistant Companion App图标。
 
-## Today View Widget
+## 今日视图小部件
 
-**(Discontinued in iOS App v2024.8, use iOS widgets instead)**
+**（在iOS App v2024.8中停用，请改用iOS小部件）**
 
-The [Today View Widget](https://support.apple.com/en-gb/HT207122) is another route through which actions can be fired. To add the Home Assistant widget to your Today View:
+[今日视图小部件](https://support.apple.com/en-gb/HT207122)是触发操作的另一种途径。要将Home Assistant小部件添加到今日视图：
 
-1.  Swipe right while on the Home screen or Lock screen.
-2.  Scroll to the very bottom and tap the Edit button.
-3.  Find the "Home Assistant - Actions" widget in the "More Widgets" list and then tap the green + button to add it.
-4.  Rearrange as you'd like and then tap Done.
+1. 在主屏幕或锁屏时向右滑动。
+2. 滚动到最底部，点击编辑按钮。
+3. 在“更多小部件”列表中找到“Home Assistant - 操作”小部件，然后点击绿色的+按钮添加。
+4. 按照您的需要重新排列，然后点击完成。

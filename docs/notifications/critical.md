@@ -1,19 +1,19 @@
 ---
-title: "Critical notifications"
+title: "重要通知"
 id: "critical-notifications"
 ---
-The configuration and behavior of critical notifications differ between iOS and Android.
+重要通知的配置和行为在 iOS 和 Android 之间有所不同。
 
 ## ![iOS](/assets/iOS.svg)
-Critical notifications were introduced in iOS 12 and are designed for sending high-priority notifications that you don't want to miss - for example security system, water leak sensor, and smoke/CO2 alarm alerts.
+在 iOS 12 中引入了重要通知，旨在发送您不想错过的高优先级通知——例如安全系统、水漏传感器和烟雾/CO2 警报。
 
-iOS gives special priority to this type of notification. Critical alerts always appear at the top of your lock screen above all other notifications, and play a sound even if Do Not Disturb is enabled or the iPhone is muted. Because we never want you to miss a critical notification, they are allowed to bypass the app [notification rate limits](details.md) as well.
+iOS 对这种类型的通知给予了特别的优先级。重要警报总是出现在锁定屏幕的顶部，超出所有其他通知，即使在启用“请勿打扰”模式或 iPhone 静音时也会播放声音。因为我们不希望您错过任何重要通知，它们也被允许绕过应用的 [通知速率限制](details.md)。
 
-![iOS](/assets/iOS.svg)example
+![iOS](/assets/iOS.svg)示例
 
 ```yaml
 automations:
-  - alias: "Fire Detected iOS"
+  - alias: "火灾检测 iOS"
 
     trigger:
       - platform: state
@@ -23,22 +23,21 @@ automations:
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          title: "Wake up!"
-          message: "The house is on fire and the cat's stuck in the dryer!"
+          title: "快醒醒！"
+          message: "房子着火了，猫被困在烘干机里！"
           data:
             push:
               sound:
                 name: "default"
                 critical: 1
                 volume: 1.0
-
 ```
-If you have previously read the [sounds documentation](sounds.md) this syntax should be mostly familiar. Note the example expands the `sound` attribute to include the `critical: 1` flag, and `volume: 1.0` to set the volume to 100 %.
+如果您之前阅读过 [声音文档](sounds.md)，这个语法应该大致是熟悉的。请注意，示例扩展了 `sound` 属性以包括 `critical: 1` 标志，并将 `volume: 1.0` 设置为 100%。
 
-Alternatively, you can use the [`interruption-level` syntax](basic.md#interruption-level) to make a notification critical.
+或者，您可以使用 [`interruption-level` 语法](basic.md#interruption-level) 来使通知变为重要。
 ```yaml
 automations:
-  - alias: "Dog barking loudly"
+  - alias: "狗叫得很大声"
 
     trigger:
       - platform: numeric_state
@@ -48,33 +47,32 @@ automations:
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          title: "Snoopy is going to wake the neighbors"
-          message: "The dog is barking and likely to wake the neighbors!"
+          title: "史努比要吵醒邻居了"
+          message: "狗在叫，可能会吵醒邻居！"
           data:
             push:
               interruption-level: critical
-
 ```
 
-For **CarPlay** users, it's also worth mentioning that critical notifications are the only ones that can appear on the car's built-in display, making them very useful if you want to know when something critical happens while you're driving.
+对于**CarPlay**用户，也值得一提的是，重要通知是唯一可以出现在汽车内置显示屏上的通知，如果您想知道在驾驶时发生了什么紧急情况，它们会非常有用。
 
 ## ![Android](/assets/android.svg)
 
 :::info
-The below options will only impact when [local push notifications](local.md) are not used. If you are on the minimal version you do not need to worry about this.
+以下选项仅在未使用 [本地推送通知](local.md) 的情况下产生影响。如果您使用的是最小版本，则无需担心此问题。
 :::
 
-For Android, notifications will appear immediately in most cases. However, in some cases (such as phone being stationary or when screen has been turned off for prolonged period of time), default notifications will not ring the phone until screen is turned on.
+对于 Android，通知通常会立即出现。但是，在某些情况下（例如手机静止不动或屏幕关闭很长时间），默认通知在屏幕开启之前不会响铃。
 
-To override that behavior, set `priority: high` and `ttl: 0`.
+要覆盖此行为，请设置 `priority: high` 和 `ttl: 0`。
 
-By default they also do not override Do Not Disturb settings, if you would like to override this you will need to use [notification channels](basic.md#notification-channels). 
+默认情况下，它们也不会覆盖“请勿打扰”设置，如果您希望覆盖此设置，则需要使用 [通知通道](basic.md#notification-channels)。
 
-![Android](/assets/android.svg) &nbsp; Android example
+![Android](/assets/android.svg) &nbsp; Android 示例
 
 ```yaml
 automations:
-  - alias: "Fire Detected android"
+  - alias: "火灾检测 Android"
 
     trigger:
       - platform: state
@@ -84,21 +82,21 @@ automations:
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          title: "Wake up!"
-          message: "The house is on fire and the cat's stuck in the dryer!"
+          title: "快醒醒！"
+          message: "房子着火了，猫被困在烘干机里！"
           data:
             ttl: 0
             priority: high
 ```
 
-### ![Android](/assets/android.svg) Alarm Stream
-You can also force the notification to play from the alarm stream so it will make the device ring even if on vibrate/silent ringer mode. Users on Android 7 and below can still use the `channel` example below as we are just using it to override the default notification behavior for sound. In order to make a notification show up immediately and make a sound regardless of ringer mode follow one of the examples below.
+### ![Android](/assets/android.svg) 警报流
+您还可以强制通知从警报流中播放，这样即使在震动/静音模式下，设备也会响铃。Android 7 及以下用户仍然可以使用下面的 `channel` 示例，因为我们仅使用它来覆盖默认通知的声音行为。为了使通知立即显示并发出声音，无论铃声模式如何，请遵循以下示例之一。
 
-Using this method to can send a normal notification:
+使用此方法可以发送普通通知：
 
 ```yaml
 automations:
-  - alias: "Fire Detected Android alarm stream"
+  - alias: "火灾检测 Android 警报流"
     trigger:
       - platform: state
         entity_id: sensor.smoke_alarm
@@ -107,21 +105,20 @@ automations:
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          title: "Wake up!"
-          message: "The house is on fire and the cat's stuck in the dryer!"
+          title: "快醒醒！"
+          message: "房子着火了，猫被困在烘干机里！"
           data:
             ttl: 0
             priority: high
             channel: alarm_stream
 ```
 
-
-### ![Android](/assets/android.svg) Text To Speech Alarm Stream
-Or you can use Text To Speech to speak the notification:
+### ![Android](/assets/android.svg) 语音合成警报流
+或者，您可以使用语音合成来朗读通知：
 
 ```yaml
 automations:
-  - alias: "Fire Detected TTS alarm"
+  - alias: "火灾检测 TTS 警报"
 
     trigger:
       - platform: state
@@ -135,15 +132,15 @@ automations:
             ttl: 0
             priority: high
             media_stream: alarm_stream
-            tts_text: "The house is on fire and the cat's stuck in the dryer!"
+            tts_text: "房子着火了，猫被困在烘干机里！"
 ```
 
-### ![Android](/assets/android.svg) Text To Speech Alarm Stream Max Volume
-Alternatively using Text To Speech you can also make the notification speak as loud as it can, and then revert back to the original volume level:
+### ![Android](/assets/android.svg) 语音合成警报流最大音量
+另外，使用语音合成时，您还可以调整通知的音量到最大，然后再恢复到原始音量级别：
 
 ```yaml
 automations:
-  - alias: "Fire Detected TTS loud"
+  - alias: "火灾检测 TTS 大声"
 
     trigger:
       - platform: state
@@ -158,5 +155,4 @@ automations:
             ttl: 0
             priority: high
             media_stream: alarm_stream_max
-            tts_text: "The house is on fire and the cat's stuck in the dryer!"
-```
+            tts_text: "房子着火了，猫被困在烘干机里！"

@@ -1,52 +1,52 @@
 ---
-title: "Sharing"
+title: "分享"
 id: 'sharing'
 ---
 
-This feature will be available in the following app versions:
+此功能将在以下应用版本中可用：
 
 | ![iOS](/assets/iOS.svg) | ![Android](/assets/android.svg) Android |
 | ----------------------------- | --------------------------------------- |
 | 2020.7                        | 2.5.0                                   |
 
 
-The companion apps let you share to your Home Assistant server from any application that allows you to share. The apps will fire a `mobile_app.share` event with some event data for you to automate with.
+配套应用允许你从任何允许分享的应用程序中向你的 Home Assistant 服务器分享。应用程序会触发一个 `mobile_app.share` 事件，并附带一些事件数据供你自动化使用。
 
-Both of the apps will provide event data for either `url` or `text` depending on which application the share came from. iOS users will get event data for `entered` which will contain any text sent with the share. Android users will get event data for `caller` which will contain the app that the share event came from.
+这两个应用都会提供关于 `url` 或 `text` 的事件数据，具体取决于分享来自哪个应用程序。iOS 用户将获取关于 `entered` 的事件数据，其中包含与分享一起发送的任何文本。Android 用户将获取关于 `caller` 的事件数据，其中包含分享事件来自的应用。
 
-Example event data for the Android app:
+Android 应用的示例事件数据：
 
 ```json
 {
     "event_type": "mobile_app.share",
     "data": {
         "caller": "android-app://com.android.chrome",
-        "subject": "Webpage Title",
+        "subject": "网页标题",
         "url": "https://www.example.xom",
-        "text": "TEXT",
-        "device_id": "DEVICE_ID"
+        "text": "文本",
+        "device_id": "设备_ID"
     },
     "origin": "REMOTE",
     "time_fired": "2020-09-25T01:06:48.512587+00:00",
     "context": {
         "id": "ID",
         "parent_id": null,
-        "user_id": "USER_ID"
+        "user_id": "用户_ID"
     }
 }
 ```
 
-Example event data for the iOS app:
+iOS 应用的示例事件数据：
 
 ```json
 {
     "event_type": "mobile_app.share",
     "data": {
-        "entered": "Text that I typed",
+        "entered": "我输入的文本",
         "sourceDeviceID": "iphone_11_pro_debug",
         "sourceDeviceName": "iPhone 11 Pro",
-        "sourceDevicePermanentID": "DEVICE_ID",
-        "text": "Home Assistant automations system into multiple areas of iOS ",
+        "sourceDevicePermanentID": "设备_ID",
+        "text": "Home Assistant 自动化系统进入 iOS 的多个区域",
         "url": "https://www.example.com"
     },
     "origin": "REMOTE",
@@ -54,7 +54,6 @@ Example event data for the iOS app:
     "context": {
         "id": "ID",
         "parent_id": null,
-        "user_id": "USER_ID"
+        "user_id": "用户_ID"
     }
 }
-```

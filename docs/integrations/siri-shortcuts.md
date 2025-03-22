@@ -1,128 +1,128 @@
 ---
-title: "Siri Shortcuts"
+title: "Siri 快捷指令"
 id: siri-shortcuts
 ---
 
 ![iOS](/assets/iOS.svg)<br />
-With iOS 13 or later and the Home Assistant Companion App, you can take advantage of the power of Siri Shortcuts to carry out Home Assistant tasks with a tap or by using voice commands.
+通过 iOS 13 或更高版本以及 Home Assistant Companion App，您可以利用 Siri 快捷指令的强大功能，通过点击或语音命令来执行 Home Assistant 任务。
 
-## Getting Started - Example Shortcut
+## 开始使用 - 示例快捷指令
 
-As an example, if you wanted to create a shortcut to turn on a light (`light.porch` in this example):
+作为示例，如果您想创建一个打开灯光的快捷指令（在此示例中为 `light.porch`）：
 
-1. Open the Shortcuts app (included by default with iOS, can be re-installed from the [App Store](https://apps.apple.com/us/app/shortcuts/id915249334) if you deleted it)
-2. Tap the Plus icon at the top right to create a new shortcut.
-3. Tap Add Action and add a "Dictionary" item.
-4. In the Dictionary item, tap "Add new item", tap "Text" then add `entity_id` as the key and `light.porch` as the text.
-5. Tap the large plus to add another action, search for "Home Assistant" and select "Call Service".
-6. Tap "Service" which is highlighted in "Call Service with data".
-7. Scroll through the list of available services and find `light.turn_on`.
-8. Tap the arrow next at the end of the "Call Service with data" line and in the "Server" field select the Home Assistant server you wish to perform the action on.
-9. As long as the Dictionary action is above the Home Assistant action there is no need to enter anymore details. If you prefer not to use the Dictionary action, you can select "Show More" and enter the action data in JSON format in the "Service Data" field.
-10. Tap next and enter or record a name/phrase to use with "Hey, Siri" to trigger the shortcut.
+1. 打开快捷指令应用（默认包含在 iOS 中，如果您删除了，可以从 [App Store](https://apps.apple.com/us/app/shortcuts/id915249334) 重新安装）
+2. 点击右上角的加号图标以创建一个新的快捷指令。
+3. 点击添加操作并添加一个“字典”项。
+4. 在字典项中，点击“添加新项”，点击“文本”，然后添加 `entity_id` 作为键，并将 `light.porch` 作为文本。
+5. 点击大型加号以添加另一个操作，搜索“Home Assistant”并选择“调用服务”。
+6. 点击“服务”，该选项在“调用服务时使用数据”中突出显示。
+7. 在可用服务列表中滚动并找到 `light.turn_on`。
+8. 点击“调用服务时使用数据”行末的箭头，在“服务器”字段中选择您希望执行此操作的 Home Assistant 服务器。
+9. 只要字典操作位于 Home Assistant 操作的上方，就无需输入更多详细信息。如果您不希望使用字典操作，可以选择“显示更多”并在“服务数据”字段中按 JSON 格式输入操作数据。
+10. 点击下一步并输入或录制一个名称/短语，以与“嘿 Siri”一起触发该快捷指令。
 
-The final shortcut should look similar to this:
+最终的快捷指令应该类似于这样：
 
-<img className="center_image" alt="Example of a completed Siri Shortcut as described above" src="/assets/siri-shortcut-example.jpg" />
+<img className="center_image" alt="上述已完成的 Siri 快捷指令示例" src="/assets/siri-shortcut-example.jpg" />
 
-## Shortcut Flow
+## 快捷指令流程
 
-In the previous example we will used the Dictionary action to define our action data, this is an example of one action provide data to a subsequent action in the Shortcut flow. These data can come from other apps or other actions provided by Home Assistant, such as Render Text to get the state of an entity in Home Assistant. By default empty fields will try to use data on your device's clipboard if no other flow or payload data is provided.
+在前面的示例中，我们使用字典操作来定义我们的操作数据，这是一个操作向快捷指令流程中的后续操作提供数据的示例。这些数据可以来自其他应用程序或 Home Assistant 提供的其他操作，例如渲染文本以获取 Home Assistant 中实体的状态。默认情况下，如果未提供其他流程或有效负载数据，则空字段将尝试使用您设备剪贴板上的数据。
 
-## Actions
+## 操作
 
-### Call Service
+### 调用服务
 
-You can call any action set up in Home Assistant (see the [Actions Page in Developer Tools](https://www.home-assistant.io/docs/tools/dev-tools/)). As used in the [example above](#getting-started---example-shortcut).
+您可以调用在 Home Assistant 中设置的任何操作（请参见 [开发工具中的操作页面](https://www.home-assistant.io/docs/tools/dev-tools/)）。如上 [示例所示](#getting-started---example-shortcut)。
 
-### Fire Event
+### 触发事件
 
-Fires an event on to the [Home Assistant Event Bus](https://www.home-assistant.io/docs/configuration/events/)
+向 [Home Assistant 事件总线](https://www.home-assistant.io/docs/configuration/events/) 触发事件。
 
 :::tip
-Must be valid JSON.
+必须是有效的 JSON。
 :::
 
-### Get Camera Image
+### 获取相机图像
 
-Get a single still frame from a camera entity and place it on the clipboard or use in subsequent actions.
+从相机实体获取单个静帧并将其放置在剪贴板上或在后续操作中使用。
 
-### Perform Action
+### 执行动作
 
-Perform an [action](core/actions.md).
+执行一个 [动作](core/actions.md)。
 
-### Render Template
+### 渲染模板
 
-Render a [template](https://www.home-assistant.io/docs/configuration/templating/) which can then be used in subsequent actions.
+渲染一个 [模板](https://www.home-assistant.io/docs/configuration/templating/)，然后可以在后续操作中使用。
 
-### Send Location
+### 发送位置
 
-Send a location to Home Assistant. Will attempt to use clipboard contents as location, otherwise will use current location.
+向 Home Assistant 发送位置。将尝试使用剪贴板内容作为位置，否则将使用当前位置。
 
-### Update Sensors
+### 更新传感器
 
-Update all sensors.
+更新所有传感器。
 
-## Launching Shortcuts
+## 启动快捷指令
 
-Shortcuts are deeply integrated into the OS. After creating one, you have numerous ways to launch them.
+快捷指令深度集成到操作系统中。创建后，您有多种方式来启动它们。
 
-* **Siri / Voice** - You can launch any of your created Shortcuts using Siri from an iPhone, iPad, HomePod, or Apple Watch. If your shortcut is named "Bedtime" the command would be "Hey Siri, Bedtime."
-* **Widget** - Shortcuts has a widget on the Today View which can be accessed by swiping right from the Home or Lock screen. At the bottom of the widgets screen, press "Edit" and then the green plus button to add the widget to your Today View.
-* **Shortcuts app** - On the "My Shortcuts" tab, simply tap on the shortcut you want to launch. There is a search bar at the top to quickly filter your list of Shortcuts if needed.
-* **Apple Watch (watchOS 7)** - With iOS 14 and watchOS7 you can launch Shortcuts from either the Shortcuts Apple Watch app, or via complications on the Siri watch face.
-* **Spotlight Search** - When on your iOS device Home screen, swipe down from the center of your Home screen to bring up Spotlight search. From here you can type the name of a Shortcut and run it with one tap.
-* **Add to Home Screen** - When editing any Shortcut, press the (...) button in the top right to see options, and press the "Add to Home Screen" button. You can customize the name and provide a custom icon if you wish.
-* **Push Notification** - Shortcuts can be launched [via push notifications](#executing-a-shortcut-via-home-assistant-notifications).
-* **Back Tap (iOS 14)** - Under iOS Settings > Accessibility > Touch > Back Tap, you can launch any Shortcut via double tapping or triple tapping the back of your iPhone.
+* **Siri / 语音** - 您可以使用 Siri 从 iPhone、iPad、HomePod 或 Apple Watch 启动您创建的任何快捷指令。如果您的快捷指令命名为“就寝时间”，则命令为“嘿 Siri，就寝时间。”
+* **小部件** - 快捷指令在今天视图中有一个小部件，可以通过从主屏幕或锁定屏幕向右滑动访问。在小部件屏幕的底部，按“编辑”，然后按绿色加号按钮将小部件添加到今天视图中。
+* **快捷指令应用** - 在“My Shortcuts”标签中，只需点击您要启动的快捷指令。如果需要，顶部有一个搜索栏可以快速筛选您的快捷指令列表。
+* **Apple Watch (watchOS 7)** - 在 iOS 14 和 watchOS7 中，您可以通过快捷指令 Apple Watch 应用或 Siri 表盘上的复杂功能启动快捷指令。
+* **聚焦搜索** - 在您的 iOS 设备主屏幕上，向下滑动主屏幕中心以调出聚焦搜索。在这里，您可以输入快捷指令的名称并通过一次点击运行它。
+* **添加到主屏幕** - 编辑任何快捷指令时，按右上角的（...）按钮以查看选项，然后按“添加到主屏幕”按钮。如果愿意，您可以自定义名称并提供自定义图标。
+* **推送通知** - 快捷指令可以通过 [推送通知](#executing-a-shortcut-via-home-assistant-notifications) 启动。
+* **双击返回 (iOS 14)** - 在 iOS 设置 > 辅助功能 > 触摸 > 双击返回中，您可以通过双击或三次点击 iPhone 的背面来启动任何快捷指令。
 
-## Executing a Shortcut via Home Assistant Notifications
+## 通过 Home Assistant 通知执行快捷指令
 
-You can trigger a Shortcut from Home Assistant using a notification like so:
+您可以通过通知从 Home Assistant 触发快捷指令，如下所示：
 
 ```yaml
 - action: notify.mobile_app_<your_device_id_here>
   data:
-    message: "Trigger a Shortcut!"
+    message: "触发一个快捷指令！"
     data:
       shortcut:
-        name: "Shortcut Name"
-        # you can provide any number of keys and values
-        # all values must be strings (e.g. not numbers, arrays, dictionaries, etc.)
-        key_for_shortcut: "value provided to shortcut"
-        another_key: "another value"
+        name: "快捷指令名称"
+        # 您可以提供任意数量的键和值
+        # 所有值必须是字符串（例如，不是数字、数组、字典等）
+        key_for_shortcut: "提供给快捷指令的值"
+        another_key: "另一个值"
 ```
 
-When you tap on the notification to launch Home Assistant, it will redirect you to the Shortcuts app to perform the given Shortcut. You can customize this behavior with the following keys in `shortcut` above:
+当您点击通知以启动 Home Assistant 时，它将重定向到快捷指令应用以执行给定的快捷指令。您可以通过 `shortcut` 中的以下键自定义此行为：
 
-| Key | Values | Notes |
+| 键 | 值 | 备注 |
 | --- | ------ | ----- |
-| `ignore_result` | Any String, e.g. `"ignore"` | When set, does not re-open the Home Assistant app when completed. Also prevents the below event from firing. |
+| `ignore_result` | 任何字符串，例如 `"ignore"` | 设置后，完成时不会重新打开 Home Assistant 应用程序，也阻止下面的事件触发。 |
 
 :::note
-If the Shortcut doesn't require any input, it may appear as though the Shortcuts app wasn't launched at all. Check for the event being performed to see the results.
+如果快捷指令不需要任何输入，它可能看起来好像快捷指令应用根本没有启动。请检查执行的事件以查看结果。
 :::
 
-Once you complete the Shortcut, it'll return you to Home Assistant and fire an event. The event fired is `ios.shortcut_run` with the result of the Shortcut with the following keys:
+一旦您完成了快捷指令，它将返回 Home Assistant 并触发一个事件。触发的事件为 `ios.shortcut_run`，结果为快捷指令的结果，具有以下键：
 
-| Key | Values | Description |
+| 键 | 值 | 描述 |
 | -- | -- | -- |
-| `status` | `success`, `failure`, `cancelled` | The status of the execution |
-| `result` | Varies | The result provided by the Shortcut itself |
-| `error` | Dictionary, keys `error-Code` and `errorMessage` | Error description from the Shortcuts app if failure|
-| `input` | Varies | `shortcut` value in action |
-| `name` | Varies | `shortcut.name` value in action |
+| `status` | `成功`、`失败`、`取消` | 执行状态 |
+| `result` | 变化 | 快捷指令本身提供的结果 |
+| `error` | 字典，键 `error-Code` 和 `errorMessage` | 如果失败，则为快捷指令应用的错误描述 |
+| `input` | 变化 | 操作中的 `shortcut` 值 |
+| `name` | 变化 | 操作中的 `shortcut.name` 值 |
 
-## Personal Automation
+## 个人自动化
 
-With Shortcuts Personal Automation, you can get the best of both worlds - by using iOS triggers to execute Home Assistant actions. A few examples of some useful iOS + Home Assistant combinations for inspiration:
+通过快捷指令个人自动化，您可以充分利用两全其美 - 使用 iOS 触发器来执行 Home Assistant 操作。一些有用的 iOS + Home Assistant 组合灵感的示例：
 
-* Trigger your Home Assistant "morning routine" automation after stopping or snoozing the Wake-Up alarm on your iPhone.
-* When starting a workout on your Apple Watch, use Home Assistant to play your workout playlist. When finishing a workout on your Apple Watch, use Home Assistant to turn on your fan to cool down.
-* Get perfect car presence in Home Assistant by toggling an `input_boolean` in Home Assistant when you connect or disconnect from CarPlay, or connect to your cars Bluetooth system.
-* You can ensure that any Home Assistant automations using the iOS app's "Battery State" sensor run immediately by creating a Shortcuts personal automation with the "Charger" trigger (iOS 17) along with the "Send Location" Home Assistant app action. An example use of this is triggering your bedtime routine automation immediately after your phone is plugged in at night time, rather than waiting for the next sensors background update.
-* Place an NFC sticker on the lid of your pills bottle. Each time you take your medicine, scan the NFC sticker with your iPhone. Home Assistant can keep a log of the exact times you take your medicine, increment a [counter](https://www.home-assistant.io/integrations/counter/) which will help you know when to refill your prescription, and more.
+* 在您停止或打盹 iPhone 上的闹钟后触发您的 Home Assistant “晨间例程”自动化。
+* 当您在 Apple Watch 上开始锻炼时，使用 Home Assistant 播放您的锻炼播放列表。当您在 Apple Watch 上完成锻炼时，使用 Home Assistant 打开风扇以降温。
+* 通过在连接或断开 CarPlay 或连接到您的汽车蓝牙系统时切换 Home Assistant 中的 `input_boolean` 来确保 Home Assistant 中完美的汽车存在。
+* 您可以确保任何使用 iOS 应用“电池状态”传感器的 Home Assistant 自动化立即运行，通过创建一个使用“充电器”触发器（iOS 17）的快捷指令个人自动化，并结合“发送位置” Home Assistant 应用操作。这个示例使用的是在夜间手机插入充电时立即触发就寝例程，而不是等待下一个传感器的后台更新。
+* 在您的药瓶盖上放置一个 NFC 标签。每次您服药时，使用 iPhone 扫描 NFC 标签。 Home Assistant 可以保留您服药的精确时间记录，累加一个 [计数器](https://www.home-assistant.io/integrations/counter/)，这将帮助您知道何时补充处方等等。
 
-To create a Personal Automation in the Shortcuts app, go to the "Automations" tab, press the "+" button in the top right corner, and then tap the "Create Personal Automation" button. If you don't have any existing Automations in the shortcut app, just tap the "Create Personal Automation" button. There are 21 triggers available on iOS 17. See Apple's [Shortcuts user guide](https://support.apple.com/guide/shortcuts/create-a-new-personal-automation-apdfbdbd7123/3.5/ios/13.5) for more information on creating Personal Automations.
+要在快捷指令应用中创建个人自动化，转到“自动化”标签，按右上角的“+”按钮，然后点击“创建个人自动化”按钮。如果您在快捷指令应用中没有现有的自动化，只需点击“创建个人自动化”按钮。在 iOS 17 中有 21 个可用触发器。有关创建个人自动化的更多信息，请参见苹果 [快捷指令用户指南](https://support.apple.com/guide/shortcuts/create-a-new-personal-automation-apdfbdbd7123/3.5/ios/13.5)。
 
-In iOS 17 all personal automation trigger types can run automatically without any interaction, except for the "Before I Commute" trigger.
+在 iOS 17 中，所有个人自动化触发类型可以自动运行，无需任何交互，除了“我通勤前”触发器以外。

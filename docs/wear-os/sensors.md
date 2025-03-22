@@ -1,73 +1,73 @@
 ---
-title: "Sensors"
+title: "传感器"
 id: 'sensors'
 ---
 
-The Wear OS app also offers [sensors](../core/sensors.md#android-sensors) to consume your wearable data in Home Assistant, please refer to the link to learn more about how sensors update on Android. Not all sensors offered by the phone app will be offered by the Wear OS app. Please see the list below for what sensors are currently supported by the Wear OS app. If a sensor requires permissions you will be prompted to accept, otherwise the sensor will not enable and send data.
+Wear OS 应用还提供了 [传感器](../core/sensors.md#android-sensors)，以便在 Home Assistant 中使用您的可穿戴数据，请参考链接了解有关传感器在 Android 上如何更新的更多信息。手机应用提供的并非所有传感器都会在 Wear OS 应用中提供。请查看下面的列表，了解 Wear OS 应用当前支持哪些传感器。如果某个传感器需要权限，您将被提示接受，否则该传感器将无法启用并发送数据。
 
-It's important to note that sensor updates require the app to post a notification to the device in order to prevent it from being killed by the OS. You can go to into Wear device settings and turn off the SensorWorker Notification channel to stop these notifications from buzzing on your wrist.
+需要注意的是，传感器更新需要应用向设备发送通知，以防止操作系统将其杀死。您可以进入 Wear 设备的设置并关闭 SensorWorker 通知通道，以停止这些通知在您的手腕上振动。
 
 :::info
-Sensor updates are dependent upon the watch having data connectivity and the app being allowed to send an update. Some devices implement stricter battery saving techniques than others so updates may not happen as frequently as you would expect.
+传感器更新依赖于手表具有数据连接，并且应用被允许发送更新。一些设备实施的电池节省技术比其他设备更严格，因此更新可能没有您预期的那么频繁。
 
-There is currently no support for sensor settings. Some sensors may not be fully operational as a result. For example, the BLE Transmitter and Beacon Monitor sensors can only be enabled, none of the settings can be changed as of this moment. These sensors may not be completely functional while we work on adding sensor settings, the default settings will allow for primary functionality.
+目前没有传感器设置的支持。因此某些传感器可能无法完全操作。例如，BLE 发射器和信标监控传感器只能启用，当前没有设置可以更改。这些传感器在我们添加传感器设置时可能无法完全功能，默认设置将允许基本功能。
 :::
 
-## Sensor List
+## 传感器列表
 
-| Sensor | Attributes | Description |
+| 传感器 | 属性 | 描述 |
 | --------- | --------- | ----------- |
-| [App Data](../core/sensors.md#app-data-sensors) | None | Sensors that show how much data was sent or received by the app. |
-| [App Importance](../core/sensors.md#app-importance-sensor) | None | The current importance of the app to determine if its in the foreground or cached. |
-| [App Memory](../core/sensors.md#app-memory-sensor) | None | Information about the memory that is available for the app. |
-| [App Usage](../core/sensors.md#app-usage-sensors) | None | Sensors that represent how the app is treated based on its usage. |
-| [Audio](../core/sensors.md#audio-sensors) | None | Several different sensors around different types of audio detection from the device. |
-| [Battery](../core/sensors.md#battery-sensors) (enabled by default) | None | Several different sensors around the state of the devices battery. Only `battery_level`, `battery_state` and `charger_type` enabled by default. |
-| `binary_sensor.bedtime_mode` | None | A sensor to reflect the state of Bedtime mode on the device. For best results enable Do Not Disturb or Interactive sensor. Only available on Wear OS 3 devices |
-| [Bluetooth Sensors](../core/sensors.md#bluetooth-sensors) | [See Attributes](../core/sensors.md#bluetooth-sensors) | Several different sensors about the state of bluetooth on the device. Sensors are also available for beacon transmitting and monitoring. |
-| `sensor.current_time_zone` | [See Attributes](../core/sensors.md#current-time-zone-sensor) | The current time zone the device is in. |
-| [Current Version](../core/sensors.md#current-version-sensor) | None | The current installed version of the application. |
-| [Do Not Disturb](../core/sensors.md#do-not-disturb-sensor) | None | The state of do not disturb on the device. |
-| [Doze](../core/sensors.md#doze-sensor) | None | Whether or not the device is in doze mode. |
-| [Health Services](#health-services) | [See below](#health-services) | A group of sensors provided by the Health Services API. |
-| `sensor.heart_rate` | Accuracy | Current heart rate in beats per minute. This sensor makes use of the [heart rate sensor](https://developer.android.com/reference/android/hardware/Sensor#TYPE_HEART_RATE). |
-| [Interactive](../core/sensors.md#interactive-sensor) | None | Whether or not the device is in an interactive state. |
-| [Keyguard Sensors](../core/sensors.md#keyguard-sensors) | None | Sensors that represent various states about the device being locked or secured. |
-| `sensor.last_reboot` | [See Attributes](../core/sensors.md#last-reboot-sensor) | The timestamp of the device's last reboot. |
-| [Last Update](../core/sensors.md#last-update-trigger-sensor) | None | The state will reflect the intent that caused the last update to get sent. |
-| `sensor.light_sensor` | None | The current level of illuminance the device detects. |
-| [Mobile Data Sensors](../core/sensors.md#mobile-data-sensors) | None | Several different sensors around the state of mobile data. |
-| `binary_sensor.nfc_state` | None | Whether or not the device has its NFC sensor enabled. |
-| `sensor.phone_state` | None | The only tracked states are `idle`, `ringing` or `offhook`, no other information is accessed. |
-| `sensor.pressure_sensor` | None | The pressure reading from the device. |
-| `sensor.proximity_sensor` | None | The current proximity reading from the device, certain devices will only show boolean value of `near` or `far`. |
-| [Network](../core/sensors.md#connection-type-sensor) | None | Several different sensors around the state of WiFi. |
-| [Next Alarm](../core/sensors.md#next-alarm-sensor) | [See Attributes](../core/sensors.md#next-alarm-sensor) | Date of the next scheduled alarm. |
-| `binary_sensor.on_body_sensor` | None | A sensor to indicate whether the wearable believes it is on the body or not. This sensor makes use of the [low latency off body detection](https://developer.android.com/reference/android/hardware/Sensor#TYPE_LOW_LATENCY_OFFBODY_DETECT) sensor. |
-| [Power Save](../core/sensors.md#power-save-sensor) | None | Whether or not the device is in power saving mode. |
-| `sensor.screen_brightness` | [See Attributes](../core/sensors.md#screen-brightness-sensor) | The current value of screen brightness. |
-| `sensor.screen_off_timeout` | None | The current value of screen off timeout setting. |
-| `sensor.sim_1` | [See Attributes](../core/sensors.md#cellular-provider-sensor) | Name of your cellular provider. |
-| `sensor.sim_2` | [See Attributes](../core/sensors.md#cellular-provider-sensor) | Name of your cellular provider. |
-| [Steps](../core//sensors.md#pedometer-sensors) | None | The number of steps taken from the user since the last device reboot. Requires activity recognition permissions on supported devies. |
-| [Storage Sensors](../core/sensors.md#storage-sensor) | [See Attributes](../core/sensors.md#storage-sensor) | The amount of total and available internal & external storage on your Android device. |
-| `binary_sensor.theater_mode` | None | A sensor to reflect the state of Theater mode on the device. For best results enable the Interactive sensor. |
-| [Traffic Stats Sensor](../core/sensors.md#traffic-stats-sensor) | None | Amount of data transmitted and received from mobile and total device usage since last reboot. |
-| `binary_sensor.wet_mode` | None | A sensor to indicate the state of Wet Mode on the current device. This sensor is also known as Touch Lock or Water Lock on some devices. This is a special mode where the user must press and hold the crown/power button for 2 seconds to re-enable touch. |
+| [应用数据](../core/sensors.md#app-data-sensors) | 无 | 显示应用发送或接收了多少数据的传感器。 |
+| [应用重要性](../core/sensors.md#app-importance-sensor) | 无 | 当前应用的重要性，以确定它是处于前台还是缓存。 |
+| [应用内存](../core/sensors.md#app-memory-sensor) | 无 | 可用于应用程序的内存信息。 |
+| [应用使用情况](../core/sensors.md#app-usage-sensors) | 无 | 代表应用根据其使用情况被对待的传感器。 |
+| [音频](../core/sensors.md#audio-sensors) | 无 | 关于设备不同类型音频检测的多个传感器。 |
+| [电池](../core/sensors.md#battery-sensors) (默认启用) | 无 | 关于设备电池状态的多个传感器。默认只启用 `battery_level`、`battery_state` 和 `charger_type`。 |
+| `binary_sensor.bedtime_mode` | 无 | 一个传感器，用于反映设备的就寝模式状态。为了获得最佳效果，请启用请勿打扰或交互传感器。仅在 Wear OS 3 设备上可用 |
+| [蓝牙传感器](../core/sensors.md#bluetooth-sensors) | [查看属性](../core/sensors.md#bluetooth-sensors) | 关于设备蓝牙状态的多个传感器。还有用于信标发送和监控的传感器。 |
+| `sensor.current_time_zone` | [查看属性](../core/sensors.md#current-time-zone-sensor) | 设备当前所处的时区。 |
+| [当前版本](../core/sensors.md#current-version-sensor) | 无 | 当前安装的应用程序版本。 |
+| [请勿打扰](../core/sensors.md#do-not-disturb-sensor) | 无 | 设备的请勿打扰状态。 |
+| [休眠](../core/sensors.md#doze-sensor) | 无 | 设备是否处于休眠模式。 |
+| [健康服务](#health-services) | [见下文](#health-services) | 由健康服务 API 提供的一组传感器。 |
+| `sensor.heart_rate` | 准确度 | 当前心率（以每分钟心跳计）。此传感器使用 [心率传感器](https://developer.android.com/reference/android/hardware/Sensor#TYPE_HEART_RATE)。 |
+| [交互](../core/sensors.md#interactive-sensor) | 无 | 设备是否处于交互状态。 |
+| [锁屏传感器](../core/sensors.md#keyguard-sensors) | 无 | 代表设备被锁定或安全的各种状态的传感器。 |
+| `sensor.last_reboot` | [查看属性](../core/sensors.md#last-reboot-sensor) | 设备上次重启的时间戳。 |
+| [最后更新](../core/sensors.md#last-update-trigger-sensor) | 无 | 状态将反映导致最后一次更新发送的意图。 |
+| `sensor.light_sensor` | 无 | 设备检测到的当前照度水平。 |
+| [移动数据传感器](../core/sensors.md#mobile-data-sensors) | 无 | 关于移动数据状态的多个传感器。 |
+| `binary_sensor.nfc_state` | 无 | 设备的 NFC 传感器是否启用。 |
+| `sensor.phone_state` | 无 | 唯一跟踪的状态是 `idle`、`ringing` 或 `offhook`，没有其他信息被访问。 |
+| `sensor.pressure_sensor` | 无 | 来自设备的压力读取。 |
+| `sensor.proximity_sensor` | 无 | 设备当前的接近读取，某些设备仅显示 `near` 或 `far` 的布尔值。 |
+| [网络](../core/sensors.md#connection-type-sensor) | 无 | 关于 WiFi 状态的多个传感器。 |
+| [下一次闹钟](../core/sensors.md#next-alarm-sensor) | [查看属性](../core/sensors.md#next-alarm-sensor) | 下一次定时闹钟的日期。 |
+| `binary_sensor.on_body_sensor` | 无 | 一个传感器，指示可穿戴设备是否认为自己在身体上。此传感器使用 [低延迟离体检测](https://developer.android.com/reference/android/hardware/Sensor#TYPE_LOW_LATENCY_OFFBODY_DETECT) 传感器。 |
+| [省电模式](../core/sensors.md#power-save-sensor) | 无 | 设备是否处于省电模式。 |
+| `sensor.screen_brightness` | [查看属性](../core/sensors.md#screen-brightness-sensor) | 当前屏幕亮度的值。 |
+| `sensor.screen_off_timeout` | 无 | 当前屏幕熄灭超时设置的值。 |
+| `sensor.sim_1` | [查看属性](../core/sensors.md#cellular-provider-sensor) | 您的移动网络提供商的名称。 |
+| `sensor.sim_2` | [查看属性](../core/sensors.md#cellular-provider-sensor) | 您的移动网络提供商的名称。 |
+| [步数](../core//sensors.md#pedometer-sensors) | 无 | 自上次设备重启以来用户走的步数。需要支持的设备的活动识别权限。 |
+| [存储传感器](../core/sensors.md#storage-sensor) | [查看属性](../core/sensors.md#storage-sensor) | 您的 Android 设备上可用内部和外部存储的总量和可用量。 |
+| `binary_sensor.theater_mode` | 无 | 一个传感器，用于反映设备的电影院模式状态。为了获得最佳效果，请启用交互传感器。 |
+| [流量统计传感器](../core/sensors.md#traffic-stats-sensor) | 无 | 自上次重启以来，从移动设备和总体设备使用中传输和接收的数据量。 |
+| `binary_sensor.wet_mode` | 无 | 一个传感器，用于指示当前设备的湿模式状态。此传感器在某些设备上也称为触控锁或水锁。这是一个特殊模式，用户必须按住冠/电源按钮 2 秒钟才能重新启用触控。 |
 
 
-### Health Services
+### 健康服务
 
-Wear OS 3+ Only<br />
+仅限 Wear OS 3+<br />
 
-A list of sensors that contain data provided by Googles [Health Services API](https://developer.android.com/training/wearables/health-services/passive#useractivityinfo).
+包含 Google 的 [健康服务 API](https://developer.android.com/training/wearables/health-services/passive#useractivityinfo) 提供的数据的传感器列表。
 
-The following sensors are available (if your device supports them):
+以下传感器可用（如果您的设备支持它们）：
 
-| Sensor | Attribute | Description |
+| 传感器 | 属性 | 描述 |
 | --------- | --------- | ----------- |
-| `sensor.activity_state` | Exercise type, Time | A sensor to reflect the current user activity state which can be either: asleep, exercise, passive or unknown.|
-| `sensor.daily_calories` | None | The total number of calories over a day (including both BMR and active calories), where the previous day ends and a new day begins at 12:00 AM local time. |
-| `sensor.daily_distance` | None | The total distance over a day, where the previous day ends and a new day begins at 12:00 AM local time. |
-| `sensor.daily_floors` | None | The total number floors climbed over a day, where the previous day ends and a new day begins at 12:00 AM local time. |
-| `sensor.daily_steps` | None | The total step count over a day, where the previous day ends and a new day begins at 12:00 AM local time. |
+| `sensor.activity_state` | 运动类型，时间 | 反映当前用户活动状态的传感器，可以是：睡眠、运动、被动或未知。 |
+| `sensor.daily_calories` | 无 | 一天内的总卡路里数（包括基础代谢率和活动卡路里），前一天结束时和新的一天开始时是在当地时间午夜 12:00。 |
+| `sensor.daily_distance` | 无 | 一天内的总距离，前一天结束时和新的一天开始时是在当地时间午夜 12:00。 |
+| `sensor.daily_floors` | 无 | 一天内总共攀爬的楼层数，前一天结束时和新的一天开始时是在当地时间午夜 12:00。 |
+| `sensor.daily_steps` | 无 | 一天内的总步数，前一天结束时和新的一天开始时是在当地时间午夜 12:00。 |

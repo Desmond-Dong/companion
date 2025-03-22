@@ -1,13 +1,13 @@
 ---
-title: Troubleshooting
+title: 故障排除
 id: 'faqs'
 ---
 
-Below is a list of common issues and troubleshooting advice to address them. For more support please [look at the more help page](more-help.md)
+下面是常见问题及其故障排除建议的列表。如需更多支持，请查看[更多帮助页面](more-help.md)。
 
-## App crashes on set up
+## 应用在设置时崩溃
 
-If you are running Home Assistant 0.110 and the app crashes after clicking "continue" during set up, you need to add values for `internal_url` and `external_url`. This can be done through the user interface via your [General Settings](https://my.home-assistant.io/redirect/general/). If you do not see this section, you may need to turn on "Advanced Mode" from your profile page first. If these fields are disabled it is likely you have have your configuration stored in `configuration.yaml`, in this case add the entries under `homeassistant:` i.e.:
+如果您运行的是 Home Assistant 0.110，并且在设置过程中点击“继续”后应用崩溃，则需要为 `internal_url` 和 `external_url` 添加值。这可以通过用户界面在您的[常规设置](https://my.home-assistant.io/redirect/general/)中完成。如果您未看到此部分，您可能需要先在您的个人资料页面上启用“高级模式”。如果这些字段被禁用，可能是因为您的配置存储在 `configuration.yaml` 中，在这种情况下，请在 `homeassistant:` 下添加以下条目：
 
 ```yaml
 homeassistant:
@@ -16,120 +16,125 @@ homeassistant:
   internal_url: URL
 ```
 
-Replacing `URL` with the address you use to access your Home Assistant instance. The values of `internal_url` and `external_url` can be the same and should be the same as you have for `url:` in the `http:` of `configuration.yaml`.
+将 `URL` 替换为您用于访问 Home Assistant 实例的地址。`internal_url` 和 `external_url` 的值可以相同，并且应与您在 `configuration.yaml` 的 `http:` 中的 `url:` 相同。
 
-When you have saved these changes, restart Home Assisant and, after Home Assistant has finished restarting, reopen the the app. 
+保存这些更改后，重启 Home Assistant，并在 Home Assistant 完成重启后重新打开该应用。
 
-## I don't see a `notify.mobile_app` action for my device in my `dev-services` panel
-Once you have [set up](/getting_started/index.mdx) the Companion app you will need to restart Home Assistant for the `notify.mobile_app` action to register. On iOS the `notify.mobile_app_<Device_ID>` action will be created provided you granted notification permissions during setup, on Android the action will appear after the restart. If you can't see this, [force quit on iOS](https://support.apple.com/HT201330) or force stop on Android. Then relaunch the Companion app and finally restart your Home Assistant instance. The action should now be listed in the `Developer Tools > Actions` panel.
+## 我在我的 `dev-services` 面板中没有看到设备的 `notify.mobile_app` 操作
 
-![iOS](/assets/iOS.svg) If you don't see the action on iOS, check the notification settings within the app (swipe right to bring up the sidebar, then tap "[Settings](https://my.home-assistant.io/redirect/config/)", and then tap "Companion App", then "Notifications"). If the "Push ID" box is empty, tap the Reset button below it.
+一旦您[设置](https://my.home-assistant.io/redirect/getting_started/)了 Companion 应用，您需要重启 Home Assistant 以注册 `notify.mobile_app` 操作。在 iOS 上，如果在设置期间授予了通知权限，则会创建 `notify.mobile_app_<Device_ID>` 操作，在 Android 上，操作将在重启后出现。如果您看不到这一点，请在 iOS 上[强制退出](https://support.apple.com/HT201330)或在 Android 上强行停止。然后重新启动 Companion 应用，最后重新启动您的 Home Assistant 实例。该操作现在应该在 `开发工具 > 操作` 面板中列出。
 
-![Android](/assets/android.svg) If you still don't see the action on Android follow the steps to [start fresh](#starting-fresh-with-the-android-app).
+![iOS](/assets/iOS.svg) 如果您在 iOS 上不见该操作，请检查应用中的通知设置（向右滑动以打开侧边栏，然后点击“[设置](https://my.home-assistant.io/redirect/config/)”，然后点击“Companion App”，再点击“通知”）。如果“推送 ID”框为空，请点击下面的重置按钮。
 
-## I have a `notify.mobile_app_<Device_ID>` action but don't receive notifications
-Firstly, check your message payload is valid. Look at the examples in the [notification docs](../notifications/basic.md) or try sending the simple example below on the `Developer Tools > Services` page to your `notify.mobile_app_<Device_ID>` service.
+![Android](/assets/android.svg) 如果您在 Android 上仍然不见该操作，请按照步骤[重新开始](#starting-fresh-with-the-android-app)。
+
+## 我有一个 `notify.mobile_app_<Device_ID>` 操作但没有收到通知
+
+首先，检查您的消息有效负载是否有效。查看[通知文档](../notifications/basic.md)中的示例，或者尝试在 `开发工具 > 服务` 页面上向您的 `notify.mobile_app_<Device_ID>` 服务发送下面的简单示例。
 ```JSON
 {"message": "Hello World"}
 ```
 
-If this notification is delivered the problem is most likely with your payload.
+如果该通知已送达，问题很可能出在您的负载上。
 
-If the above doesn't work, try the following:
+如果上述方法无效，请尝试以下方法：
 
-1.  _Check your message limits:_ To allow us to provide a free notification service, each app target is limited to 500 notifications per day. [Location updates](../notifications/notification-commands#request-location-updates) and other special notifications do not count towards this limit. ![iOS](/assets/iOS.svg) In iOS you can check your remaining notifications within the Companion app by swiping right to open the sidebar and tapping "[Settings](https://my.home-assistant.io/redirect/config/)", and then tap "Companion App" then "Notifications" and scroll to the bottom of the page. The limit resets everyday at midnight UTC.
+1.  _检查您的消息限制：_ 为了让我们提供免费通知服务，每个应用目标每天限制 500 次通知。[位置更新](../notifications/notification-commands#request-location-updates)和其他特殊通知不计入此限制。 ![iOS](/assets/iOS.svg) 在 iOS 中，您可以通过在 Companion 应用中向右滑动打开侧边栏并点击“[设置](https://my.home-assistant.io/redirect/config/)”，然后点击“Companion App”再点击“通知”并向下滚动到页面底部来检查您剩余的通知。该限制将在 UTC 凌晨重置。
 
-2.  _Reset your push ID token:_ ![iOS](/assets/iOS.svg) If you have checked you still have notifications remaining, you can reset your notification at the top of the "Notifications" page within the "Companion App" page of [Settings](https://my.home-assistant.io/redirect/config/). After doing this you may need to [force quit](https://support.apple.com/HT201330) the iOS Companion app and then reopen the app and finally restart your Home Assistant instance.
+2.  _重置您的推送 ID 令牌：_ ![iOS](/assets/iOS.svg) 如果您确认仍有剩余通知，您可以在[设置](https://my.home-assistant.io/redirect/config/)的“Companion App”页面的“通知”页面顶部重置您的通知。在此之后，您可能需要[强制退出](https://support.apple.com/HT201330) iOS Companion 应用，然后重新打开应用并最终重启您的 Home Assistant 实例。
 
-3.  _Check your system settings:_
-    - ![iOS](/assets/iOS.svg) In the iOS Settings application, navigate to Notifications, then select Home Assistant, and ensure that "Allow Notifications" is toggled on.
-    - ![Android](/assets/android.svg) In the Android Settings application, navigate to Apps, then select Home Assistant, then select Notifications, and ensure that "All Home Assistant notifications" is toggled on. If you're only receiving some notifications, check if the [notification channel](../notifications/notifications-basic#notification-channels) you're using is toggled on.
+3.  _检查您的系统设置：_
+    - ![iOS](/assets/iOS.svg) 在 iOS 设置应用中，导航到通知，然后选择 Home Assistant，确保“允许通知”被切换为启用。
+    - ![Android](/assets/android.svg) 在 Android 设置应用中，导航到应用程序，然后选择 Home Assistant，再选择通知，确保“所有 Home Assistant 通知”被切换为启用。如果您仅收到某些通知，请检查您使用的[通知通道](../notifications/notifications-basic#notification-channels)是否被切换为启用。
 
-4. _Start fresh with the Android app:_ ![Android](/assets/android.svg) If you still can't recieve notifications in the Android app then try to [start fresh](#starting-fresh-with-the-android-app).
+4. _使用 Android 应用重新开始：_ ![Android](/assets/android.svg) 如果您仍无法在 Android 应用中接收通知，请尝试[重新开始](#starting-fresh-with-the-android-app)。
 
-## I receive an SSL error and/or I am unable to connect to my Home Assistant Instance when away from Home
-This often happens when you have the [Home Assistant Cloud](https://www.home-assistant.io/cloud/) enabled but have do not have [Remote UI](https://www.nabucasa.com/config/remote/) turned on. To address this either enable the [Remote UI](https://www.nabucasa.com/config/remote/) or swipe right to open the sidebar and the tap "Settings", and then tap "Companion App" then under "Settings" tap "Connection". Make sure the switch next to "Connect Via Cloud" is off and enter the remote address of your Home Assistant Instance in the "External URL" field. This address must be for an encrypted connection, for instructions on setting up an encrypted remote connection to your Home Assistant instances, please see the [Home Assistant docs](https://www.home-assistant.io/docs/configuration/remote/) or [this guide to setting up Let's Encrypt with Duck DNS](https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/).
+## 我收到 SSL 错误并且在外出时无法连接到我的 Home Assistant 实例
 
-If you do not have [Home Assistant Cloud](https://www.home-assistant.io/cloud/) set up at all, the problem is likely that the remote connection is not secured. The Companion App requires an encrypted connection for remote connections. Please see the [Home Assistant docs](https://www.home-assistant.io/docs/configuration/remote/) or [this guide to setting up Let's Encrypt with Duck DNS](https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/) for instructions on setting up a secured connection.
+这通常发生在您启用了 [Home Assistant Cloud](https://www.home-assistant.io/cloud/) 但没有开启 [Remote UI](https://www.nabucasa.com/config/remote/) 时。要解决此问题，您可以启用 [Remote UI](https://www.nabucasa.com/config/remote/)，或者向右滑动以打开侧边栏然后点击“设置”，接着点击“Companion App”，在“设置”下点击“连接”。确保“通过云连接”旁边的开关关闭，并在“外部 URL”字段中输入您的 Home Assistant 实例的远程地址。该地址必须用于加密连接，关于设置到您的 Home Assistant 实例的加密远程连接的说明，请参见 [Home Assistant 文档](https://www.home-assistant.io/docs/configuration/remote/)或[设置 Let's Encrypt 和 Duck DNS 的指南](https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/)。
 
-## Something in Home Assistant doesn't work the same way it does on my desktop
-This is probably not an issue with the Companion App but more likely with Home Assistant or the particular component that isn't behaving as expected. To test the cause please try the following steps.
+如果您完全没有设置 [Home Assistant Cloud](https://www.home-assistant.io/cloud/)，问题可能是远程连接没有安全保障。Companion 应用要求远程连接必须是加密的。请参见 [Home Assistant 文档](https://www.home-assistant.io/docs/configuration/remote/)或[设置 Let's Encrypt 和 Duck DNS 的指南](https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/)以获取设置安全连接的说明。
 
-1.  Firstly, swipe down in the iOS Companion app to refresh your view. In the Android app force stop the application and relaunch it.
-2.  If the problem still persists, open your Home Assistant instance in the Safari/Chrome browser (you may have to sign in). If the problem is present in Safari/Chrome, please raise an issue on either the [Home Assistant Frontend GitHub](https://github.com/home-assistant/frontend/issues) or if it is with a custom component, with the developer of that component. In your issue report, state that the problem exists when viewing on a mobile browser and not necessarily the Companion App.
-3.  If the problem does not occur in Safari, please raise an issue on the [iOS Companion App GitHub](https://github.com/home-assistant/iOS/issues) or the [Android Companion App GitHub](https://github.com/home-assistant/android/issues). Please state you followed these steps and the problem only occurs in the Companion app.
+## Home Assistant 中的某些功能与我的桌面不工作
 
-## The status bar (top bar with cell/Wi-Fi strength) does not match my theme
-If you are using iOS app prior to version 2020.2 or the Android app, to change the color of the status bar to match your Home Assistant theme, please use the [`frontend.set_theme`](https://www.home-assistant.io/components/frontend/#theme-automation) action instead of the dropdown menu in the Home Assistant profile page. Using the action will generate an event allowing the Companion App to detect the theme change and apply the correct color to the status bar. See the [theming](../integrations/theming.md) documentation for details of which keys are used. Note that colors must be specified as hex values (e.g. `#0099ff`) in your theme and specifying element colors through variable names is not supported.
+这可能不是 Companion 应用的问题，更可能是 Home Assistant 或特定组件未按预期正常工作。要测试原因，请尝试以下步骤。
 
-## I am running the Companion App on multiple devices, the `sensor` names are too similar and confusing, what can I do?
-Starting in Home Assistant Core 0.106, the default sensor names will be registered with your device name as set in the iOS settings app or the Android Companion App Configuration page. For now, you will need to rename each sensor from within the [Integrations Dashboard](https://my.home-assistant.io/redirect/integrations/) of Home Assistant's Configuration page by following these steps.
+1.  首先，在 iOS Companion 应用中向下滑动以刷新您的视图。在 Android 应用中强行停止应用程序然后重新启动它。
+2.  如果问题仍然存在，请在 Safari/Chrome 浏览器中打开您的 Home Assistant 实例（您可能需要登录）。如果问题出现在 Safari/Chrome 中，请在 [Home Assistant Frontend GitHub](https://github.com/home-assistant/frontend/issues) 中提出问题，或者如果是自定义组件问题，请与该组件的开发者联系。在您的问题报告中，说明在移动浏览器上查看时存在此问题，而不一定是 Companion 应用。
+3.  如果在 Safari 中没有发生该问题，请在 [iOS Companion App GitHub](https://github.com/home-assistant/iOS/issues) 或 [Android Companion App GitHub](https://github.com/home-assistant/android/issues) 中提出问题。请说明您遵循了这些步骤且问题仅在 Companion 应用中发生。
 
-1.  Go to the [Integrations Dashboard](https://my.home-assistant.io/redirect/integrations/) with Configuration.
-2.  Find the "Mobile App: _Device Name_" integration corresponding the device you wish to rename the sensors of and open it
-3.  For each sensor you wish to rename, click or tap on the sensor name and then the cog symbol.
-4.  Under "Entity ID" change the entity id as required. Do **not** change `sensor.` or `device_tracker.` part of the ID
-5.  Repeat Steps 4 and 5 for each sensor you wish to rename
+## 状态栏（包含蜂窝/Wi-Fi 信号强度的顶部条）与我的主题不匹配
 
-## `kCLError` when pulling down to manually refresh the app/update Location
+如果您使用的是 2020.2 之前的 iOS 应用或 Android 应用，请使用 [`frontend.set_theme`](https://www.home-assistant.io/components/frontend/#theme-automation) 操作，而不是 Home Assistant 个人资料页面中的下拉菜单来更改状态栏的颜色，以匹配您的 Home Assistant 主题。使用该操作将生成一个事件，允许 Companion 应用检测主题变化并将正确的颜色应用于状态栏。有关使用的键的详细信息，请参见 [主题](../integrations/theming.md) 文档。请注意，颜色必须在您的主题中以十六进制值（例如 `#0099ff`）指定，并且不支持通过变量名称指定元素颜色。
 
-To fix this change the location permission for the Home Assistant App to "Always" in iOS Settings>Privacy>Location Services.
+## 我在多个设备上运行 Companion 应用，`sensor` 名称太相似且令人困惑，我该怎么办？
 
-## Person entity is not updated with recent location
+从 Home Assistant Core 0.106 开始，默认传感器名称将与您在 iOS 设置应用或 Android Companion 应用配置页面中设置的设备名称配对。现在，您需要通过以下步骤，从 Home Assistant 配置页面的 [集成仪表板](https://my.home-assistant.io/redirect/integrations/) 中重命名每个传感器。
 
-If you are using the `person` entity as opposed to the provided `device_tracker` entity, you may at times notice the `person` entity state not updating as you would expect. By default any new device you login to with the app will be added as a tracker to the person logging in, which may cause this issue. You can check the `person` entity using the following steps:
+1.  转到 [集成仪表板](https://my.home-assistant.io/redirect/integrations/) 的配置。
+2.  找到与您希望重命名传感器的设备相对应的“移动应用：_设备名称_”集成并打开它
+3.  对于每个您希望重命名的传感器，单击或点击传感器名称，然后点击齿轮图标。
+4.  在“实体 ID”下，根据需要更改实体 ID。 **不要**更改 ID 的 `sensor.` 或 `device_tracker.` 部分。
+5.  对于您希望重命名的每个传感器，重复步骤 4 和 5。
 
-1.  Go to [People](https://my.home-assistant.io/redirect/people/)
-2.  Select the person having tracker issues
-3.  Review the devices that belong to this person
-4.  Remove any device that sits at home or is no longer used. Only keep devices that travel with you in this list.
-5.  Save the changes
+## 手动下拉刷新应用/更新位置时出现 `kCLError`
 
-## Starting fresh with the Android app
-![Android](/assets/android.svg) At times you may need to start fresh with the Android app as a new feature may not be working properly or something odd happens. Make sure to follow each step precisely without skipping anything.
+要解决此问题，请将 Home Assistant 应用的位置信息许可更改为“始终”在 iOS 设置 > 隐私 > 位置服务中。
+
+## 人员实体未更新最近位置
+
+如果您使用的是 `person` 实体，而不是提供的 `device_tracker` 实体，您可能会注意到 `person` 实体的状态没有按预期更新。默认情况下，您使用应用登录时，任何新的设备都将作为跟踪器添加到登录的人员中，这可能会导致此问题。您可以按照以下步骤检查 `person` 实体：
+
+1.  转到 [人员](https://my.home-assistant.io/redirect/people/)
+2.  选择遇到跟踪问题的人
+3.  查看属于此人的设备
+4.  移除任何留在家中或不再使用的设备。仅保留随您旅行的设备。
+5.  保存更改
+
+## 使用Android应用重新开始
+![Android](/assets/android.svg) 有时您可能需要在 Android 应用中重新开始，因为某个新功能可能未正常工作或发生了奇怪的事情。确保精确遵循每个步骤而不跳过任何内容。
 
 :::info
-Not all but some issues can be solved by simply logging out of the app and logging back in. If you have [trusted networks](https://www.home-assistant.io/docs/authentication/providers/#trusted-networks) setup in your server make sure to login to the app entering your credentials so the app can continue to work when not on the trusted network. If after you attempt to log out and log back and the issue still persists then please continue with the below steps.
+并非所有但有些问题可以通过简单地注销应用并重新登录来解决。如果您在服务器中设置了[受信网络](https://www.home-assistant.io/docs/authentication/providers/#trusted-networks)，请确保在应用中登录时输入您的凭据，以使应用在不在受信网络下时继续工作。如果在您尝试注销和重新登录后问题仍然存在，请继续执行下面的步骤。
 :::
 
-1.  Check that Home Assistant Core, the [Android app](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android) and [Android System WebView](https://play.google.com/store/apps/details?id=com.google.android.webview) are up to date.
-2.  Clear Storage or App data in Android app. Do not assume it is safe to uninstall and reinstall as that triggers auto-backup which we are trying to avoid here.
-3.  In Home Assistant navigate to the [Integrations Dashboard](https://my.home-assistant.io/redirect/integrations/). Remove the mobile app entry for the device in question. If you see more than 1 remove them all.
-4.  Restart Home Assistant.
-5.  Log back into the Android app. If you have more than 1 device, make sure to rename the device during onboarding. Remember to login using your credentials instead of Trusted Networks.
+1.  检查 Home Assistant Core、[Android 应用](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android)和[Android System WebView](https://play.google.com/store/apps/details?id=com.google.android.webview)是否是最新的。
+2.  在 Android 应用中清除存储或应用数据。不要假设卸载和重新安装是安全的，因为这会触发自动备份，而我们在这里试图避免。
+3.  在 Home Assistant 中转到[集成仪表板](https://my.home-assistant.io/redirect/integrations/)。移除相关设备的移动应用条目。如果您看到多个，请全部移除。
+4.  重启 Home Assistant。
+5.  重新登录到 Android 应用。如果您有多个设备，请确保在入职时重命名设备。请记住使用您的凭据而不是受信网络进行登录。
 
+## 设备跟踪器在 Android 应用中未更新
+![Android](/assets/android.svg) 如果您发现设备跟踪器没有按预期更新，请按照以下步骤确保设置最佳。
 
-## Device Tracker is not updating in Android app
-![Android](/assets/android.svg) If you find that the device tracker is not updating as you would expect follow the below steps to ensure optimal settings.
+1.  确保您的设备和服务器满足位置跟踪的先决条件：
+    - 为您的服务器启用[远程访问](https://www.home-assistant.io/docs/configuration/remote/)。
+    - 在[设置](https://my.home-assistant.io/redirect/config/) > Companion app > 管理传感器中，启用以下 **位置传感器**：后台位置、位置区域和单一准确位置。
+      - 如果您使用多个服务器，请确保正确的服务器为每个传感器启用。
+    - 如果您没有从 Play 商店安装应用，请验证您正在使用[`full`版本](../core/android-flavors.md)。
+    - 如果您使用 `person` 实体进行跟踪，请再次检查它是否[正确设置](#person-entity-is-not-updated-with-recent-location)。
+2.  确保应用已获得位置权限，始终允许。（在 Android 12 及更新版本中，提示时允许精确位置）
+3.  确保您的设备启用了位置 (GPS)。
+4.  允许后台访问并关闭该应用的“电池优化”。
+    - 您可以在 [设置](https://my.home-assistant.io/redirect/config/) > Companion app 中检查后台访问。该设置应显示一个对勾 ✔️。
+    - 一些制造商可能会增加额外的省电功能（例如：省电），确保禁用它们。您通常可以在系统设置应用中访问这些功能。
+5.  为该应用开启不受限制的数据。
+    - 如果数据节省模式开启，Home Assistant 可能无法正确发送/接收数据。
 
-1.  Make sure your device and server meet the prerequisites for location tracking:
-    - Enable [remote access](https://www.home-assistant.io/docs/configuration/remote/) for your server.
-    - In [Settings](https://my.home-assistant.io/redirect/config/) > Companion app > Manage sensors, enable the following **Location sensors**: Background location, Location zone and Single accurate Location.
-      - If you use multiple servers, make sure the correct servers have each sensor enabled.
-    - If you did not install the app from the Play Store, verify that you are using the [`full` flavor](../core/android-flavors.md).
-    - If you are using the `person` entity for tracking double check it is [setup properly](#person-entity-is-not-updated-with-recent-location).
-2.  Ensure the app has location permissions granted, all the time. (On Android 12 and newer, allow Precise location when prompted)
-3.  Ensure that location (GPS) is enabled on your device.
-4.  Allow background access and turn off 'battery optimizations' for the app.
-    - You can check background access in [Settings](https://my.home-assistant.io/redirect/config/) > Companion app. The setting should show a check mark ✔️.
-    - Some manufacturers may add additional battery saving features (ex: Power Saving), make sure to disable all of those as well. You can usually access these from the system settings app.
-5.  Turn on unrestricted data for the app.
-    - If Data Saver is on, Home Assistant may not send/receive data correctly.
+有时，以上步骤仍然不会导致位置更新到达您的服务器。该应用可以接收大量位置更新，并且可能会跳过其中一些。要确定原因，请查看应用位置历史记录日志。
 
-Sometimes the above steps will still not result in location updates reaching your server. The app can receive a lot of location updates and may skip some of them. To determine why, review the app location history logs.
+转到 [设置](https://my.home-assistant.io/redirect/config/) > Companion app > 故障排除 > 位置跟踪并启用位置历史。该应用现在将保留过去 48 小时内接收到的所有位置更新的日志。
 
-Go to [Settings](https://my.home-assistant.io/redirect/config/) > Companion app > Troubleshooting > Location tracking and enable location history. The app will now keep a log of all location updates received in the last 48 hours.
-
- - Each update will show the source (for example, "Background location") and result (for example, "Sent"). The app verifies that a location is valid before sending it, and an update may be skipped due to time, accuracy, duplicates, or other reasons.
- - The app should receive updates multiple times an hour. If you do not see updates after enabling the history, make sure to follow the previously mentioned steps. No location history is usually caused by limited background access for the Home Assistant app, or the Android system killing the app.
- - If multiple updates are skipped due to accuracy then check the GPS coordinates to ensure they were correct, and consider increasing the [sensor setting for accuracy](../core/location.md#location-sensor-settings). For example, if you see a valid location getting skipped with accuracy around `350` then set the minimum accuracy setting to `400` as a buffer. Larger values may also lead to inconsistent results so go by valid reports in the logs.
+ - 每个更新将显示来源（例如，“后台位置”）和结果（例如，“已发送”）。该应用验证位置有效后才会发送，并且由于时间、准确性、重复或其他原因，更新可能会被跳过。
+ - 该应用应多个小时接收更新。如果您在启用历史记录后没有看到更新，请确保遵循之前提到的步骤。没有位置历史通常是由于对 Home Assistant 应用的后台访问受限，或者 Android 系统杀死了该应用。
+ - 如果由于准确性跳过了多个更新，那么请检查 GPS 坐标以确保它们是正确的，并考虑增加[传感器的准确性设置](../core/location.md#location-sensor-settings)。例如，如果您看到一个有效位置被跳过，准确性在 `350` 附近，则应将最小准确性设置为 `400` 作为缓冲。较大的值也可能导致不一致的结果，因此请参考日志中的有效报告。
 
 <details>
-<summary>Manual review steps</summary>
+<summary>手动审核步骤</summary>
 
-You can also manually review the location history by using the [crash logs](#android-crash-logs) to determine whats going on. These logs contain more details, but are only kept while the app is open. The entire location decision making process is printed to the logs to help you understand whats happening. When you look at the logs pay attention to the lines that contain `LocBroadcastReceiver` to follow the decisions. Keep in mind you want roughly 10 minutes of logs so you may need to keep the app open to generate longer logs while the issue is happening. 
+您还可以通过使用[崩溃日志](#android-crash-logs)手动检查位置历史记录以确定发生了什么。这些日志包含更多详细信息，但仅在应用打开时保存。整个位置决策过程打印到日志，以帮助您了解发生了什么。当您查看日志时，请注意包含 `LocBroadcastReceiver` 的行以跟踪决策。请记住，您希望获得大约 10 分钟的日志，因此您可能需要保持应用打开以在发生问题时生成更长的日志。
 
-Below is an example of what you can expect to see to ensure that location updates are coming to the phone. The app will verify that a location is valid before sending it back. These are the logs you can expect to see when a duplicate location is received. The app will not send the same location update to the server if it has not changed for 15 minutes since the last update was sent.
+以下是您可以期待看到的内容，以确保位置更新到达手机。该应用在发送之前将验证位置是否有效。如果您收到重复的位置更新，您将会看到这些日志。该应用在与服务器保持连接时，如果自上次发送更新以来的 15 分钟内位置没有变化，应用将不会将相同的位置更新发送到服务器。
 
 ```
 2021-02-03 09:03:00.900 7306-7306/? D/LocBroadcastReceiver: Received location update.
@@ -142,7 +147,7 @@ Below is an example of what you can expect to see to ensure that location update
 2021-02-03 09:03:00.903 7306-7306/? D/LocBroadcastReceiver: Duplicate location received, not sending to HA
 ```
 
-Below you will find the expected log for successful location results. If you do not see lines like these, make sure to follow the previously mentioned steps.
+以下是您可以期待看到的成功位置结果的日志。如果您未见到这些行，请确保遵循之前提到的步骤。
 
 ```
 2021-02-03 09:06:34.241 7306-7306/? D/LocBroadcastReceiver: Received location update.
@@ -155,50 +160,57 @@ Below you will find the expected log for successful location results. If you do 
 2021-02-03 09:06:34.309 7306-7430/? D/LocBroadcastReceiver: Location update sent successfully
 ```
 
-The logs will indicate whether a report was skipped due to time, accuracy, duplicates or something else.
+日志将指示报告是否因时间、准确性、重复或其他原因而被跳过。
 </details>
 
-If you still do not receive location updates after following the above steps and believe this is incorrect, submit a GitHub [issue](https://github.com/home-assistant/android/issues/new?assignees=&labels=bug&template=Bug_report.md&title=). If possible attach at least 10 minutes of logs from this troubleshooting step to make it easier for others to help (this may be requested).
+如果您在遵循上述步骤后仍未收到位置更新并认为这是错误的，请提交 GitHub [问题](https://github.com/home-assistant/android/issues/new?assignees=&labels=bug&template=Bug_report.md&title=)。如果可能，请附上至少 10 分钟的日志，以便其他人更容易提供帮助（可能会被要求）。
 
-## Using a self-signed certificate leads to a blank page in Android
-![Android](/assets/android.svg) If you are using a self-signed certificate on Android then you may get stuck at a blank screen after entering and/or selecting your Home Assistant instance. In order to correct this issue you will need to make sure the URL is valid and that you import the certificate into Android's Trusted Certificates. Steps to perform this can be found [here](https://support.google.com/nexus/answer/2844832?hl=en). These steps were written for devices on Android 9+ but are very close for older supported devices.
+## 使用自签名证书会导致 Android 中出现空白页面
 
-## Android widget is not working
-![Android](/assets/android.svg) If you find that a widget is no longer working then these steps may help you resolve the issue.
+![Android](/assets/android.svg) 如果您在 Android 上使用自签名证书，则在输入和/或选择您的 Home Assistant 实例后，可能会停留在空白屏幕。为了解决此问题，您需要确保 URL 有效，并将证书导入到 Android 的受信任证书中。执行此操作的步骤可以在[此处](https://support.google.com/nexus/answer/2844832?hl=en)找到。这些步骤是为 Android 9+ 设备编写的，但对于较旧的受支持设备也非常接近。
 
-1.  Check that data saver is disabled on the device, the widget will not work when it is enabled.
-2.  Check that background data for the Home Assistant app is enabled.
-3.  Remove and recreate the widget.
+## Android 小部件无法正常工作
 
-## Notify action is too similar or not showing up in Android
-If you have more than 1 device of the same model and you did not rename your device in Companion App Configuration after logging in then you may have a conflict.
+![Android](/assets/android.svg) 如果您发现小部件不再工作，那么这些步骤可能会帮助您解决该问题。
 
-1.  Navigate to [Settings](https://my.home-assistant.io/redirect/config/) in the sidebar.
-2.  Tap "Companion App"
-3.  Change the Device Name under Device Registration.
-4.  Restart Home Assistant to register the new notify action. (i.e. `notify.mobile_app_<device_name>`)
+1.  检查设备上的数据节省模式是否禁用，小部件在启用时将无法工作。
+2.  检查 Home Assistant 应用程序的后台数据是否启用。
+3.  移除并重新创建小部件。
 
-## Sensors are missing or not updating
-![iOS](/assets/iOS.svg) When the app is not in the foreground, sensor updates are tied to location updates, so you need to make sure that location permissions are set to "Allow Always" in iOS settings.
+## 通知操作过于相似或未在 Android 中显示
 
-The app will also try to send updates in the background however the frequency of these is determined by iOS and is heavily throttled to protect battery life. iOS uses an internal metric, which is not visible to app developers, to prioritize background activities for apps. Apps which you use more will be allowed to do more in the background more frequently, this means that the more you use the Companion App, iOS will learn that the app is important to you and allow more frequent updates via background fetch.
+如果您有多个相同型号的设备，并且在登录后未在 Companion App 配置中重命名设备，则可能发生冲突。
 
-If you want to ensure that the sensors are updated when your device starts charging or the battery level goes below or above a certain limit, the most reliable way is to use an Automation in iOS's [Shortcuts](/integrations/siri-shortcuts.md) app. Set the "When" part to the desired condition and in the "Do" part select the "Update Sensors" action for Home Assistant. You will most likely want to turn off "Ask Before Running" to avoid being prompted before the update is sent. Due to limitations in iOS, you will however always see a notification from the Shortcuts app when these updates are sent.
+1.  在侧边栏中导航到[设置](https://my.home-assistant.io/redirect/config/)。
+2.  点击“Companion App”
+3.  更改设备注册下的设备名称。
+4.  重启 Home Assistant 以注册新的通知操作。（即 `notify.mobile_app_<device_name>`）
 
-![Android](/assets/android.svg) On Android, sensors will show up as and when they have an update. Some will show up immediately upon enabling and others will show up once permissions have been granted and the state was retrieved. If you do not see a sensor then you may need to wait for the sensor to get a state update so it can send it to your Home Assistant server.
+## 传感器缺失或未更新
 
-## Text to speech notifications are not working
-![Android](/assets/android.svg) Check that [Speech Recognition & Synthesis](https://play.google.com/store/apps/details?id=com.google.android.tts) is updated. Check that it is also set as the default Text to Speech engine, this may be required for certain manufacturers.
+![iOS](/assets/iOS.svg) 当应用不在前台时，传感器更新与位置更新相关，因此您需要确保在 iOS 设置中将位置权限设置为“始终允许”。
 
-## Android Crash Logs
-![Android](/assets/android.svg) The Android app makes use of Google's ADB [Logcat](https://developer.android.com/studio/command-line/logcat) feature to log errors. From time to time you may wish to inspect the logs or a developer may ask for crash logs in order to fix your issue. There is an option under [Settings](https://my.home-assistant.io/redirect/config/) Companion App > Troubleshooting > Show and Share Logs. This feature makes it a lot of easier to refresh, share and view the logs. The logs can then be used when you want to create an [issue](https://github.com/home-assistant/android/issues/new?assignees=&labels=bug&template=Bug_report.md&title=) or when a developer asks for them to troubleshoot an issue. It is important to note that the device logs may or may not contain sensitive information like your Home Assistant URL so make sure to remove sensitive information before sharing.
+该应用还会尝试在后台发送更新，但这些更新的频率由 iOS 决定，并且为了保护电池寿命，频率受到严格限制。iOS 使用一种内部度量标准，这是应用开发人员无法看到的，来优先处理应用的后台活动。您使用得越多，Companion 应用越重要，iOS 将允许更频繁的后台更新。
 
-## Android app battery drain
-![Android](/assets/android.svg) The android app offers many features, some of which may drain more battery than others. The default settings on the app strive to keep the app as battery friendly as possible. There may come a time when you enable a feature which may lead to more battery drain than desired. This section will list all the things to check on the application before you decide to [start fresh](#starting-fresh-with-the-android-app). For the below options you will need to go to Companion App Settings to check and disable them one by one.
+如果您想确保在设备开始充电或电池电量超过或低于特定限制时更新传感器，最可靠的方法是在 iOS 的[快捷方式](/integrations/siri-shortcuts.md)应用中使用自动化。将“当”部分设置为所需条件，在“执行”部分选择 Home Assistant 的“更新传感器”操作。您可能希望关闭“运行前询问”以避免在发送更新之前提示。由于 iOS 的限制，当发送这些更新时，您仍会从快捷方式应用收到通知。
 
-1.  If on the full version check that high accuracy mode is not left enabled all the time.
-2.  If on the full version check that Single Accurate Location sensor does not have "Include in sensor updates" option enabled.
-3.  Check that Persistent Connection is set to "Never".
-4.  If the Bluetooth Transmitter sensor is enabled check that the transmitter is not left on all the time, only enable it when you wish to use it.
-5.  Check that Sensor Update Frequency is set to "Normal".
-6.  Check that none of the Notification Sensors have the allow list disabled in their respective settings. You always want to define an allow list to prevent heavy battery usage.
+![Android](/assets/android.svg) 在 Android 上，传感器将在更新时显示。有些在启用时会立即显示，其他则会在授予权限并检索状态后显示。如果您未见到传感器，则可能需要等待该传感器获取状态更新，以便将其发送到您的 Home Assistant 服务器。
+
+## 文字转语音通知无法正常工作
+
+![Android](/assets/android.svg) 请检查[语音识别与合成](https://play.google.com/store/apps/details?id=com.google.android.tts)是否已更新。请确保将其设置为默认的文字转语音引擎，这可能是某些制造商所需的。
+
+## Android 崩溃日志
+
+![Android](/assets/android.svg) Android 应用利用 Google 的 ADB [Logcat](https://developer.android.com/studio/command-line/logcat) 功能记录错误。您可能会不时希望检查日志，或者开发人员可能会要求您提供崩溃日志以修复您的问题。您可以在[设置](https://my.home-assistant.io/redirect/config/) Companion App > 故障排除 > 显示并共享日志中找到一个选项。该功能使刷新、分享和查看日志变得更加简单。然后，日志可以在您想要创建问题时或当开发人员要求时用于排查问题。需要注意的是，设备日志可能包含有关您的 Home Assistant URL 的敏感信息，因此请确保在共享之前删除敏感信息。
+
+## Android 应用耗电
+
+![Android](/assets/android.svg) Android 应用提供许多功能，其中某些功能可能比其他功能更耗电。该应用的默认设置力求尽可能友好于电池。可能会出现您启用的某个功能导致电池耗电超出预期的时候。本节将列出在您决定[重新开始](#starting-fresh-with-the-android-app)之前需检查的所有应用程序设置。对于以下选项，您需要转到 Companion App 设置中逐个检查并禁用它们。
+
+1.  如果使用完整版本，请检查高准确度模式是否始终启用。
+2.  如果使用完整版本，请检查单一准确位置传感器是否未启用“包含在传感器更新中”选项。
+3.  检查持久连接是否设置为“从不”。
+4.  如果启用了蓝牙发射器传感器，请检查发射器是否始终开启，仅在您希望使用时启用。
+5.  检查传感器更新频率是否设置为“正常”。
+6.  检查没有任何通知传感器在其各自设置中禁用了允许列表。您始终希望定义一个允许列表，以防止严重的电池耗费。

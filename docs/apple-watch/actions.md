@@ -1,16 +1,16 @@
 ---
-title: "(Legacy) iOS Actions"
+title: "(Legacy) iOS 动作"
 id: "watch-actions"
 ---
 
-:::info Before continuing
-You can easily run scripts and active scenes directly by adding Script/Scene to your watch [configuration](/docs/apple-watch/#home).
-iOS Actions won't receive future support. Please migrate to other solutions, such as the **Scripts** widget, or Apple Watch configuration.
+:::info 继续之前
+您可以通过将脚本/场景添加到您的手表 [配置](/docs/apple-watch/#home) 来轻松运行脚本和活动场景。
+iOS 动作将不再获得未来支持。请迁移到其他解决方案，例如 **Scripts** 小部件或 Apple Watch 配置。
 :::
 
-Actions that are fired from Apple Watch will be delivered to the Home Assistant Event Bus in the same way as actions triggered on iPhone with the `ios.action_fired` event, however the payload of the event will differ slightly to clarify the source of the event. Actions triggered by Apple Watch will have the `triggerSource` key set to `watch`.
+从 Apple Watch 触发的动作将以与在 iPhone 上触发的动作相同的方式传递到 Home Assistant 事件总线，使用 `ios.action_fired` 事件，但事件的有效载荷会有所不同，以明确事件的来源。由 Apple Watch 触发的动作将具有 `triggerSource` 键，值为 `watch`。
 
-An example `ios.action_fired` payload for an event triggered on Apple Watch is:
+在 Apple Watch 上触发的事件的 `ios.action_fired` 有效载荷示例如下：
 
 ```json
 {
@@ -31,4 +31,3 @@ An example `ios.action_fired` payload for an event triggered on Apple Watch is:
         "user_id": "3831508509fe4124abaf1d144c2e8ca4"
     }
 }
-```

@@ -1,141 +1,141 @@
 ---
-title: "Standard Attachments"
+title: "标准附件"
 id: notification-attachments
 ---
 
-Notifications may contain an image, video, or audio file attachment that is displayed alongside the notification. See [table for supported media](#supported-media-types) for a breakdown of support by platform.
+通知可以包含图像、视频或音频文件附件，这些附件将与通知一起显示。请参见[支持的媒体表](#supported-media-types)以获取各平台的支持情况。
 
-## Downloading
+## 下载
 
-An attachment is an image, video, or audio file which is downloaded to the device when a notification is received and shown alongside the notification. A thumbnail is shown when the notification is not expanded. The full size attachment is shown when the notification is expanded.
+附件是图像、视频或音频文件，在接收通知时下载到设备，并与通知一起显示。当通知未展开时，会显示缩略图。当通知展开时，全尺寸附件将被显示。
 
-There are several locations to which you can save and you can use the [`camera.snapshot`](https://www.home-assistant.io/integrations/camera#action-snapshot) action to save snapshots.
+您可以将其保存到多个位置，并可以使用[`camera.snapshot`](https://www.home-assistant.io/integrations/camera#action-snapshot)操作来保存快照。
 
 :::note
-Attachments are required to be accessible from the internet, but not necessarily without authentication. See sources below.
+附件必须能够从互联网上访问，但不一定需要无身份验证访问。请参见以下来源。
 :::
 
-### `media_source` (recommended)
+### `media_source`（推荐）
 
-The [`media_source` integration](https://www.home-assistant.io/integrations/media_source) has the advantage that access requires authentication headers (which Home Assistant provides to the companion app). This means the content is not publicly available.
+[`media_source`集成](https://www.home-assistant.io/integrations/media_source)的优点是访问需要身份验证头（Home Assistant提供给伴随应用程序）。这意味着内容不对公众开放。
 
-You can use relative URLs in the format `/media/local/direct.jpg` with this integration.
+您可以使用格式为`/media/local/direct.jpg`的相对URL与此集成一起使用。
 
 :::info
-A file stored in `/media/file.jpg` on-disk is represented by `/media/local/file.jpg` in the notification. Note the addition of the `local` part of the path.
+存储在磁盘`/media/file.jpg`中的文件在通知中表示为`/media/local/file.jpg`。请注意路径中`local`部分的添加。
 :::
 
-### `www` folder
+### `www` 文件夹
 
-You will want to store the image in the `www` folder located in your Home Assistant [config directory](https://www.home-assistant.io/docs/configuration/). This will then expose the image to the internet so that you may use it in your notifications and receive them anywhere.
+您会想将图像存储在位于您的Home Assistant [配置目录](https://www.home-assistant.io/docs/configuration/)中的`www`文件夹中。这将使图像暴露到互联网上，以便您可以在通知中使用它，并在任何地方接收这些通知。
 
-You can use URLs in the format `/local/file.jpg` with this integration.
+您可以使用格式为`/local/file.jpg`的URL与此集成一起使用。
 
 :::info
-A file stored in `/www/file.jpg` on-disk is represented by `/local/file.jpg` in the notification. Note the change of the `local` part of the path.
+存储在磁盘`/www/file.jpg`中的文件在通知中表示为`/local/file.jpg`。请注意路径中`local`部分的变化。
 :::
 
-## Automatic snapshots
+## 自动快照
 
-![Android](/assets/android.svg) Android users can also use `/api/camera_proxy/camera.name` where `camera.name` is replaced by the entity ID of the camera you wish to use.
+![Android](/assets/android.svg) Android用户也可以使用`/api/camera_proxy/camera.name`，其中`camera.name`被替换为您希望使用的摄像头的实体ID。
 
-![iOS](/assets/apple.svg) iOS users can use the [camera stream in dynamic attachments](dynamic-content.md#camera-stream).
+![iOS](/assets/apple.svg) iOS用户可以使用[动态附件中的摄像头流](dynamic-content.md#camera-stream)。
 
 :::tip
-To expand a notification on 3D Touch devices simply force touch any notification. On non-3D Touch devices swipe and tap the "View" button.
+要在3D Touch设备上展开通知，只需强按任何通知。在非3D Touch设备上，向左滑动并点击“查看”按钮。
 :::
 
-## Image entities
+## 图像实体
 
-Images from image entities can use `/api/image_proxy/image.name` where `image.name` is replaced by the entity ID of the image entity you wish to use.
+图像实体中的图像可以使用`/api/image_proxy/image.name`，其中`image.name`被替换为您希望使用的图像实体的实体ID。
 
-## Supported media types
+## 支持的媒体类型
 
-Please ensure your attachment meets the criteria below, otherwise it will not show.
+请确保您的附件符合以下标准，否则将不会显示。
 
-| Attachment Type  | Maximum file size | Allowed Formats | Supported Platform  |
+| 附件类型  | 最大文件大小 | 允许的格式 | 支持的平台  |
 | :-------: | --------------- | ------------------|------------------------- |
-|    Image    | 10 MB    | JPEG, GIF, PNG          | ![Android](/assets/android.svg) Android & ![iOS](/assets/iOS.svg) |
-|   Video   | 50 MB   | MPEG, MPEG2, MPEG4, AVI   | ![Android](/assets/android.svg) Android & ![iOS](/assets/iOS.svg) |
-|   Audio    | 5 MB  | AIFF, WAV, MP3, MPEG4 Audio          | ![iOS](/assets/iOS.svg) |
+|    图像    | 10 MB    | JPEG, GIF, PNG          | ![Android](/assets/android.svg) Android & ![iOS](/assets/iOS.svg) |
+|   视频   | 50 MB   | MPEG, MPEG2, MPEG4, AVI   | ![Android](/assets/android.svg) Android & ![iOS](/assets/iOS.svg) |
+|   音频    | 5 MB  | AIFF, WAV, MP3, MPEG4 Audio          | ![iOS](/assets/iOS.svg) |
 
-![iOS](/assets/iOS.svg) version 2021.5 or later will attempt to re-download larger files when opening the content if they exceeded the size.
+![iOS](/assets/iOS.svg) 版本2021.5或更高版本将在打开内容时尝试重新下载更大的文件，如果它们超出了大小限制。
 
-## Parameters
+## 参数
 
-You can use the following keys to add attachments. See supported media types above. All of the URLs provided must be accessible via the internet.
+您可以使用以下键添加附件。请参见上述支持的媒体类型。所有提供的URL必须可以通过互联网访问。
 
-| Key | Example values |
+| 键 | 示例值 |
 | -- | -- |
 | `video` | `/media/local/video.mp4`<br /><br />`https://example.com/video.mp4` |
 | `image` | `/media/local/photo.jpg`<br /><br />`https://example.com/image.jpg` |
 | `audio` | `/media/local/audio.mp3`<br /><br />`https://example.com/audio.mp3` |
 
-When present, values will be used in the order of the table above. For example, you can specify an `audio` and `image` and iOS will pick up the audio while Android will pick up the image.
+如果存在，值将按照上述表格的顺序使用。例如，您可以指定`audio`和`image`，iOS将选择音频，而Android将选择图像。
 
-:::info ![Android](/assets/android.svg) &nbsp; Notes:
-*   If you are setting the [`icon_url`](basic.md#notification-icon) and `image` property then only the image will be displayed on the device.
-*   If you are setting the `image` and `video` property then only the video will be displayed on the device.
-*   Video will be shown as a series of frames captured from the video file. It will not work well with videos that are < 10s long.
-*   GIF will only be animated in notification shade on Android 14+
+:::info ![Android](/assets/android.svg) &nbsp; 注意：
+*   如果您设置了[`icon_url`](basic.md#notification-icon)和`image`属性，则设备上只会显示图像。
+*   如果您设置了`image`和`video`属性，则设备上只会显示视频。
+*   视频将显示为从视频文件捕获的一系列帧。它将与小于10秒的视频效果不佳。
+*   GIF将仅在Android 14+的通知阴影中动画播放。
 :::
 
-## Example action
+## 示例操作
 
 ```yaml
 automation:
-  - alias: Notify Mobile app attachment
+  - alias: 通知移动应用附件
     trigger:
       ...
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          message: "Something happened at home!"
+          message: "家里发生了某事！"
           data:
-            # an example of an absolute url
+            # 绝对URL示例
             image: "https://www.home-assistant.io/images/default-social.png"
-            # example of a relative url
+            # 相对URL示例
             image: "/media/local/image.png"
-            # the same works for video
+            # 同样适用于视频
             video: "/media/local/video.mp4"
-            # and for audio
+            # 也适用于音频
             audio: "/media/local/audio.mp3"
 ```
 
-## Example of visuals
+## 视觉示例
 
-An unexpanded push notification with an image attachment:
+一个未展开的推送通知，其中包含图像附件：
 
-![An unexpanded push notification with an attachment.](/assets/ios/attachment.png)
+![未展开的推送通知附带附件。](/assets/ios/attachment.png)
 
-The same notification but expanded to show the full size image attachment:
+同一通知，但展开以显示全尺寸图像附件：
 
-![The same notification but expanded to show the full size attachment](/assets/ios/expanded_attachment.png)
+![同一通知，但展开以显示全尺寸附件](/assets/ios/expanded_attachment.png)
 
-## Configuration
-![iOS](/assets/iOS.svg)Specific<br />
+## 配置
+![iOS](/assets/iOS.svg) 特定<br />
 
- [See table for supported media](#supported-media-types)
+ [请参见支持的媒体表](#supported-media-types)
 
- You can customize the attachment on the notifications using the following format:
+您可以使用以下格式自定义通知中的附件：
 
  ```yaml
 - action: notify.mobile_app_<your_device_id_here>
   data:
-    message: "Something happened at home!"
+    message: "家里发生了某事！"
     data:
       attachment:
-        # hide the thumbnail, only show when long-pressing/3d-touching notification
+        # 隐藏缩略图，仅在长按/3D触摸通知时显示
         hide-thumbnail: true
  ```
 
--   **url** (*Optional*): The URL of content to use as the attachment. This URL *must* be accessible from the Internet, or the receiving device must be on the same network as the hosted content. This overrides any `image`, `video` or `audio` values.
--   **content-type** (*Optional*): By default, the extension of the URL will be checked to determine the filetype if a `url` is provided, or inferred from the use of the `image`, `video` and `audio` keys. If there is no extension/it can't be determined you can manually provide a file extension.
--   **hide-thumbnail** (*Optional*): If set to `true` the thumbnail will not show on the notification. The content will only be viewable by expanding.
--   **lazy** (*Optional*): Requires ![iOS](/assets/iOS.svg) v2021.5 or later. If set to `true` the attachment will not be downloaded immediately and will only be loaded when viewing the notification. Use this to avoid downloading obviously-too-large attachments, but if they are only _occasionally_ too large, you shouldn't provide this key as the app can attempt both.
+-   **url**（*可选*）：作为附件使用的内容的URL。此URL *必须* 能够从Internet访问，或者接收设备必须与托管内容在同一网络上。此参数会覆盖任何`image`、`video`或`audio`的值。
+-   **content-type**（*可选*）：默认情况下，如果提供了`url`，将检查URL的扩展名以确定文件类型，或者从`image`、`video`和`audio`键推断。如果没有扩展名/无法确定，您可以手动提供文件扩展名。
+-   **hide-thumbnail**（*可选*）：如果设置为`true`，则缩略图将不会在通知上显示。内容仅可通过展开查看。
+-   **lazy**（*可选*）：需要![iOS](/assets/iOS.svg) v2021.5或更高版本。如果设置为`true`，则附件将不会立即下载，仅在查看通知时加载。使用此选项避免下载明显过大的附件，但如果它们只是偶尔太大，则不应提供此键，因为应用程序可以尝试两者。
 
-![Android](/assets/android.svg) Android Specific
+![Android](/assets/android.svg) Android 特定
 
- [See table for supported media](#supported-media-types)
+ [请参见支持的媒体表](#supported-media-types)
 
-- `GIF` filetype will only be animated in notification shade on Android 14+
+- `GIF`文件类型将仅在Android 14+的通知阴影中动画播放。

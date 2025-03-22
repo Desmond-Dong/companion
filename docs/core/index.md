@@ -1,47 +1,47 @@
 ---
-title: Feature overview
+title: 功能概述
 id: 'core'
 ---
 
-The Home Assistant Companion App provides a convenient way to view and control your Home Assistant instance however it also extends the power of your instance by allowing your device to act as a data source. The Home Assistant Companion App adds numerous [sensors](sensors.md) (such as battery and network status among others), creates a `device_tracker` entity to allow [location](location.md) updates to be sent from the device and also provides [action shortcuts](actions.md) to trigger scripts or automations.
+Home Assistant Companion App 提供了一种便捷的方式来查看和控制您的 Home Assistant 实例，同时还通过允许您的设备充当数据源来扩展您实例的功能。Home Assistant Companion App 添加了众多 [传感器](sensors.md)（例如电池和网络状态等），创建一个 `device_tracker` 实体以允许从设备发送 [位置](location.md) 更新，并且还提供 [动作快捷方式](actions.md) 来触发脚本或自动化。
 
-Not all features are supported by Android at the moment but eventually most features will be supported.  Look for the ![Android](/assets/android.svg) Android logo to see what is currently supported.
+目前并非所有功能都受 Android 支持，但最终大多数功能将受到支持。请查找 ![Android](/assets/android.svg) Android 标志以查看当前支持的功能。
 
-## Feature Comparison:
+## 功能比较：
 
 <table className="core-table">
   <thead>
     <tr>
-      <th><strong>Integrations</strong></th>
-      <th><img alt="Android" src="/assets/android.svg" /> Full</th>
-      <th><img alt="Android" src="/assets/android.svg" /> Minimal</th>
+      <th><strong>集成</strong></th>
+      <th><img alt="Android" src="/assets/android.svg" /> 完整</th>
+      <th><img alt="Android" src="/assets/android.svg" /> 最小</th>
       <th><img alt="iOS" src="/assets/iOS.svg" /></th>
       <th><img alt="macOS" src="/assets/macOS.svg" /></th>
       </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="/docs/core/actions">Actions</a></td>
+      <td><a href="/docs/core/actions">动作</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/android-device-controls">Android Device Controls</a></td>
+      <td><a href="/docs/integrations/android-device-controls">Android 设备控制</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/android-quick-settings">Android Quick Settings</a></td>
+      <td><a href="/docs/integrations/android-quick-settings">Android 快速设置</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/android-shortcuts">Android Shortcuts</a></td>
+      <td><a href="/docs/integrations/android-shortcuts">Android 快捷方式</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
@@ -55,56 +55,56 @@ Not all features are supported by Android at the moment but eventually most feat
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/android-widgets">Android Widgets</a></td>
+      <td><a href="/docs/integrations/android-widgets">Android 小部件</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/app-events">App Events</a></td>
+      <td><a href="/docs/integrations/app-events">应用事件</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/haptics">Haptic Feedback</a></td>
+      <td><a href="/docs/integrations/haptics">触觉反馈</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/siri-shortcuts">Siri Shortcuts</a></td>
+      <td><a href="/docs/integrations/siri-shortcuts">Siri 快捷方式</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/sharing">Sharing</a></td>
+      <td><a href="/docs/integrations/sharing">共享</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/theming">Theming</a></td>
+      <td><a href="/docs/integrations/theming">主题</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/url-handler">URL Handler</a></td>
+      <td><a href="/docs/integrations/url-handler">URL 处理</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/integrations/universal-links">Universal Links</a></td>
+      <td><a href="/docs/integrations/universal-links">通用链接</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
@@ -120,37 +120,37 @@ Not all features are supported by Android at the moment but eventually most feat
   </tbody>
   <thead>
     <tr>
-      <th><strong>Location Updates</strong></th>
-      <th><img alt="Android" src="/assets/android.svg" /> Full</th>
-      <th><img alt="Android" src="/assets/android.svg" /> Minimal</th>
+      <th><strong>位置更新</strong></th>
+      <th><img alt="Android" src="/assets/android.svg" /> 完整</th>
+      <th><img alt="Android" src="/assets/android.svg" /> 最小</th>
       <th><img alt="iOS" src="/assets/iOS.svg" /></th>
       <th><img alt="macOS" src="/assets/macOS.svg" /></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="/docs/core/location#overview">App Opened</a></td>
+      <td><a href="/docs/core/location#overview">应用打开</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#overview">App Refreshed</a></td>
+      <td><a href="/docs/core/location#overview">应用刷新</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#overview">Background</a></td>
+      <td><a href="/docs/core/location#overview">后台</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#location-tracking-in-home-assistant-zones">Enter/Exit Zone</a></td>
+      <td><a href="/docs/core/location#location-tracking-in-home-assistant-zones">进入/退出区域</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
@@ -164,28 +164,28 @@ Not all features are supported by Android at the moment but eventually most feat
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#sending-an-intent">Intent</a></td>
+      <td><a href="/docs/core/location#sending-an-intent">意图</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-commands#request-location-updates">Notification</a></td>
+      <td><a href="/docs/notifications/notification-commands#request-location-updates">通知</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#location-tracking-when-outside-a-home-assistant-zone">Significant Location Change</a></td>
+      <td><a href="/docs/core/location#location-tracking-when-outside-a-home-assistant-zone">重要位置改变</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/location#overview">URL Handler</a></td>
+      <td><a href="/docs/core/location#overview">URL 处理</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
@@ -201,226 +201,226 @@ Not all features are supported by Android at the moment but eventually most feat
   </tbody>
   <thead>
     <tr>
-      <th><strong>Notifications</strong></th>
-      <th><img alt="Android" src="/assets/android.svg" /> Full</th>
-      <th><img alt="Android" src="/assets/android.svg" /> Minimal</th>
+      <th><strong>通知</strong></th>
+      <th><img alt="Android" src="/assets/android.svg" /> 完整</th>
+      <th><img alt="Android" src="/assets/android.svg" /> 最小</th>
       <th><img alt="iOS" src="/assets/iOS.svg" /></th>
       <th><img alt="macOS" src="/assets/macOS.svg" /></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="/docs/notifications/actionable-notifications">Actionable</a></td>
+      <td><a href="/docs/notifications/actionable-notifications">可操作的</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#alert-once">Alert Once</a></td>
+      <td><a href="/docs/notifications/notifications-basic#alert-once">仅一次警报</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#badge">Badge</a></td>
+      <td><a href="/docs/notifications/notifications-basic#badge">徽章</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-channels">Channels</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-channels">频道</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-cleared">Cleared</a></td>
+      <td><a href="/docs/notifications/notification-cleared">已清除</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-color">Color</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-color">颜色</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-commands">Commands</a></td>
+      <td><a href="/docs/notifications/notification-commands">命令</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/critical-notifications">Critical Alerts</a></td>
+      <td><a href="/docs/notifications/critical-notifications">重要警报</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/dynamic-content">Dynamic Attachments</a></td>
+      <td><a href="/docs/notifications/dynamic-content">动态附件</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#grouping">Grouping</a></td>
+      <td><a href="/docs/notifications/notifications-basic#grouping">分组</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-message-html-formatting">HTML Formatting</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-message-html-formatting">HTML 格式化</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-icon">Icon</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-icon">图标</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-attachments">Image</a></td>
+      <td><a href="/docs/notifications/notification-attachments">图像</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-channel-importance">Importance</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-channel-importance">重要性</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-led-color">LED Color</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-led-color">LED 颜色</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-local">Local Push</a></td>
+      <td><a href="/docs/notifications/notification-local">本地推送</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic">Message</a></td>
+      <td><a href="/docs/notifications/notifications-basic">消息</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#opening-a-url">Opening a URL</a></td>
+      <td><a href="/docs/notifications/notifications-basic#opening-a-url">打开 URL</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#persistent-notification">Persistent</a></td>
+      <td><a href="/docs/notifications/notifications-basic#persistent-notification">持久</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#presentation-options">Presentation Options</a></td>
+      <td><a href="/docs/notifications/notifications-basic#presentation-options">演示选项</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#clearing">Replaceable Notifications</a></td>
+      <td><a href="/docs/notifications/notifications-basic#clearing">可替换通知</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-commands#request-location-updates">Request Location Updates</a></td>
+      <td><a href="/docs/notifications/notification-commands#request-location-updates">请求位置更新</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-sounds">Sound</a></td>
+      <td><a href="/docs/notifications/notification-sounds">声音</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-status-bar-icon">Status Bar Icon</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-status-bar-icon">状态栏图标</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#sticky-notification">Sticky</a></td>
+      <td><a href="/docs/notifications/notifications-basic#sticky-notification">粘性</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#subtitle--subject">Subject / Subtitle</a></td>
+      <td><a href="/docs/notifications/notifications-basic#subtitle--subject">主题 / 副标题</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#text-to-speech-notifications">Text to Speech</a></td>
+      <td><a href="/docs/notifications/notifications-basic#text-to-speech-notifications">文本转语音</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-timeout">Timeout</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-timeout">超时</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic">Title</a></td>
+      <td><a href="/docs/notifications/notifications-basic">标题</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notifications-basic#notification-vibration-pattern">Vibration Pattern</a></td>
+      <td><a href="/docs/notifications/notifications-basic#notification-vibration-pattern">振动模式</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/notifications/notification-attachments">Video</a></td>
+      <td><a href="/docs/notifications/notification-attachments">视频</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -429,113 +429,113 @@ Not all features are supported by Android at the moment but eventually most feat
   </tbody>
   <thead>
     <tr>
-      <th><strong>Sensors</strong></th>
-      <th><img alt="Android" src="/assets/android.svg" /> Full</th>
-      <th><img alt="Android" src="/assets/android.svg" /> Minimal</th>
+      <th><strong>传感器</strong></th>
+      <th><img alt="Android" src="/assets/android.svg" /> 完整</th>
+      <th><img alt="Android" src="/assets/android.svg" /> 最小</th>
       <th><img alt="iOS" src="/assets/iOS.svg" /></th>
       <th><img alt="macOS" src="/assets/macOS.svg" /></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="/docs/core/sensors#active-sensor">Active Sensor</a></td>
+      <td><a href="/docs/core/sensors#active-sensor">活动传感器</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Active Camera</a></td>
+      <td><a href="/docs/core/sensors">活动相机</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Active Microphone</a></td>
+      <td><a href="/docs/core/sensors">活动麦克风</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#activity-sensors">Activity Sensors</a></td>
+      <td><a href="/docs/core/sensors#activity-sensors">活动传感器</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#android-auto-sensor">Android Auto Sensor</a></td>
+      <td><a href="/docs/core/sensors#android-auto-sensor">Android 自动传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#android-os-sensors">Android OS Sensors</a></td>
+      <td><a href="/docs/core/sensors#android-os-sensors">Android OS 传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#app-data-sensors">App Data Sensors</a></td>
-      <td>✅</td>
-      <td>✅</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><a href="/docs/core/sensors#app-importance-sensor">App Importance Sensor</a></td>
+      <td><a href="/docs/core/sensors#app-data-sensors">应用数据传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#app-memory-sensor">App Memory Sensor</a></td>
+      <td><a href="/docs/core/sensors#app-importance-sensor">应用重要性传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#app-usage-sensors">App Usage Sensors</a></td>
+      <td><a href="/docs/core/sensors#app-memory-sensor">应用内存传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#audio-sensors">Audio Sensors</a></td>
+      <td><a href="/docs/core/sensors#app-usage-sensors">应用使用传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pedometer-sensors">Average Active Pace</a></td>
+      <td><a href="/docs/core/sensors#audio-sensors">音频传感器</a></td>
+      <td>✅</td>
+      <td>✅</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><a href="/docs/core/sensors#pedometer-sensors">平均活动步伐</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#battery-sensors">Battery Level</a></td>
+      <td><a href="/docs/core/sensors#battery-sensors">电池电量</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#battery-sensors">Battery State</a></td>
+      <td><a href="/docs/core/sensors#battery-sensors">电池状态</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#bluetooth-sensors">Bluetooth Sensors</a></td>
+      <td><a href="/docs/core/sensors#bluetooth-sensors">蓝牙传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
@@ -549,238 +549,238 @@ Not all features are supported by Android at the moment but eventually most feat
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Camera in Use</a></td>
+      <td><a href="/docs/core/sensors">正在使用的相机</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#connection-type-sensor">Connection Type</a></td>
+      <td><a href="/docs/core/sensors#connection-type-sensor">连接类型</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#current-time-zone-sensor">Current Time Zone</a></td>
+      <td><a href="/docs/core/sensors#current-time-zone-sensor">当前时区</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#current-version-sensor">Current Version</a></td>
+      <td><a href="/docs/core/sensors#current-version-sensor">当前版本</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Displays</a></td>
+      <td><a href="/docs/core/sensors">显示屏</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pedometer-sensors">Distance</a></td>
+      <td><a href="/docs/core/sensors#pedometer-sensors">距离</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#do-not-disturb-sensor">Do Not Disturb</a></td>
+      <td><a href="/docs/core/sensors#do-not-disturb-sensor">请勿打扰</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#doze-sensor">Doze</a></td>
+      <td><a href="/docs/core/sensors#doze-sensor">休眠</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#dynamic-color-sensor">Dynamic Color</a></td>
+      <td><a href="/docs/core/sensors#dynamic-color-sensor">动态颜色</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pedometer-sensors">Floors Ascended</a></td>
+      <td><a href="/docs/core/sensors#pedometer-sensors">上楼层数</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pedometer-sensors">Floors Descended</a></td>
+      <td><a href="/docs/core/sensors#pedometer-sensors">下楼层数</a></td>
       <td></td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#frontmost-app-sensor">Frontmost App</a></td>
+      <td><a href="/docs/core/sensors#frontmost-app-sensor">最前端的应用</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#geocoded-location-sensor">Geocoded Location</a></td>
+      <td><a href="/docs/core/sensors#geocoded-location-sensor">地理位置</a></td>
       <td>✅</td>
       <td></td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#health-connect-sensors">Health Connect</a></td>
+      <td><a href="/docs/core/sensors#health-connect-sensors">健康连接</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#high-accuracy-mode">High Accuracy Mode</a></td>
+      <td><a href="/docs/core/sensors#high-accuracy-mode">高精度模式</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#high-accuracy-update-interval">High Accuracy Update Interval</a></td>
+      <td><a href="/docs/core/sensors#high-accuracy-update-interval">高精度更新间隔</a></td>
       <td>✅</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#interactive-sensor">Interactive</a></td>
+      <td><a href="/docs/core/sensors#interactive-sensor">交互式</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#keyguard-sensors">Keyguard Sensors</a></td>
+      <td><a href="/docs/core/sensors#keyguard-sensors">锁屏传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#last-reboot-sensor">Last Reboot</a></td>
+      <td><a href="/docs/core/sensors#last-reboot-sensor">最后重启</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#last-update-trigger-sensor">Last Update Trigger</a></td>
+      <td><a href="/docs/core/sensors#last-update-trigger-sensor">最后更新触发器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#last-used-app-sensor">Last Used App</a></td>
+      <td><a href="/docs/core/sensors#last-used-app-sensor">最后使用的应用</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#light-sensor">Light</a></td>
+      <td><a href="/docs/core/sensors#light-sensor">光</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Microphone in Use</a></td>
+      <td><a href="/docs/core/sensors">正在使用的麦克风</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#mobile-data-sensors">Mobile Data Sensors</a></td>
+      <td><a href="/docs/core/sensors#mobile-data-sensors">移动数据传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#notification-sensors">Notification Sensors</a></td>
+      <td><a href="/docs/core/sensors#notification-sensors">通知传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#phone-sensors">Phone Sensors</a></td>
+      <td><a href="/docs/core/sensors#phone-sensors">电话传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#power-save-sensor">Power Save</a></td>
+      <td><a href="/docs/core/sensors#power-save-sensor">省电模式</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pressure-sensor">Pressure</a></td>
+      <td><a href="/docs/core/sensors#pressure-sensor">压力</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors">Primary Display ID & Name</a></td>
+      <td><a href="/docs/core/sensors">主要显示 ID & 名称</a></td>
       <td></td>
       <td></td>
       <td></td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#proximity-sensor">Proximity</a></td>
+      <td><a href="/docs/core/sensors#proximity-sensor">接近传感器</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#public-ip-sensor">Public IP</a></td>
+      <td><a href="/docs/core/sensors#public-ip-sensor">公共 IP</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#next-alarm-sensor">Next Alarm</a></td>
+      <td><a href="/docs/core/sensors#next-alarm-sensor">下一个闹钟</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#cellular-provider-sensor">Sim 1</a></td>
+      <td><a href="/docs/core/sensors#cellular-provider-sensor">SIM 卡 1</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#cellular-provider-sensor">Sim 2</a></td>
+      <td><a href="/docs/core/sensors#cellular-provider-sensor">SIM 卡 2</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
@@ -794,28 +794,28 @@ Not all features are supported by Android at the moment but eventually most feat
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#pedometer-sensors">Steps</a></td>
+      <td><a href="/docs/core/sensors#pedometer-sensors">步数</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#storage-sensor">Storage</a></td>
+      <td><a href="/docs/core/sensors#storage-sensor">存储</a></td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#traffic-stats-sensor">Traffic Stats</a></td>
+      <td><a href="/docs/core/sensors#traffic-stats-sensor">流量统计</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><a href="/docs/core/sensors#work-profile-sensor">Work Profile</a></td>
+      <td><a href="/docs/core/sensors#work-profile-sensor">工作配置文件</a></td>
       <td>✅</td>
       <td>✅</td>
       <td></td>

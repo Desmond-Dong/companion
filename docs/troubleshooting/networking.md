@@ -1,87 +1,86 @@
 ---
-title: Companion App Networking
+title: 伴侣应用网络
 id: 'networking'
 ---
-Having your Home available anywhere and everywhere you go is important, whether you forgot to turn off the stove or you want to check the camera views because of an alert.
+无论您在何处，能够随时随地访问您的家都是重要的，无论是因为您忘记关闭炉子，还是因为您想查看摄像头视图以应对警报。
 
-Because we want your smart home to be private and secure on the web, many parts of the puzzle need to align just right so everything works as you expect. This guide aims to help you understand the requirements, some of the complexities and our recommended typical solutions to setting up network access to your Home Assistant instance:
+因为我们希望您的智能家居在网络上是私密和安全的，所以许多拼图的部分需要正确对齐，才能确保一切如您所愿地运行。本指南旨在帮助您了解要求、一些复杂性和我们推荐的设置网络访问到您的 Home Assistant 实例的典型解决方案：
 
-## The basics: How the app talks to your Home Assistant
-In order for the app to talk to HA, it needs to know its address. Just within your home network you might know that your Home Assistant is on an IP like `192.168.1.4` and listening on port 8123. If you use Home Assistant OS and haven't changed any of the defaults, Home Assistant will also be reachable at [http://homeassistant.local:8123](http://homeassistant.local:8123).
-This is all fine and will work perfectly well as long as you never take your phone or tablet outside your home, but what if you do?
-The easiest way is to subscribe to Nabu Casa Cloud for a monthly [fee](https://www.nabucasa.com/pricing/). This fee helps support further development of Home Assistant. Nabu Casa Cloud acts as a "smart" proxy on the internet, tunnelling your frontend in an encrypted manner from your home to your phone, regardless where you are and without requiring opening your home network to inbound traffic from the internet.
-If you don't want to use Nabu Casa Cloud (which is fine, but you should still subscribe and enjoy the warm feeling of supporting Home Assistant), you need HA to be accessible from the internet. This requires opening a port on your router and getting a name for your Home Assistant on the internet. While it is possible to have your HA use Port 8123 internally and have your router do a port-forwarding from say the default https port of 443 to 8123, we recommend you NOT do this for reasons of simplicity which we will explain later. You also need a name for your Home Assistant as homeassistant.local is a private domain suffix that does not exist on the internet.
+## 基础：应用如何与您的 Home Assistant 通信
+为了让应用与 HA 通信，应用需要知道其地址。在您家中的网络内，您可能知道您的 Home Assistant 的 IP 就像 `192.168.1.4` 并且监听端口 8123。如果您使用 Home Assistant OS 且未更改任何默认设置，Home Assistant 也可以通过 [http://homeassistant.local:8123](http://homeassistant.local:8123) 访问。这都很好，并且只要您从未将手机或平板带出家门，它就能完美工作，但如果您带出去了呢？
+最简单的方法是每月订阅 Nabu Casa Cloud 的 [费用](https://www.nabucasa.com/pricing/)。此费用有助于支持 Home Assistant 的进一步开发。Nabu Casa Cloud 充当互联网的“智能”代理，以加密方式将您的前端从家中隧道到您的手机，无论您在哪里，并且无需打开您的家庭网络以接收来自互联网的入站流量。
+如果您不想使用 Nabu Casa Cloud（这很好，但您仍然应该订阅并享受支持 Home Assistant 的良好心情），您需要让 HA 可以从互联网访问。这需要在路由器上开放一个端口，并为您的 Home Assistant 获取一个互联网上的名称。虽然您可以让 HA 在内部使用端口 8123，并让您的路由器从例如默认的 https 端口 443 转发到 8123，但我们建议您不要这样做，原因是简单性，我们稍后会解释。您还需要为您的 Home Assistant 获取一个名称，因为 homeassistant.local 是一个在互联网上不存在的私有域后缀。
 
-## Dynamic DNS
-Most non-business internet connections have at least one of two drawbacks: Your internet service provider typically does not give you a static IP (meaning the public IP address your modem/router is assigned will change every once in a while or even every 24 hours) and some ISPs don't even give you a "real" IP address as they do not have enough addresses to give out. This last scenario is very common on cable providers and especially in Asia/Pacific. If your ISP says they use Carrier-grade NAT (CG-NAT) or something like Dual Stack lite (DS-lite) you likely will have this problem. If you're impacted please see the CG-NAT and IPv6 addendum.
-For dynamic, public IP addresses the solution is simple: Typically users choose a dynamic dns service such as [duckdns.org](https://github.com/home-assistant/addons/blob/master/duckdns/README.md) which will create a unique name (e.g. `my-home.duckdns.org`) that is supported to be updated via your router to always point to your public address. If you have created the port-forward of TCP 8123 on your router's public interface to TCP 8123 on your internal Home Assistant IP (say `192.168.1.4`), your Home Assistant is now available on the web. You could declare victory at this point and stop but don't - because everything at this point is unencrypted and we want you to enjoy HA in a private, secure manner.
+## 动态 DNS
+大多数非商业互联网连接至少有两个缺点：您的互联网服务提供商通常不提供静态 IP（这意味着您的调制解调器/路由器被分配的公共 IP 地址会偶尔更改，甚至可能每 24 小时更改一次），而且一些 ISP 甚至不提供“真正的” IP 地址，因为他们没有足够的地址分配。这种情况在电缆提供商中非常普遍，尤其是在亚太地区。如果您的 ISP 说他们使用运营商级 NAT（CG-NAT）或类似双栈 lite（DS-lite），您很可能会遇到这个问题。如果您受到影响，请参阅 CG-NAT 和 IPv6 附录。
+对于动态公共 IP 地址，解决方案很简单：通常用户会选择一个动态 DNS 服务，例如 [duckdns.org](https://github.com/home-assistant/addons/blob/master/duckdns/README.md)，该服务将创建一个唯一名称（例如 `my-home.duckdns.org`），这个名称可以通过路由器更新，以始终指向您的公共地址。如果您已经在路由器的公共接口上创建了 TCP 8123 的端口转发到内部 Home Assistant IP（比如 `192.168.1.4`），您的 Home Assistant 现在可以在网上访问。在这个时候你可以宣布胜利并停止，但不要这样做——因为此时一切都是未加密的，我们希望您能够以私密和安全的方式享受 HA。
 ## Hairpin NAT
-At this point of setting up we need to check one capability of your router: Hairpin NAT (otherwise known as NAT reflection or NAT loopback). What this means is the ability of your router to mirror a request from its inside (LAN) interface to its outside (WAN) address back to an internal IP address (in this case, your Home Assistant), thus reflecting or hairpinning the traffic. It's easy to check if this works: Just open a browser on your phone or PC while connected to your home network and opening `http://my-home.duckdns.org:8123` - if it works, you have hairpin NAT working and can go on to the next section. Most current routers will support NAT hairpinning out of the box, there are however some routers (especially if you got your router from your ISP) that do not have this ability or have it disabled. If this is the case, you need to check if you can enable it on your router or, if you can't, you will need to set up Split Brain DNS.
+在设置的这个阶段，我们需要检查您的路由器的一个功能：Hairpin NAT（也称为 NAT 反射或 NAT 循环）。这意味着您的路由器能够将请求从其内部（局域网）接口镜像到其外部（广域网）地址，然后再返回到内部 IP 地址（在这种情况下是您的 Home Assistant），从而反射或发回流量。检查它是否工作很简单：只需在连接到家中网络的手机或 PC 上打开浏览器，并打开 `http://my-home.duckdns.org:8123` ——如果有效，您就有了工作中的 hairpin NAT，可以进入下一部分。大多数当前的路由器将支持 NAT hairpinning，但有些路由器（特别是如果您从 ISP 获取路由器）可能没有此功能或已禁用。如果是这种情况，您需要检查是否可以在路由器上启用它，或者如果不能，您需要设置 Split Brain DNS。
 
-## Securing the connection
-We'll stay with our DuckDNS example. Using `http://my-home.duckdns.org:8123` works, but anyone could be reading your traffic. Let's change that! The DuckDNS add-on will create a free, trusted and valid LetsEncrypt SSL certificate to use on your Home Assistant. Just follow the installation instructions [here](https://github.com/home-assistant/addons/tree/master/duckdns) and [here](https://github.com/home-assistant/addons/blob/master/duckdns/README.md) and you will have secure, public access to your Home Assistant. What's great about using the DuckDNS add-on is that it uses the LetsEncrypt DNS challenge, whereby during requesting the certificate it proves "ownership" of the domain by creating a temporary DNS record. If you use a different DNS provider other than DuckDNS, you can use the [LetsEncrypt](https://github.com/home-assistant/addons/tree/master/letsencrypt) add-on for `Home Assistant` which supports proving ownership of the name either via the DNS or the http challenge. The latter requires port-forwarding TCP Port 80 on your router to your internal Home Assistant IP on TCP Port 80.
+## 确保连接安全
+我们将继续使用 DuckDNS 的示例。使用 `http://my-home.duckdns.org:8123` 可以工作，但任何人都可能在读取您的流量。让我们改变这一点！DuckDNS 附加组件将为您的 Home Assistant 创建一个免费的、受信任的有效的 LetsEncrypt SSL 证书。只需按照 [这里](https://github.com/home-assistant/addons/tree/master/duckdns) 和 [这里](https://github.com/home-assistant/addons/blob/master/duckdns/README.md) 的安装说明操作，您将获得对 Home Assistant 的安全公共访问。使用 DuckDNS 附加组件的好处在于，它使用 LetsEncrypt DNS 挑战，在请求证书时，通过创建一个临时 DNS 记录来证明“拥有”该域名。如果您使用的 DNS 提供商不是 DuckDNS，您可以使用支持通过 DNS 或 http 挑战证明名称所有权的 `Home Assistant` 的 [LetsEncrypt](https://github.com/home-assistant/addons/tree/master/letsencrypt) 附加组件。后者要求将 TCP 端口 80 的端口转发到您内部 Home Assistant IP 的 TCP 端口 80。
 
-With Hairpin NAT working and SSL on your DNS domain you can now access Home Assistant securely both on the internet and at home and you should add `external_url: my-home.duckdns.org:8123` to the `homeassistant:` section of your configuration.yaml. This is not strictly necessary but will help with auto-detection during onboarding of the iOS app, as the app will know where and how to reach your Home Assistant.
+当 Hairpin NAT 工作并且 DNS 域上有 SSL 后，您现在可以在互联网上和家庭中安全访问 Home Assistant，您应该在 `homeassistant:` 部分的 configuration.yaml 中添加 `external_url: my-home.duckdns.org:8123`。这并不是绝对必要的，但会帮助在 iOS 应用的入门过程中进行自动检测，因为该应用会知道如何到达您的 Home Assistant。
 
 ## Split Brain DNS
-So what's this split brain DNS (also known as split horizon DNS, split-DNS) thing and why would I need it? If your router doesn't do hairpin NAT, you still need to access your Home Assistant via the public DNS name, e.g. `my-home.duckdns.org`. Why is that? Because valid encryption via https and SSL certificates only works for public DNS names. What this means is that the certificate name on your server needs to match the DNS name you enter in your browser or app. This is fine with hairpin NAT available but becomes an issue when it's not. In this case you need to "split" the answer your browser/app gets when it looks up the IP address behind `my-home.duckdns.org` - you need one answer for devices on your home network that points to the internal IP address of your Home Assistant (e.g. `192.168.1.4`) and another answer for when you're out and about (e.g. `104.25.25.31`).
-The easiest solution to this is to use the [AdGuard Home](https://github.com/hassio-addons/addon-adguard-home) add-on for Home Assistant. This can also be set up on some routers (e.g. pfSense or UniFi Security Gateways) but we'll continue on using our example guide with the tools provided via Home Assistant: So you've now installed the AdGuard Home add-on and changed the DNS server on your router DHCP settings to the address of your Home Assistant. You should now go to the AdGuard Home setting page in your [Add-ons panel](https://my.home-assistant.io/redirect/supervisor/) and there go to `Settings` -> `Filters` and select: `DNS rewrites`
+那么什么是 Split Brain DNS（也称为 Split Horizon DNS、split-DNS），我为什么需要它？如果您的路由器不支持 hairpin NAT，您仍然需要通过公共 DNS 名称访问 Home Assistant，例如 `my-home.duckdns.org`。这是为什么呢？因为有效的加密通过 https 和 SSL 证书只对公共 DNS 名称有效。这意味着，您的服务器上的证书名称需要与您在浏览器或应用中输入的 DNS 名称匹配。如果 hairpin NAT 可用，这就没问题，但在不可用时就会成为问题。在这种情况下，您需要“拆分”浏览器/应用获取的 IP 地址后面的 `my-home.duckdns.org` 的答案——您需要一个指向 Home Assistant 内部 IP 地址的答案（例如 `192.168.1.4`），以及一个在外出时使用的答案（例如 `104.25.25.31`）。
+最简单的解决方案是使用 `Home Assistant` 的 [AdGuard Home](https://github.com/hassio-addons/addon-adguard-home) 附加组件。这也可以在某些路由器上设置（例如 pfSense 或 UniFi Security Gateways），但我们将继续使用 Home Assistant 提供的工具进行示例指南：因此您现在已经安装了 AdGuard Home 附加组件，并将路由器 DHCP 设置中的 DNS 服务器更改为您的 Home Assistant 地址。您现在应该访问 AdGuard Home 设置页面，在 [附加组件面板](https://my.home-assistant.io/redirect/supervisor/) 中，转到 `设置` -> `过滤器` 并选择：`DNS 重写`。
 
-Here you click `Add DNS rewrite` and enter your `my-home.duckdns.org` and the internal IP `192.168.1.4` of your Home Assistant, followed by clicking on `save`. What happens now is that all DNS queries for the address `my-home.duckdns.org` from inside your home network will be answered by AdGuard via its own rewrite table, thus pointing toward the internal address of your Home Assistant instead of asking public DNS servers on the web which will all answer with the public IP of your router.
-Even if you don't need split brain DNS, you may also want to set this up as it will enable you to access Home Assistant via it's public name even when your internet connection is down and hairpin NAT won't work. One less dependency on the Cloud!
+在这里，您点击 `添加 DNS 重写`，输入 `my-home.duckdns.org` 及 Home Assistant 的内部 IP `192.168.1.4`，然后点击 `保存`。此时，来自您家庭网络内的所有对 `my-home.duckdns.org` 的 DNS 查询将通过 AdGuard 的重写表答复，从而指向 Home Assistant 的内部地址，而不是询问公共 DNS 服务器，后者将返回路由器的公共 IP。
+即使您不需要 Split Brain DNS，您可能也希望设置它，因为它将使您能够通过公共名称访问 Home Assistant，即使您的互联网连接中断并且 hairpin NAT 不可用。这减少了对云的依赖！
 
-## Setting up the app
-If you've followed all our advice, your app should find your Home Assistant instance automatically during onboarding when connected to your home wifi network. You can also go through onboarding anywhere you're connected to the internet by manually entering `https://my-home.duckdns.org:8123` and the setup will finish with that address in the `External URL` field in the app connection settings. There should be no need to enter an internal URL as the same address will work regardless of where your phone is connected.
+## 设置应用
+如果您遵循了我们的所有建议，当连接到家庭 Wi-Fi 网络时，您的应用应在入门过程中自动发现您的 Home Assistant 实例。您还可以通过手动输入 `https://my-home.duckdns.org:8123` 在任何连接到互联网的地方完成入门，设置将以该地址作为应用连接设置中的 `External URL` 字段完成。无需输入内部 URL，因为无论您的手机连接到何处，相同的地址都能正常工作。
 
-If you want to (or have to) use Nabu Casa Cloud or a different URL depending on the network you're connected to, there are more steps required:
+如果您希望（或必须）使用 Nabu Casa Cloud 或根据所连接的网络使用其他 URL，则需要更多步骤：
 
--   In system settings, set the location access permission for Home Assistant to 'Always' on iOS or 'Allow all the time' on Android. This is required because iOS 13 and newer and all Android versions will only let apps with such permission have access to the wifi SSID which is used by the app to determine whether to use internal or external URLs.
--   Once permission is given, add your Home Assistant address to internal URL (if you come from the top of this article, this could be `http://homeassistant.local:8123`)
--  ![iOS](/assets/iOS.svg) If you've set up Nabu Casa Cloud in your Home Assistant the checkbox to "Connect via Cloud" should now become available. Once you activate the checkbox, external URL will become deactivated.
--  ![Android](/assets/android.svg) Manually change your Home Assistant's external URL to your Nabu Casa Cloud URL.
+-   在系统设置中，将 Home Assistant 的位置访问权限设置为 iOS 上的“始终”或 Android 上的“始终允许”。这是必需的，因为 iOS 13 及更高版本和所有 Android 版本仅允许具有此权限的应用访问 Wi-Fi SSID，而该 SSID 被应用用于确定使用内部还是外部 URL。
+-   一旦获得权限，将您的 Home Assistant 地址添加到内部 URL（如果您从本文开头进入，这可能是 `http://homeassistant.local:8123`）
+-  ![iOS](/assets/iOS.svg) 如果您在 Home Assistant 中设置了 Nabu Casa Cloud，则“通过云连接”的复选框现在应变为可用状态。一旦您激活该复选框，外部 URL 将被禁用。
+-  ![Android](/assets/android.svg) 手动将 Home Assistant 的外部 URL 更改为您的 Nabu Casa Cloud URL。
 
-:::note Using the BSSID instead of SSID
-![Android](/assets/android.svg) You can also enter a wifi network BSSID in the app's settings in case you have multiple access points with the same SSID, and only want to use the internal URL when connected to a specific access point. To do so, add a new SSID with the name `BSSID:` followed by the BSSID (for example: `BSSID:1A:2B:3C:4D:5E:6F`).
+:::note 使用 BSSID 而不是 SSID
+![Android](/assets/android.svg) 如果您有多个具有相同 SSID 的接入点，并且只希望在连接到特定接入点时使用内部 URL，您还可以在应用设置中输入 Wi-Fi 网络 BSSID。为此，请添加一个新 SSID，名称为 `BSSID:` 后跟 BSSID（例如：`BSSID:1A:2B:3C:4D:5E:6F`）。
 :::
 
-## Addendum: CG-NAT
-If your ISP doesn't give you a public IPv4 address you're down to basically only two solutions: You can call your ISP and ask if they can give you a real address or if there is an upgrade for your connection available (oddly enough, asking nicely will work with many ISPs out there) or use Nabu Casa Cloud.
+## 附录：CG-NAT
+如果您的 ISP 不提供公共 IPv4 地址，您基本上仅有两个解决方案：您可以拨打 ISP 电话，询问他们是否可以为您提供真实地址或您的连接是否可升级（奇怪的是，礼貌地询问对许多 ISP 有用），或者使用 Nabu Casa Cloud。
 
-## Addendum: IPv6
-Since IPv6 has been rolling out for the last 20 years, chances are that along with an IPv4 address your home network will also have been provided with IPv6 addresses from your ISP. So your Home Assistant host may have it's IPv4 address of `192.168.1.4` as well as an IPv6 address of `2001:db8:1042::51c1:28d8:3bdc:6724`. Here's where our advice for not changing the TCP port you forward to Home Assistant comes in:
--   Home Assistant will listen for traffic on `192.168.1.4:8123` *and* `[2001:db8:1042::51c1:28d8:3bdc:6724]:8123`
--   If you really want to future proof your setup, you will have two DNS records for `my-home.duckdns.org`: An A-record pointing to your routers public IPv4 address which will be port-forwarded to your HA hosts internal address and an AAAA-record, which points directly to the IPv6 address of your HA host. Now when you access your HA remotely either protocol could be used, since all you're entering will be `https://my-home.duckdns.org:8123`. If you had changed the Port on your Router to the https default 443, the connection would now fail if you suddenly ended up with a working IPv6 setup as nothing is listening on `[2001:db8:1042::51c1:28d8:3bdc:6724]:443`.
+## 附录：IPv6
+由于 IPv6 已经推出20年，您的家庭网络很可能在提供 IPv4 地址的同时也获得了来自 ISP 的 IPv6 地址。因此，您的 Home Assistant 主机可能具有其 IPv4 地址 `192.168.1.4` 和 IPv6 地址 `2001:db8:1042::51c1:28d8:3bdc:6724`。这是我们建议不更改 TCP 端口的原因：
+-   Home Assistant 将在 `192.168.1.4:8123` *和* `[2001:db8:1042::51c1:28d8:3bdc:6724]:8123` 上监听流量
+-   如果您确实想要使您的设置具有未来保障，您将有两个 DNS 记录指向 `my-home.duckdns.org`：一个 A 记录指向您的路由器公共 IPv4 地址，该地址将被端口转发到您的 HA 主机内部地址，另一个 AAAA 记录，直接指向您的 HA 主机的 IPv6 地址。现在，当您远程访问 HA 时，可以使用任何协议，因为您输入的将是 `https://my-home.duckdns.org:8123`。如果您将路由器上的端口更改为 https 默认的 443，则在您突然拥有可工作的 IPv6 设置时，连接将失败，因为没有监听 `[2001:db8:1042::51c1:28d8:3bdc:6724]:443`。
 
-## Addendum: Reverse Proxy via NGINX
-There are cases when having Home Assistant serve https is impossible or incompatible with some of your devices. This can be especially true with ESP-based low power IoT hardware that communicates via RestAPI and just doesn't have the horsepower to do the SSL encryption. One example is the [konnected.io Integration](https://www.home-assistant.io/integrations/konnected/) which requires Home Assistant to be reachable via http.
-So to accomodate this and still have encryption for external access, we use a reverse proxy like [NGINX](https://www.home-assistant.io/docs/ecosystem/nginx/). What a reverse proxy does is to act as an intermediate for your clients (Browser or App). The client talks to the reverse proxy securely via https and the proxy passes through this traffic to Home Assistant over an unencrypted http connection. Staying with our Home Assistant example, we'll assume you have already set up DuckDNS and LetsEncrypt. You should now install the [NGINX Home Assistant SSL proxy](https://www.home-assistant.io/addons/nginx_proxy/) add-on for Home Assistant and configure it according to the docs.
+## 附录：通过 NGINX 进行反向代理
+在某些情况下，让 Home Assistant 提供 https 是不可能的，或者与某些设备不兼容。这对于通过 RestAPI 通信、且没有足够的性能进行 SSL 加密的基于 ESP 的低功耗 IoT 硬件尤其如此。例如，[konnected.io 集成](https://www.home-assistant.io/integrations/konnected/) 要求 Home Assistant 必须通过 http 可访问。
+因此，为了适应这一点并仍然实现外部访问的加密，我们使用反向代理，例如 [NGINX](https://www.home-assistant.io/docs/ecosystem/nginx/)。反向代理的作用是作为您的客户端（浏览器或应用）的中介。客户端通过 https 安全地与反向代理通信，代理则将此流量通过未加密的 http 连接传递给 Home Assistant。延续我们的 Home Assistant 示例，我们假设您已经设置了 DuckDNS 和 LetsEncrypt。您现在应安装 [NGINX Home Assistant SSL 代理](https://www.home-assistant.io/addons/nginx_proxy/) 附加组件，并根据文档进行配置。
 
-In your configuration.yaml file the following changes are needed:
+在您的 configuration.yaml 文件中，需要进行以下更改：
 ```
 homeassistant:
-  external_url: https://my-home.duckdns.org # Note we no longer have a :8123 Port here
+  external_url: https://my-home.duckdns.org # 注意我们不再有 :8123 端口
 
 http:
-  use_x_forwarded_for: true     # To ensure HA understands that client requests come via reverse proxy
+  use_x_forwarded_for: true     # 确保 HA 理解客户端请求是通过反向代理而来
   trusted_proxies:
-    - 172.30.32.0/23            # In Home Assistant we need to add the Docker subnet
-    - 127.0.0.1                 # Add the localhost IPv4 address
-    - ::1                       # Add the localhost IPv6 address
-  # Comment or remove the SSL certificate lines:
+    - 172.30.32.0/23            # 在 Home Assistant 中，我们需要添加 Docker 子网
+    - 127.0.0.1                 # 添加本地主机的 IPv4 地址
+    - ::1                       # 添加本地主机的 IPv6 地址
+  # 注释或删除 SSL 证书行：
   # ssl_certificate: /ssl/fullchain.pem
   # ssl_key: /ssl/privkey.pem
 ```
-Once that's done your router's port-forwarding should be `TCP 443` to your Home Assistant internal IP `192.168.1.4 Port 443`. Do NOT create a forward to `192.168.1.4 Port 8123` as that is now unencrypted http and should only be accessible from your local network.
-You can now access your Home Assistant via `https://my-home.duckdns.org` both internally and externally while having `http://192.168.1.4:8123` available to be used as unencrypted endpoint for things like `konnected.io`.
-Note: If you don't use the NGINX Home Assistant add-on but instead roll your own, please ensure that websockets support is enabled.
+完成后，路由器的端口转发应为 `TCP 443` 到您的 Home Assistant 内部 IP `192.168.1.4 Port 443`。请勿创建转发到 `192.168.1.4 Port 8123`，因为那是未加密的 http，只应在本地网络中访问。
+您现在可以在内部和外部通过 `https://my-home.duckdns.org` 访问您的 Home Assistant，同时可使用 `http://192.168.1.4:8123` 作为未加密的端点供 `konnected.io` 等使用。
+注意：如果您不使用 NGINX Home Assistant 附加组件，而是自己配置，请确保启用了 WebSockets 支持。
 
-### TLS Client Authentication
+### TLS 客户端认证
 
 ![Android](/assets/android.svg)
 
-If your Home Assistant requires TLS Client Authentication (because it is behind a reverse proxy configured to perform TLS Client Authentication), the app will ask for a certificate.
-Please refer to your device and Android version documentation to install the certificate, an example for Pixel phones is available here [Add & remove certificates](https://support.google.com/pixelphone/answer/2844832?hl=en).
+如果您的 Home Assistant 需要 TLS 客户端认证（因为它在配置为执行 TLS 客户端认证的反向代理后面），则应用会要求您提供证书。
+请参考您的设备和 Android 版本文档以安装证书，像 Pixel 手机的示例可以在这里找到 [添加和删除证书](https://support.google.com/pixelphone/answer/2844832?hl=zh-Hans)。
 
-Wear OS does not support authentication with installed certificates. The app cannot transfer the certificate to the Wear OS app automatically, therefore you are asked to provide a certificate during the Wear OS app onboarding. If a new certificate is required, you have to start the onboarding process again by logging out from the Wear OS app. The certificate (and key) must be supplied as a PKCS12 container. Support for the current default PKCS12 encryption method is limited, but it might work if your phone and watch are new enough so please try that first. Only in case onboarding with this new format fails, you could try using a legacy PKCS12 container instead. Using e.g. OpenSSL, this is achieved by using the `-legacy` flag while generating the container file.
+Wear OS 不支持使用已安装证书进行身份验证。应用无法将证书自动转移到 Wear OS 应用，因此在 Wear OS 应用的入门过程中会要求您提供证书。如果需要新的证书，您必须通过从 Wear OS 应用注销重新启动入门过程。证书（和密钥）必须作为 PKCS12 容器提供。当前默认 PKCS12 加密方法的支持有限，但如果您的手机和手表足够新, 可能会首先成功尝试此方法。仅当使用这种新格式的入门失败时，您可以尝试使用旧版 PKCS12 容器。使用例如 OpenSSL，可以通过在生成容器文件时使用 `-legacy` 标志来实现。
 
-Beginning February 2024 [Let's Encrypt has begun its migration over to providing keys that are not cross-signed by IdenTrust's root CA certificate](https://letsencrypt.org/2023/07/10/cross-sign-expiration.html), instead using their own now widely trusted root CA certificate. Older clients that have not received an updated list of trusted certificate authorities will consider newer Let's Encrypt SSL keys as being invalid, which include versions of Android older than 7.1.1. This will cause Chrome or the Companion App to display an SSL error. An easy workaround is to use Firefox to access Home Assistant, as it's distributed with its own updated trusted list of certificate authorities. Another workaround is to manually install Let’s Encrypt's Active ISRG Root X1 Self-signed PEM (not DST Root X3) into the Android Credential Storage.
+自 2024 年 2 月起，[Let's Encrypt 已开始迁移到提供未由 IdenTrust 的根 CA 证书交叉签名的密钥](https://letsencrypt.org/2023/07/10/cross-sign-expiration.html)，而是使用他们自己现在广泛信任的根 CA 证书。较旧的客户端如果没有获得更新的受信任证书颁发机构列表，将认为更新的 Let's Encrypt SSL 密钥是无效的，这包括 Android 7.1.1 之前的版本。这将导致 Chrome 或伴侣应用显示 SSL 错误。一个简单的解决方案是使用 Firefox 访问 Home Assistant，因为它与自己的更新信任的证书颁发机构列表一起分发。另一个解决方案是手动安装 Let’s Encrypt 的活跃 ISRG 根 X1 自签名 PEM（而不是 DST 根 X3）到 Android 凭证存储。

@@ -1,27 +1,26 @@
 ---
-title: "Privacy, rate limiting and security"
+title: "隐私、速率限制与安全"
 id: "notification-details"
 ---
 
-## Privacy
+## 隐私
 
-No notification content is stored on remote servers. Only the required push registration data and a simple counter of the total number of push notifications sent per day per device (for rate-limiting purposes) is kept.
+通知内容不会存储在远程服务器上。仅保留所需的推送注册数据和按设备每日发送的推送通知总数的简单计数器（用于速率限制）。
 
-## Architecture
-To provide the notification service, the app uses Google's Firebase cloud messaging service. For more information about Firebase, please [click here](https://firebase.google.com/docs/cloud-messaging).
+## 架构
+为了提供通知服务，该应用使用Google的Firebase云消息传递服务。如需了解有关Firebase的更多信息，请 [点击这里](https://firebase.google.com/docs/cloud-messaging)。
 
 ![iOS](/assets/iOS.svg)<br />
-If you wish to not exchange data with Google's servers, you can opt out of the Firebase services in the Privacy section of the Companion App settings in [Configuration](https://my.home-assistant.io/redirect/config/) when using the app. Doing so will stop notifications from functioning.  
+如果您希望不与Google的服务器交换数据，您可以在使用应用时，在[配置](https://my.home-assistant.io/redirect/config/)中的Companion App设置的隐私部分选择退出Firebase服务。这样做将导致通知无法正常功能。
 
-## Rate limiting
+## 速率限制
 
-Currently, you are allowed to send a maximum of 500 push notifications per day per device. The rate limit resets at midnight UTC daily. This is to ensure that the service remains cheap to maintain. In the future we may add support for upgrading to allow more notifications.
+目前，您每天每个设备最多可以发送500条推送通知。速率限制每天午夜UTC重置。这是为了确保服务保持低成本维护。未来我们可能会增加支持以允许更多通知。
 
-The in-app Notifications settings screen in the iOS app displays your current rate limits for the day broken out into the following categories: Attempts, Delivered, Errors, Total, and the exact time until next daily reset. For Android you can find these details on the Companion App Screen with [Configuration](https://my.home-assistant.io/redirect/config/). Alternatively, you can also view them by setting `homeassistant.components.mobile_app.notify: info` for the [`logger`](https://www.home-assistant.io/integrations/logger/) integration.
+iOS应用内的通知设置屏幕显示您当天的当前速率限制，分为以下几个类别：尝试、已发送、错误、总计，以及距离下次每日重置的确切时间。对于Android，您可以在Companion App的[配置](https://my.home-assistant.io/redirect/config/)屏幕上找到这些详细信息。或者，您还可以通过为[`logger`](https://www.home-assistant.io/integrations/logger/)集成设置`homeassistant.components.mobile_app.notify: info`来查看它们。
 
-If an error occurs while sending a notification, it does not count towards your rate limit. [Critical Alerts](critical.md) and [Notification Commands](commands.md) also do not count towards your rate limit.
+如果在发送通知时发生错误，则不计入您的速率限制。[关键警报](critical.md)和[通知命令](commands.md)也不计入您的速率限制。
 
+## 安全
 
-## Security
-
-All traffic between your Home Assistant instance, the push infrastructure, and Apple, is encrypted with SSL.
+Home Assistant实例、推送基础设施和Apple之间的所有流量均使用SSL加密。

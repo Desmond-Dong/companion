@@ -1,24 +1,29 @@
 module.exports = {
-  title: 'Home Assistant Companion Docs',
-  tagline: 'Everything you need to know to use Home Assistant Companion',
+  title: 'Home Assistant Companion 文档',
+  tagline: '使用 Home Assistant Companion 所需的一切',
   url: 'https://companion.home-assistant.io',
   baseUrl: '/',
   favicon: 'img/brand/favicon.png',
-  organizationName: 'home-assistant', // Usually your GitHub org/user name.
-  projectName: 'companion.home-assistant', // Usually your repo name.
+  organizationName: 'home-assistant', // 通常是你的 GitHub 组织/用户名。
+  projectName: 'companion.home-assistant', // 通常是你的仓库名称。
+  onBrokenLinks: 'ignore',
+  i18n: {
+    defaultLocale: 'cn',
+    locales: ['cn', 'en'],
+  },
   themeConfig: {
     navbar: {
-      title: 'Companion Apps',
+      title: 'Companion 应用',
       logo: {
         alt: 'Home Assistant',
         src: 'img/brand/logo.svg',
         srcDark: 'img/brand/logo.svg',
       },
       items: [
-        { to: '/docs/getting_started', label: 'Docs', position: 'left' },
-        { to: '/download', label: 'Download', position: 'left' },
-        { to: '/docs/gallery/android', label: 'Gallery', position: 'left' },
-        { to: '/docs/troubleshooting/more-help', label: 'Support', position: 'left' },
+        { to: '/docs/getting_started', label: '文档', position: 'left' },
+        { to: '/download', label: '下载', position: 'left' },
+        { to: '/docs/gallery/android', label: '画廊', position: 'left' },
+        { to: '/docs/troubleshooting/more-help', label: '支持', position: 'left' },
         {
           href: 'https://www.github.com/home-assistant/iOS',
           label: 'GitHub (iOS)',
@@ -41,10 +46,10 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: '社区',
           items: [
             {
-              label: 'Forum',
+              label: '论坛',
               href: 'https://community.home-assistant.io/c/mobile-apps/40'
             },
             {
@@ -58,7 +63,7 @@ module.exports = {
           ],
         },
         {
-          title: 'Social',
+          title: '社交',
           items: [
             {
               label: 'Twitter',
@@ -71,7 +76,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant. Built with Docusaurus.`,
+      copyright: `版权所有 © ${new Date().getFullYear()} Home Assistant。由 Docusaurus 构建。`,
     },
     image: 'img/default-social.png'
   },
@@ -86,9 +91,6 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        googleAnalytics: {
-          trackingID: 'UA-57927901-7'
         },
       },
     ],

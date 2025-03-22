@@ -1,40 +1,40 @@
 ---
-title: Errors
+title: 错误
 id: 'errors'
 ---
 
-Here's a list of all the error codes you may experience with further documentation about why this happens and what to do about it.
+以下是您可能遇到的所有错误代码的列表，并附有关于发生原因和该如何处理的进一步文档。
 
-## Setup and Connectivity
+## 设置和连接
 
-### "Invalid Client ID or Redirect URI"  and  "OS Error while looking up redirect_uri"
-Check your `home-assistant.log` file for any errors about `indieauth`. If it also mentions a OS Error, you most likely have a broken IPv6 implementation. You can confirm this by running `curl -v6 https://home-assistant.io/iOS/beta-auth` from the machine you run Home Assistant on. If you receive a error about not being able to connect to the server, your IPv6 stack is broken and you should disable it.
+### "无效的客户端 ID 或重定向 URI" 以及 "查找 redirect_uri 时的操作系统错误"
+检查您的 `home-assistant.log` 文件中是否有关于 `indieauth` 的错误。如果还提到了操作系统错误，您很可能有一个损坏的 IPv6 实现。您可以通过在运行 Home Assistant 的机器上执行 `curl -v6 https://home-assistant.io/iOS/beta-auth` 来确认。如果您收到与无法连接到服务器有关的错误，则您的 IPv6 栈已损坏，您应该禁用它。
 
-### "Invalid Client ID or Redirect URI"  and  "Timeout while while looking up redirect_uri"
-Check your `home-assistant.log` file for any errors about `indieauth`. If it also mentions a Timeout, you may have a problem with your DNS not behaving as expected. You can confirm this by running `dig home-assistant.io` and `nslookup home-assistant.io` from the machine you run Home Assistant on. If you see any errors there could be a dns problem.
+### "无效的客户端 ID 或重定向 URI" 以及 "查找 redirect_uri 时的超时"
+检查您的 `home-assistant.log` 文件中是否有关于 `indieauth` 的错误。如果还提到了超时，您的 DNS 可能存在异常。您可以通过在运行 Home Assistant 的机器上执行 `dig home-assistant.io` 和 `nslookup home-assistant.io` 来确认。如果看到任何错误，可能存在 DNS 问题。
 
-Fixing this varies depending on your setup - but it's worth trying the google dns servers `8.8.8.8` and `1.1.1.1`. If you are running a hassOS setup you can do this with `ha dns options --servers dns://8.8.8.8 --servers dns://1.1.1.1`.
+修复此问题的具体方法取决于您的设置——但建议尝试使用 Google 的 DNS 服务器 `8.8.8.8` 和 `1.1.1.1`。如果您正在运行 hassOS 设置，可以使用 `ha dns options --servers dns://8.8.8.8 --servers dns://1.1.1.1` 来完成这项操作。
 
-### SSL error while looking up redirect_uri [https://home-assistant.io/iOS](https://home-assistant.io/iOS)
-This error means that your Home Assistant can't negotiate the encrypted connection to [https://home-assistant.io](https://home-assistant.io). This issue has been seen on installations running on top of MacOS where the installer notice about certificates was skipped and ignored. From the Python 3.7.5 ReadMe:
+### 查找 redirect_uri 时的 SSL 错误 [https://home-assistant.io/iOS](https://home-assistant.io/iOS)
+此错误意味着您的 Home Assistant 无法协商到 [https://home-assistant.io](https://home-assistant.io) 的加密连接。此问题曾出现在运行 MacOS 的安装中，其中安装程序关于证书的通知被跳过并忽略。从 Python 3.7.5 的 ReadMe：
 
->Certificate verification and OpenSSL
->This package includes its own private copy of OpenSSL 1.1.1.   The trust certificates in system and user keychains managed by the Keychain Access application and the security command line utility are not used as defaults by the Python `ssl` module.  A sample command script is included in `/Applications/Python 3.7` to install a curated bundle of default root certificates from the third-party [certifi](https://pypi.org/project/certifi/) package.  Double-click on `Install Certificates` to run it.
->The bundled pip has its own default certificate store for verifying download connections.
+>证书验证和 OpenSSL  
+>这个包包含它自己的 OpenSSL 1.1.1 私有副本。由钥匙串访问应用程序和安全命令行工具管理的系统和用户钥匙串中的信任证书不会被 Python `ssl` 模块默认使用。`/Applications/Python 3.7` 中包含一个示例命令脚本，用于安装来自第三方 [certifi](https://pypi.org/project/certifi/) 包的默认根证书的策划捆绑包。双击 `Install Certificates` 以运行它。  
+>捆绑的 pip 有自己的默认证书存储，用于验证下载连接。
 
-### "Setup failed for dependencies: `zeroconf`"
-This error is usually caused by one of the two following issues:
-*   You are running two Home Assistant instances with identical names. The solution is to rename one of them.
-*   You are missing `default_config:` from your `configuration.yaml` file. It is possible to only add `zeroconf:` to `configuration.yaml` but adding `default_config:` will add [several useful integrations](https://www.home-assistant.io/integrations/default_config/) along with `zeroconf:`.
+### "依赖项设置失败: `zeroconf`"
+此错误通常由以下两个问题之一引起：
+* 您正在运行两个具有相同名称的 Home Assistant 实例。解决方案是重命名其中一个实例。
+* 您的 `configuration.yaml` 文件中缺少 `default_config:`。可以仅将 `zeroconf:` 添加到 `configuration.yaml` 中，但添加 `default_config:` 将与 `zeroconf:` 一起添加 [几种有用的集成](https://www.home-assistant.io/integrations/default_config/)。
 
-### Response status code was unacceptable: 400
-This occurs when the data sent during set up does not meet Home Assistant's expectations. This most commonly occurs in two circumstances:
+### 响应状态代码不可接受: 400
+当在设置期间发送的数据不符合 Home Assistant 的期望时，会发生这种情况。通常在两种情况下发生：
 
-* When you are running a version of Home Assistant older than the minimum requirement (currently 0.104.0)
-* You have unexpected characters in your device's name. While setting up the Mobile App integration, we attempt to remove non-standard characters and emoji (as of Home Assistant 0.112). However, it is worth simplifying your device name to remove such characters if you are getting this error.
+* 当您正在运行的 Home Assistant 版本低于最低要求（当前为 0.104.0）
+* 您的设备名称中包含意外字符。在设置移动应用集成时，我们会尝试移除非标准字符和表情符号（从 Home Assistant 0.112 开始）。然而，如果您遇到此错误，简化设备名称以去除这些字符是值得的。
 
-### URLSessionTask failed with error
-This error is usually caused by one of the two following issues:
-*   You have denied local network access to the app. To solve the issue on iOS, open the Home Assistant entry in the system settings and verify that local network is enabled.
-*   You have configured an incorrect external url in your instance. E.g. when forwarding external port 443 to your instance's port (normally 8123), you don't have to append a port to your URL.
-* You are logged into Nabu Casa cloud without a subscription and trying to access your instance with a reverse proxy. Just log out from your Nabu Casa cloud account.
+### URLSessionTask 失败，错误信息
+此错误通常由以下两个问题之一引起：
+* 您已拒绝该应用的本地网络访问。在 iOS 上解决该问题，请打开系统设置中的 Home Assistant 条目并确认本地网络已启用。
+* 您在实例中配置了错误的外部 URL。例如，当将外部端口 443 转发到实例的端口（通常为 8123）时，您无需在 URL 后附加端口。
+* 您在没有订阅的情况下登录到 Nabu Casa 云，并试图通过反向代理访问您的实例。只需从您的 Nabu Casa 云帐户中注销即可。

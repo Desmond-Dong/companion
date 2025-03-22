@@ -1,34 +1,34 @@
 ---
-title: "Notification Received"
+title: "通知已接收"
 id: "notification-received"
 ---
 
 ![Android](/assets/android.svg)
 
-You can receive an event when a notification is received on the device. In order to receive this event you will need to set `confirmation: true` as a parameter in your notification action. All notification data will be present in the event data for the event type `mobile_app_notification_received`. If you do not set this parameter then no event will be sent from the device when the notification is received.
+当设备收到通知时，您可以接收一个事件。为了接收此事件，您需要在通知操作中将 `confirmation: true` 设置为参数。所有通知数据都将包含在事件类型 `mobile_app_notification_received` 的事件数据中。如果您不设置此参数，则在收到通知时不会从设备发送任何事件。
 
-Example:
+示例：
 
 ```yaml
 automation:
-  - alias: Notification received confirmation
+  - alias: 通知接收确认
     trigger:
       ...
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          message: "This notification has been received"
+          message: "此通知已被接收"
           data:
             confirmation: true
 ```
 
-Example event data:
+示例事件数据：
 
 ```json
 {
     "event_type": "mobile_app_notification_received",
     "data": {
-        "message": "test",
+        "message": "测试",
         "device_id": "DEVICE_ID"
     },
     "origin": "REMOTE",
@@ -39,4 +39,3 @@ Example event data:
         "user_id": "USER_ID"
     }
 }
-```

@@ -1,13 +1,13 @@
 ---
-title: "Notification Cleared"
+title: "通知已清除"
 id: "notification-cleared"
 ---
 
 ![Android](/assets/android.svg)
 
-When a notification is cleared Android will notify the Companion app of the event. Along with ensuring that the groups are canceled, the app will send a `mobile_app_notification_cleared` event to your Home Assistant instance. This event will contain all of the notification data that was sent to the device. This event will fire with each and every notification that gets cleared. A notification is considered cleared if you either manually swipe it away from the notification status bar or if you click on the Clear All button. The event does not get sent if a notification is clicked on to open the app.
+当通知被清除时，Android会通知伴侣应用这个事件。同时，确保组被取消，应用会向您的Home Assistant实例发送一个`mobile_app_notification_cleared`事件。该事件将包含发送到设备的所有通知数据。每当通知被清除时，都会触发该事件。如果您手动从通知状态栏上滑动它，或者点击“清除全部”按钮，通知被视为已清除。如果点击通知打开应用，则不会发送事件。
 
-Example event data:
+示例事件数据：
 
 ```json
 {
@@ -24,4 +24,3 @@ Example event data:
         "user_id": "USER_ID"
     }
 }
-```

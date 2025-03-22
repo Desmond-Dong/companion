@@ -1,21 +1,21 @@
 ---
-title: "Overview"
+title: "概述"
 id: "android-auto"
 ---
 
 ![Android](/assets/android.svg)
 
-Home Assistant offers an Android Auto (AA) and Android Automotive OS (AAOS) experience. This will allow you to interact with various entities safely while driving your vehicle. It will also allow you to navigate to any `zone`, `person`, `sensor` or `device_tracker`* that has a location associated with it.
+Home Assistant 提供了 Android Auto (AA) 和 Android Automotive OS (AAOS) 的体验。这将允许您在驾驶汽车时安全地与各种实体进行交互。它还将允许您导航到任何具有位置关联的 `zone`、`person`、`sensor` 或 `device_tracker`*。
 
-\* Device tracker entities that are considered `home` will not be shown in the navigation screen.
+\* 被认为是 `home` 的设备跟踪器实体将不会显示在导航屏幕上。
 
-### Setup
+### 设置
 
-In order to use the app in your vehicle you will need to be signed in to either your phone if using AA or your vehicle if using AAOS. Once you are signed in with you will be all set to use the Home Assistant icon on the home screen in the vehicle.
+为了在您的车辆中使用应用程序，您需要登录到手机（如果使用 AA）或车辆（如果使用 AAOS）。一旦您登录后，就可以在车辆的主屏幕上使用 Home Assistant 图标。
 
-### Supported Actionable Domains
+### 支持的可操作领域
 
-- `alarm_control_panel` If a code is not required will allow for `arm_away` & `disarm` otherwise no action
+- `alarm_control_panel` 如果不需要代码则允许 `arm_away` 和 `disarm`，否则无操作
 - `button`
 - `cover`
 - `fan`
@@ -28,55 +28,55 @@ In order to use the app in your vehicle you will need to be signed in to either 
 - `switch`
 
 :::note
-The amount of entities shown will depend on the imposed limit set by the vehicle.
+显示的实体数量将取决于车辆设置的限制。
 :::
 
-### Favorites
+### 收藏夹
 
-If you would like to gain quick access to certain entities you can select some entities to be shown in the app. When you are parked simply go to [Settings](https://my.home-assistant.io/redirect/config/) > Companion app > Android Auto favorites (or Driving favorites) and select the entities you wish to view. Once you have added favorites the next time you start the Home Assistant app in the vehicle you will be shown your favorite entities. From there you can toggle entities, navigate to an entity, view all entities and also change your server.
+如果您希望快速访问某些实体，可以选择一些实体在应用中显示。当您停车时，只需前往 [设置](https://my.home-assistant.io/redirect/config/) > 伴随应用 > Android Auto 收藏夹（或驾驶收藏夹），然后选择您希望查看的实体。一旦您添加了收藏夹，下次在车辆中启动 Home Assistant 应用时，将显示您的收藏实体。从那里您可以切换实体、导航到实体、查看所有实体，以及更改您的服务器。
 
-In addition to adding the above supported domains you can also add `binary_sensor` and `sensor` entities to favorites in order to view their state in the driving interface.
+除了添加上面支持的领域外，您还可以将 `binary_sensor` 和 `sensor` 实体添加到收藏夹，以便在驾驶界面查看它们的状态。
 
 :::info
-If you installed the app from the Google Play Store on your AAOS vehicle then currently you will not be able to set your favorite entities. In the meantime you are free to use the AA app.
+如果您是在 AAOS 车辆上从 Google Play 商店安装的应用程序，那么目前您将无法设置您的收藏实体。在此期间，您可以自由使用 AA 应用程序。
 :::
 
-### Notifications
+### 通知
 
-By default Home Assistant notifications do not show up in the AA interface. To show Home Assistant notifications in AA, add [`car_ui: true` to the notification data](../notifications/basic.md#android-auto-visibility). Notifications will now show up on your phone _and_ in AA. Opening the notification from AA will open the driving interface for Home Assistant.
+默认情况下，Home Assistant 的通知不会出现在 AA 界面中。要在 AA 中显示 Home Assistant 通知，请在通知数据中添加 [`car_ui: true`](../notifications/basic.md#android-auto-visibility)。现在通知将在您的手机 _和_ AA 中显示。从 AA 打开通知将打开 Home Assistant 的驾驶界面。
 
-Notifications in AA, share settings with your phone and do not support all notification features. For example, in order to have a notification show on top of the current screen in AA, the notification channel will also need to be set to pop up on your phone. For the best experience, it is recommended to use a specific [channel](../notifications/basic.md#notification-channels) for notifications that should be visible in AA. Example:
+AA 中的通知与您的手机共享设置，且不支持所有通知功能。例如，为了让通知显示在 AA 当前屏幕的顶层，通知频道也需要设置为在您的手机上弹出。为了获得最佳体验，建议使用特定的 [频道](../notifications/basic.md#notification-channels) 来显示应该在 AA 中可见的通知。例如：
 
 ```yaml
-  - alias: Send door unlocked alert
+  - alias: 发送门未锁警报
     trigger:
       ...
     action:
       - action: notify.mobile_app_<your_device_id_here>
         data:
-          title: "Door unlocked"
-          message: "Everyone left home but the door is still unlocked"
+          title: "门未锁"
+          message: "大家都离开家了，但门仍是未锁定的"
           data:
             car_ui: true
             notification_icon: "mdi:door-open"
-            channel: "Door unlocked"
+            channel: "门未锁"
             importance: high
 ```
 
-### Sensors
+### 传感器
 
-The sensors available for AA and AAOS are described on the main [sensors](../core/sensors.md#android-sensors) page. The below list of sensors are unique to AA and AAOS:
+可用于 AA 和 AAOS 的传感器在主 [传感器](../core/sensors.md#android-sensors) 页面上进行了描述。以下传感器列表是 AA 和 AAOS 独有的：
 
-*  [Android Auto Connection](../core/sensors.md#android-auto)
-*  [Car Sensors](../core/sensors.md#car-sensors)
+*  [Android Auto 连接](../core/sensors.md#android-auto)
+*  [汽车传感器](../core/sensors.md#car-sensors)
 
-Enabling or disabling sensors is only possible while the vehicle is parked. How to change your enabled sensors, depends on how you installed the app:
+启用或禁用传感器仅在车辆停放时可用。更改您的启用传感器的方法取决于您如何安装该应用程序：
 
- - Installed from the Play Store
-   1. On another device, go to [**Settings** > **Devices & services**](https://my.home-assistant.io/redirect/integrations/) > **Devices**, and select your vehicle.
-   2. Select the sensor you want to change, click on the cogwheel, and turn **Enabled** on or off. 
-   3. Start the app in your vehicle to update the sensors.
-   4. If you enabled any sensors that require special permissions, the app will post a notification to complete enabling them. Tap on the notification to open the app, enable the sensor again and grant any requested permissions.
- - Installed from the car manufacturer's store
-   1. Tap on **Native mode** in the top right of the screen.
-   2. Go to **Settings** > **Companion app** > **Manage sensors**, and enable or disable your sensors.
+ - 从 Play 商店安装
+   1. 在另一台设备上，前往 [**设置** > **设备与服务**](https://my.home-assistant.io/redirect/integrations/) > **设备**，并选择您的车辆。
+   2. 选择想要更改的传感器，点击齿轮图标，然后打开或关闭 **启用**。
+   3. 在您的车辆中启动应用程序以更新传感器。
+   4. 如果您启用了任何需要特殊权限的传感器，该应用会发布通知以完成启用。点击通知打开应用，重新启用传感器并授权任何请求的权限。
+ - 从汽车制造商的商店安装
+   1. 点击屏幕右上角的 **原生模式**。
+   2. 前往 **设置** > **伴随应用** > **管理传感器**，启用或禁用您的传感器。

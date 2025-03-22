@@ -1,85 +1,84 @@
 ---
-title: "Android Widgets"
+title: "Android小部件"
 id: 'android-widgets'
 ---
 
-The ![Android](/assets/android.svg) Android app allows the user to create widgets on the home screen so the user can perform a variety of actions like perform an action, display the state of an entity or even render a template. You can add the widget like you normally would for any app depending on your devices launcher. The widget will not work when Data Saver is enabled, you will also need to ensure that background data for the app is enabled. If you notice that a widget is no longer working try to recreate it. Widgets can also be edited by navigating to [Settings](https://my.home-assistant.io/redirect/config/) > Companion App > Manage Widgets, if you are on Android 12 you can also edit the widget by long pressing it and clicking on the edit icon.
+该 ![Android](/assets/android.svg) Android 应用程序允许用户在主屏幕上创建小部件，以便用户可以执行各种操作，例如执行操作、显示实体的状态或甚至呈现模板。您可以像通常在任何应用程序中一样根据设备的启动器添加小部件。当数据节省模式启用时，小部件将无法工作，您还需要确保应用程序的后台数据已启用。如果您发现小部件不再工作，请尝试重新创建它。也可以通过导航到 [设置](https://my.home-assistant.io/redirect/config/) > Companion App > 管理小部件来编辑小部件，如果您在 Android 12 上，也可以通过长按小部件并单击编辑图标来编辑小部件。
 
-Widgets can also be added from the Manage Widgets settings page, as long as the device supports it.
+只要设备支持，也可以从管理小部件设置页面添加小部件。
 
-## Available widgets
+## 可用小部件
 
-### Action button
+### 动作按钮
 
-This widget will perform an action when it is tapped. The user will see a green check mark if the call was successful and red if not. Red would indicate either the widget was not setup properly, the Home Assistant server is unavailable or some other error that would be indicated in the Home Assistant log.
+此小部件在被点击时将执行一个动作。如果调用成功，用户将看到一个绿色的勾号，如果不成功，则显示红色。红色表示小部件未正确设置、Home Assistant 服务器不可用或其他在 Home Assistant 日志中指示的错误。
 
-You may set the checkbox "Require authentication". If it is set, device credentials (i.e. PIN, pattern, biometrics ...) are required before the action is performed.
+您可以设置复选框“需要身份验证”。如果选中，则在执行操作之前需要设备凭据（即 PIN、模式、生物识别……）。
 
-1.  Long press on any open space in the home screen
-2.  Scroll down to Home Assistant in the widget list
-3.  Drag the Action button widget to an open space on the home screen
-4.  Select the action you wish to perform
-5.  Fill in the required action data for the selected action
-6.  Supply a name and icon for the widget
-7.  Save the widget
+1.  在主屏幕的任何空白处长按
+2.  在小部件列表中向下滚动到 Home Assistant
+3.  将动作按钮小部件拖到主屏幕的空白处
+4.  选择您希望执行的操作
+5.  填写所选操作所需的操作数据
+6.  为小部件提供名称和图标
+7.  保存小部件
 
-### Entity State
+### 实体状态
 
-This widget will be updated when the entity state changes or when it is manually refreshed. This widget will allow the user to select any entity they wish to get the state and an attribute from as well as setting the text size and adding a custom separator between the state and attributes.
+当实体状态更改或手动刷新时，此小部件将被更新。该小部件将允许用户选择他们希望获取状态和属性的任何实体，并设置文本大小，并在状态和属性之间添加自定义分隔符。
 
-1.  Long press on any open space in the home screen
-2.  Scroll down to Home Assistant in the widget list
-3.  Drag the Entity State widget to an open space on the home screen
-4.  Enter the Entity ID you wish to view the state of
-5.  If needed select the attribute checkbox and select the attribute you wish to add to the state
-6.  If needed adjust the widget text size
-7.  If needed add a custom separator to sit between the state and attribute
-8.  If supported choose the tap action for the widget: toggle the entity or refresh the state manually (if not supported a tap will refresh)
-9.  Supply a name for the widget
-10.  Save the widget
+1.  在主屏幕的任何空白处长按
+2.  在小部件列表中向下滚动到 Home Assistant
+3.  将实体状态小部件拖到主屏幕的空白处
+4.  输入您希望查看状态的实体 ID
+5.  如果需要，选择属性复选框并选择您希望添加到状态的属性
+6.  如果需要，调整小部件文本大小
+7.  如果需要，添加自定义分隔符以位于状态和属性之间
+8.  如果支持，选择小部件的点击操作：切换实体或手动刷新状态（如果不支持，单击将刷新）
+9.  为小部件提供名称
+10.  保存小部件
 
+### 媒体播放器
 
-### Media Player
+此小部件将让用户控制主屏幕上的任何媒体播放器，并在媒体播放器状态更改或点击专辑封面时进行更新。可以隐藏或显示查找和跳过按钮的几个选项可供选择。
 
-This widget will let the user control any media player on their home screen and will be updated when the media player state changes or when the album art is tapped. There are a couple of options available to hide or show the seek and skip buttons.
+1.  在主屏幕的任何空白处长按
+2.  在小部件列表中向下滚动到 Home Assistant
+3.  将媒体播放器小部件拖到主屏幕的空白处
+4.  输入您希望控制的实体 ID。您也可以输入多个实体 ID，按从左到右的优先级排序。
+5.  如果需要，隐藏查找/跳过按钮、媒体源标签，或显示音量按钮
+6.  为小部件提供标签
+7.  保存小部件
 
-1.  Long press on any open space in the home screen
-2.  Scroll down to Home Assistant in the widget list
-3.  Drag the Media Player widget to an open space on the home screen
-4.  Enter the Entity ID you wish to control. You can also enter multiple Entity ID's, prioritized from left to right.
-5.  If needed hide the Seek/Skip buttons, the media source label, or show the Volume buttons
-6.  Supply a label for the widget
-7.  Save the widget
+### 图片
 
-### Picture
+此小部件显示相机或图像实体的最新快照，并每小时更新或在点击小部件时更新（基于配置的点击操作）。
 
-This widget shows the latest snapshot of a camera or an image entity, and updates every hour or when the widget is tapped(based on the configured tap action).
+1.  在主屏幕的任何空白处长按
+2.  在小部件列表中向下滚动到 Home Assistant
+3.  将相机小部件拖到主屏幕的空白处
+4.  输入您希望使用的相机的实体 ID
+5.  选择点击时的期望操作（“刷新”以从相机更新图像，“打开”以打开相机实体）
+6.  保存小部件
 
-1.  Long press on any open space in the home screen
-2.  Scroll down to Home Assistant in the widget list
-3.  Drag the Camera Widget to an open space on the home screen
-4.  Enter the Entity ID of the camera you wish to use
-5.  Select the desired action on tap ("Refresh" to update the image from the camera, "Open" to open the camera entity)
-6.  Save the widget
+### 模板
 
-### Template
+此小部件将显示您希望在小部件中显示的任何文本，使用 [Home Assistant 的模板功能](https://www.home-assistant.io/docs/configuration/templating/)。这是一个高级功能，但允许用户显示各种数据。模板将在相关状态更改时瞬间更新。编辑小部件时，模板将显示在文本框下面，以便您可以预览它的外观。
 
-This widget will display any text that you wish to show in a widget using [Home Assistants templating feature](https://www.home-assistant.io/docs/configuration/templating/). This is an advanced feature but allows the user to display a wide variety of data. The template will be updated instantly on relevant states changes. When editing the widget, the template will be shown below the text field so you can preview what it would look like.
+您还可以使用 HTML 来格式化所显示的文本，例如添加新行（`<br>`）、加粗某些内容（`<b>`）或放大（`<big>`）、改变颜色（`<font color='#03a9f4'>`）或将其对齐至行的开始或结束（`<p style="text-align: end">`）。
 
-You may also use HTML to format the text displayed such as adding a new line (`<br>`), making something bold (`<b>`) or large (`<big>`), changing the color (`<font color='#03a9f4'>`) or aligning it to the start or end of a line (`<p style="text-align: end">`).
+如果小部件中的模板未即时更新，您很可能遇到了 [速率限制](https://www.home-assistant.io/integrations/template/#rate-limiting-updates)。尝试优化您的模板以获取更快的更新，或点击小部件以手动更新。您还可以在 [`开发者工具 > 模板`](https://my.home-assistant.io/redirect/developer_template/) 中使用预览来测试您的模板更新。
 
-If the template in the widget isn't updating instantly, you're most likely hitting [rate limits](https://www.home-assistant.io/integrations/template/#rate-limiting-updates). Try optimizing your template to get faster updates, or tap on the widget to update it manually. You can also use the preview in [`Developer Tools > Template`](https://my.home-assistant.io/redirect/developer_template/) to test your template updates.
+1.  在主屏幕的任何空白处长按
+2.  在小部件列表中向下滚动到 Home Assistant
+3.  将模板小部件拖到主屏幕的空白处
+4.  填写模板数据并观察下面的渲染效果
+5.  保存小部件
 
-1.  Long press on any open space in the home screen
-2.  Scroll down to Home Assistant in the widget list
-3.  Drag the Template widget to an open space on the home screen
-4.  Fill in the template data and observe the rendering below
-5.  Save the widget
+## 主题
 
-## Theming
+大多数小部件允许选择要使用的主题。可用的主题取决于您的设备和特定小部件。可能的选项包括：
 
-Most widgets allow selecting a theme to use. The available themes depend on your device and the specific widget. Possible options are:
-
- - *Dynamic color*: uses the colors from your device and wallpaper to make the widget fit in with your home screen and device. This theme is only available on supported devices running Android 12 or newer.
- - *Light/dark theme*: uses your device theme to make the widget fit in with your apps.
- - *Transparent*: removes the widget background and allows you to set a text/icon color, to make the widget stand out less.
+- *动态颜色*：使用设备和墙纸的颜色，使小部件与您的主屏幕和设备协调。这一主题仅在支持的设备上运行 Android 12 或更新版本时可用。
+- *浅色/深色主题*：使用您的设备主题使小部件与您的应用程序协调。
+- *透明*：去除小部件背景，并允许您设置文本/图标颜色，使小部件更不显眼。

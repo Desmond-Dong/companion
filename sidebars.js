@@ -7,15 +7,15 @@
 
 module.exports = {
   docs: {
-    'Getting Started': [
+    '入门指南': [
       'getting_started/getting-started'],
-    'Core Features': [
+    '核心功能': [
       'core/core',
       'core/actions',
       'core/android-flavors',
       'core/location',
       'core/sensors'],
-    'Notifications': [
+    '通知': [
       'notifications/notifications-basic',
       'notifications/actionable-notifications',
       {
@@ -34,7 +34,7 @@ module.exports = {
       'notifications/notification-local',
       'notifications/notification-received',
     ],
-    'Integrations': [
+    '集成': [
       'integrations/integrations',
       'integrations/android-device-controls',
       'integrations/android-quick-settings',
@@ -67,17 +67,17 @@ module.exports = {
     'Meta Quest': [
       'meta-quest/meta-quest'
     ],
-    'Troubleshooting': [
+    '故障排除': [
       'troubleshooting/faqs',
       'troubleshooting/errors',
       'troubleshooting/networking',
       'troubleshooting/resetting',
-      'troubleshooting/troubleshooting-integrations',
+      'troubleshooting/故障排除-集成',
       'troubleshooting/more-help'
     ]
   },
   gallery: {
-    'Gallery': [
+    '画廊': [
       'gallery/android'
     ]
   },

@@ -1,10 +1,10 @@
 ---
-title: "Android Flavors"
+title: "Android 变种"
 id: 'android-flavors'
 ---
 
-The ![Android](/assets/android.svg) Android app is being offered in 2 different flavors as either `full` or `minimal`. The `full` flavor of the app is offered via the [Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android) and has the full set of features offered as it requires Google Play Services. The `full` flavor is offered for both production and [beta releases](https://play.google.com/apps/testing/io.homeassistant.companion.android).
+![Android](/assets/android.svg) Android 应用程序提供两种不同的变种，分别为 `full` 或 `minimal`。`full` 版本的应用程序通过 [Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android) 提供，拥有完整的功能集，因为它需要 Google Play 服务。`full` 版本同时提供生产和 [beta 版本](https://play.google.com/apps/testing/io.homeassistant.companion.android)。
 
-The `minimal` flavor of the app does not require Google Play Services and can be found on the [releases](https://github.com/home-assistant/android/releases) section on GitHub as an APK. It can also be installed from [F-Droid](https://f-droid.org/en/packages/io.homeassistant.companion.android.minimal). However, updates may be delayed because F-Droid builds new releases themselves. This flavor of the app does not offer location tracking. The only sensors that will not be available are: [Activity](/core/sensors.md#activity-sensors) and [Geocoded](/core/sensors.md#geocoded-location-sensor).
+`minimal` 版本的应用程序不需要 Google Play 服务，可以在 GitHub 的 [releases](https://github.com/home-assistant/android/releases) 部分找到 APK。也可以从 [F-Droid](https://f-droid.org/en/packages/io.homeassistant.companion.android.minimal) 安装。然而，由于 F-Droid 自行构建新版本，更新可能会延迟。该版本的应用程序不提供位置跟踪。唯一不可用的传感器是：[Activity](/core/sensors.md#activity-sensors) 和 [Geocoded](/core/sensors.md#geocoded-location-sensor)。
 
-In addition to these 2 flavors users can also find `debug` APKs on the [actions](https://github.com/home-assistant/android/actions) section for each pull request submitted to GitHub. The `debug` version of the app can be installed side by side the production or beta version of the app. This allows users to help test upcoming features and fixes. Both the `minimal` and `full` flavors offer a `debug` version.
+除了这两种变种，用户还可以在每个提交到 GitHub 的拉取请求的 [actions](https://github.com/home-assistant/android/actions) 部分找到 `debug` APK。应用程序的 `debug` 版本可以与生产或测试版应用程序并行安装。这使用户能够帮助测试即将推出的功能和修复。`minimal` 和 `full` 版本均提供 `debug` 版本。

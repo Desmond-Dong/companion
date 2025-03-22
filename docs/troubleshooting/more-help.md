@@ -1,17 +1,17 @@
 ---
-title: Getting more help
+title: 获取更多帮助
 id: more-help
 ---
 
-If after reading the docs here you are still having issues, try the following resources.
+如果在阅读了这里的文档后仍然有问题，请尝试以下资源。
 
-**For general help and configuration advice**
-*   Visit the [Companion Apps channel](https://discord.com/channels/330944238910963714/1284965926336335993)
-*   Post on the [iOS forums](https://community.home-assistant.io/c/mobile-apps/ios) or [Android forums](https://community.home-assistant.io/c/mobile-apps/android-companion).
+**有关一般帮助和配置建议**
+*   访问 [Companion Apps 频道](https://discord.com/channels/330944238910963714/1284965926336335993)
+*   在 [iOS 论坛](https://community.home-assistant.io/c/mobile-apps/ios) 或 [Android 论坛](https://community.home-assistant.io/c/mobile-apps/android-companion) 发帖。
 
-**For bug reports or feature requests**
-*   Please raise an issue on the [iOS GitHub repository](https://github.com/home-assistant/iOS) or the [Android GitHub repository](https://github.com/home-assistant/android).
+**有关错误报告或功能请求**
+*   请在 [iOS GitHub 仓库](https://github.com/home-assistant/iOS) 或 [Android GitHub 仓库](https://github.com/home-assistant/android) 提出问题。
 
-**For issues, corrections or amendments to these docs**
-*   Either use the edit button on the page you wish to amend (docs are written in [Markdown](https://daringfireball.net/projects/markdown/syntax)), you will need a [GitHub](https://www.github.com) account to submit changes; or
-*   raise an issue on the [GitHub repository](https://github.com/home-assistant/companion.home-assistant) for the docs.
+**有关这些文档的问题、修正或修改**
+*   可以使用您希望修改的页面上的编辑按钮（文档是用 [Markdown](https://daringfireball.net/projects/markdown/syntax) 编写的），您需要一个 [GitHub](https://www.github.com) 账户来提交更改；或
+*   在 [GitHub 仓库](https://github.com/home-assistant/companion.home-assistant) 上提出与文档相关的问题。

@@ -1,83 +1,83 @@
 ---
-title: Getting Started
+title: 入门指南
 id: getting-started
 ---
 
-## Installation
+## 安装
 
-This sections provides the minimal system requirements and installation instructions.
+本节提供最低系统要求和安装说明。
 
-### System Requirements
+### 系统要求
 
-- The iOS App requires iOS 15 or greater, this means the oldest device supported is the iPhone 6s. 
-- The Android app has 2 separate flavors `full` or `minimal`. Both flavors require Android 5.0 or greater. The `full` flavor is the one offered via the Play Store and requires Google Play Services in order to function properly. More details on the differences between the 2 flavors can be found [here](../core/android-flavors.md).
-- You need to be running Home Assistant 0.104.0 or newer.
-- The mobile apps requires the following integrations to be enabled in your Home Assistant instance, `configuration.yaml`:
+- iOS 应用需要 iOS 15 或更高版本，这意味着支持的最旧设备是 iPhone 6s。
+- Android 应用有两个独立的版本 `full` 或 `minimal`。两个版本都需要 Android 5.0 或更高版本。`full` 版本是通过 Play Store 提供的，并且需要 Google Play 服务才能正常运行。关于这两个版本之间的区别的更多细节可以在 [这里](../core/android-flavors.md) 找到。
+- 您需要运行 Home Assistant 0.104.0 或更新版本。
+- 移动应用需要在您的 Home Assistant 实例中启用以下集成，`configuration.yaml`：
   - `default_config:`
-- If for some reason you have disabled `default_config:` make sure your `configuration.yaml` at least contains:
+- 如果出于某种原因您禁用了 `default_config:`，请确保您的 `configuration.yaml` 至少包含：
   - `mobile_app:`
-- For some features the following integrations also need to be enabled:
-  - `cloud:` is used for securely connecting to your Home Assistant via Nabu Casa subscription via Remote UI and cloud webhooks
-  - `ios:` is used if you want advanced notifications like actionable notifications and categories ![iOS](/assets/iOS.svg)
+- 对于某些功能，还需要启用以下集成：
+  - `cloud:` 用于通过 Nabu Casa 订阅通过远程用户界面和云网络挂钩安全连接到您的 Home Assistant
+  - `ios:` 如果您希望获得像可操作通知和类别这样的高级通知，请使用此项 ![iOS](/assets/iOS.svg)
 
-## Setting Up
+## 设置
 
-- If your Home Assistant instance is correctly set up for [remote access](https://www.home-assistant.io/docs/configuration/remote/), you should be able set up the Companion App from any location.
-- If you're connected to the same network as your Home Assistant, it will automatically be detected during set up.
+- 如果您的 Home Assistant 实例已正确设置为 [远程访问](https://www.home-assistant.io/docs/configuration/remote/)，您应该能够从任何位置设置 Companion 应用。
+- 如果您与 Home Assistant 处于同一网络，则在设置期间将自动检测到。
 
-1. Download the Home Assistant Companion App from the [iOS App Store](https://apps.apple.com/app/home-assistant/id1099568401) or [Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android).
-2. When you open the app for the first time, you'll be guided through the process of connecting to your Home Assistant instance. Follow the steps.
-   - You are asked to grant the required permissions to integrate your phone with Home Assistant.
-   - One of the permissions requested is for location access.
-   - If this permission is denied, then you will not get a `device_tracker` or any `sensor` entity created for the device.
+1. 从 [iOS App Store](https://apps.apple.com/app/home-assistant/id1099568401) 或 [Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android) 下载 Home Assistant Companion 应用。
+2. 当您第一次打开应用时，将引导您完成连接到 Home Assistant 实例的过程。请按照步骤操作。
+   - 您需要授予所需的权限以将您的手机与 Home Assistant 集成。
+   - 一个请求的权限是位置访问。
+   - 如果拒绝此权限，则不会为该设备创建 `device_tracker` 或任何 `sensor` 实体。
 
-    <img alt="Screenshot showing location tracking permission setting during onboarding" src="/assets/android_enable_location_tracking.png" width='400'/>
+    <img alt="截图显示设置过程中位置跟踪权限设置" src="/assets/android_enable_location_tracking.png" width='400'/>
 
-3. Once you are done on the first screen, select **Continue**.
-   - The app will start checking your network for Home Assistant instances.
-     - If an instance is found, tap the instance and follow the prompts to connect and log in to your Home Assistant.
-     - If you are not connected to the same local network as your Home Assistant instance, tap **Enter Address Manually** and enter the address you use to remotely connect to your Home Assistant instance (using the [Home Assistant Cloud](https://www.nabucasa.com/config/remote/) Remote UI is recommended but not required).
-4. Once you have connected and logged into your Home Assistant instance, you will be asked to grant permission for the app to work with your iOS device beyond basic browsing of your Home Assistant instance.
-   - You are not required to grant these permissions in order to use the app.
-   - However, they provide a much greater degree of integration between your device and Home Assistant.
-   - The permissions that are requested are the following:
+3. 在您完成第一个屏幕的操作后，选择 **继续**。
+   - 应用将开始检查您的网络中的 Home Assistant 实例。
+     - 如果找到实例，点击该实例并按照提示连接并登录到您的 Home Assistant。
+     - 如果您没有连接到与您的 Home Assistant 实例相同的本地网络，请点击 **手动输入地址**，并输入您用于远程连接到 Home Assistant 实例的地址（使用 [Home Assistant Cloud](https://www.nabucasa.com/config/remote/) 远程用户界面是推荐的，但不是必须的）。
+4. 连接并登录到您的 Home Assistant 实例后，您将被要求授权应用与您的 iOS 设备进行基本浏览以外的操作。
+   - 您不必授予这些权限即可使用该应用。
+   - 但是，它们提供了您的设备与 Home Assistant 之间更大的集成程度。
+   - 请求的权限如下：
 
-     - **Location:** Allows your device to provide location to Home Assistant, a `device_tracker` entity will be created which can be used in automations and conditions within Home Assistant. As mentioned above, due to changes in iOS 13, this permission is requested before logging into Home Assistant. For Android this permission is requested as part of the onboarding process when you first log in. If this permission is denied then `device_tracker` and `sensor` entities will not be created.
-     - **Motion & Pedometer:** ![iOS](/assets/iOS.svg) Allows Home Assistant to access pedometer data from your iOS device, this creates sensors for the number of steps taken today, floors ascended and descended, distance walked today, and current activity. It does not provide any access to data held within the Health app or any other data beyond basic motion data from the device's motion chip.
-     - **Notifications:** Allows notifications to be sent to your device by Home Assistant. Along with normal notifications, Home Assistant can send Critical Notifications; these are intended for high-priority messages and will always play a sound even if the device is in silent mode ![iOS](/assets/iOS.svg). You will be asked to give permission for both notification types. Check for the ![Android](/assets/android.svg) Android logo to see what is currently supported on Android devices. You may need to restart Home Assistant once after logging in for the notification action to register.
+     - **位置：** 允许您的设备提供位置给 Home Assistant，会创建一个 `device_tracker` 实体，您可以在 Home Assistant 中用来进行自动化和条件处理。如上所述，由于 iOS 13 的变更，此权限在登录 Home Assistant 之前请求。对于 Android，此权限在首次登录时作为入门过程的一部分请求。如果拒绝此权限，则不会创建 `device_tracker` 和 `sensor` 实体。
+     - **运动与计步器：** ![iOS](/assets/iOS.svg) 允许 Home Assistant 访问您的 iOS 设备的计步器数据，这会创建传递今天步数、上升和下降楼层数、今天步行的距离及当前活动的传感器。它不提供对 Health 应用中的数据或其他超出设备运动芯片的基本运动数据的访问。
+     - **通知：** 允许 Home Assistant 将通知发送到您的设备。除了普通通知外，Home Assistant 还可以发送紧急通知；这些通知用于高优先级消息，即使设备处于静音模式下也会始终播放声音 ![iOS](/assets/iOS.svg)。系统会要求您对这两种通知类型给予许可。检查 ![Android](/assets/android.svg) Android 标志以查看当前在 Android 设备上支持的内容。您可能需要在登录后重新启动 Home Assistant 才能使通知功能注册。
 
-      <img alt="Home assistant setting up the app" src="/assets/android_allow_notifications.png" width='450' />
+      <img alt="Home assistant 设置应用" src="/assets/android_allow_notifications.png" width='450' />
 
-5. Once you have granted or denied permissions, the app will create the required connections to your Home Assistant instance and then take you to your Home Assistant home screen.
-   - Depending on the app version, you may see a "What's New" screen in between the end of setup and be taken to your home screen.
-   - Once you see the home screen, the installation is complete.
-6. If you have difficulties completing setting up the app, refer to the [troubleshooting guide](../troubleshooting/setup.md).
+5. 一旦您授予或拒绝权限，应用将创建与您的 Home Assistant 实例所需的连接，然后带您进入 Home Assistant 主屏幕。
+   - 根据应用版本，您可能会看到“新内容”屏幕，在设置结束后再带您进入主页。
+   - 一旦您看到主页，安装就完成了。
+6. 如果您在完成设置应用时遇到困难，请参考 [故障排除指南](../troubleshooting/setup.md)。
 
 :::info
-Remember to login using your credentials and not to use [Trusted Networks](https://www.home-assistant.io/docs/authentication/providers/#trusted-networks), if you have that enabled otherwise the app will only work on the trusted network.
+请记得使用您的凭据登录，不要使用 [受信网络](https://www.home-assistant.io/docs/authentication/providers/#trusted-networks)，如果您启用了此功能，否则应用仅能在受信网络上工作。
 :::
 
-## Adding Additional Servers
+## 添加额外的服务器
 
-![iOS](/assets/iOS.svg) or ![Android](/assets/android.svg)
+![iOS](/assets/iOS.svg) 或 ![Android](/assets/android.svg)
 
 :::note
-Requires Home Assistant 2021.10 or newer.
+需要 Home Assistant 2021.10 或更高版本。
 :::
 
-Once you have set up your first server, you can add additional Home Assistant instances.
+一旦您设置了第一个服务器，您可以添加其他 Home Assistant 实例。
 
-1. In the Companion app, go to [Settings](https://my.home-assistant.io/redirect/config/) > **Companion App**.
-2. Select the **Add Server** option.
-   - Servers on the same local network as your device will be discovered and listed automatically.
-3. If the new server is not listed automatically, enter the address in the same way as setting up the first server.
+1. 在 Companion 应用中，转到 [设置](https://my.home-assistant.io/redirect/config/) > **Companion 应用**。
+2. 选择 **添加服务器** 选项。
+   - 与您的设备在同一局域网中的服务器将会被自动发现并列出。
+3. 如果新服务器没有自动列出，请以与设置第一个服务器相同的方式输入地址。
 
-## TLS Client Authentication
+## TLS 客户端认证
 
 ![Android](/assets/android.svg)
 
-If your Home Assistant requires TLS Client Authentication (because it is behind a reverse proxy configured to perform TLS Client Authentication), the app will ask for a certificate. If no matching certificate is installed or supplied, you might see an error or a blank screen depending on your setup.
+如果您的 Home Assistant 需要 TLS 客户端认证（因为它在配置为执行 TLS 客户端认证的反向代理后面），应用将要求提供证书。如果没有安装或提供匹配的证书，您可能会看到错误或空白屏幕，具体取决于您的设置。
 
-Please refer to your device and Android version documentation to install the certificate. Make sure to install the certificate as a "VPN & app user certificate". An example for Pixel phones is available here: [Add & remove certificates](https://support.google.com/pixelphone/answer/2844832?hl=en).
+请参考您的设备和 Android 版本文档以安装证书。确保将证书安装为“VPN 和应用用户证书”。Pixel 手机的示例可在此处查找：[添加和移除证书](https://support.google.com/pixelphone/answer/2844832?hl=zh-Hans)。
 
-Wear OS does not support authentication with installed certificates. The app cannot transfer the certificate to the Wear OS app automatically, therefore you are asked to provide a certificate during the Wear OS app onboarding. The certificate and key need to be provided as a single file in PKCS12 format. If that does not work, refer to the [troubleshooting steps](../troubleshooting/networking.md#tls-client-authentication).
+Wear OS 不支持使用已安装的证书进行认证。应用无法将证书自动传输到 Wear OS 应用，因此在 Wear OS 应用的入门过程中，您需要提供证书。证书和密钥需要作为单个 PKCS12 格式的文件提供。如果这不可行，请参考 [故障排除步骤](../troubleshooting/networking.md#tls-client-authentication)。

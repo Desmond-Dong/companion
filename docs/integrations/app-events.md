@@ -1,32 +1,31 @@
 ---
-title: App Events
+title: 应用事件
 id: 'app-events'
 ---
 
-## Overview
+## 概述
 
 
-To help with running automations, such as clearing app icon badges, or other tasks you may wish to trigger based on app usage the Home Assistant Companion Apps will fire different events onto the Home Assistant [event bus](https://www.home-assistant.io/docs/configuration/events/) during certain situations.
+为了帮助运行自动化任务，例如清除应用图标徽章，或者根据应用使用情况触发的其他任务，Home Assistant Companion Apps 会在某些情况下向 Home Assistant 的 [事件总线](https://www.home-assistant.io/docs/configuration/events/) 发送不同的事件。
 
 ![iOS](/assets/iOS.svg)<br />
 
-| Event | Cause |
+| 事件 | 原因 |
 | ----- | ----- |
-| `ios.finished_launching` | The app opens when not already running in the background. This will also cause `ios.became_active` to be fired. |
-| `ios.entered_background` | The app is closed but left running in background (by either pressing the home button or swiping up on model without a home button). |
-| `ios.became_active` | The app is opened whether or not it was already in the background. |
-| `ios.zone_entered` | A zone was entered. If this zone is smaller than 100m, this will include a `multi_region_zone_id` key. |
-| `ios.zone_exited` | A zone was exited. If this zone is smaller than 100m, this will include a `multi_region_zone_id` key. |
+| `ios.finished_launching` | 当应用未在后台运行时打开应用。这也会导致 `ios.became_active` 被触发。 |
+| `ios.entered_background` | 应用已关闭，但仍在后台运行（通过按下主屏按钮或在无主屏按钮的机型上向上滑动）。 |
+| `ios.became_active` | 应用被打开，无论它是否已经在后台。 |
+| `ios.zone_entered` | 进入了一个区域。如果该区域小于100米，将包括 `multi_region_zone_id` 键。 |
+| `ios.zone_exited` | 离开了一个区域。如果该区域小于100米，将包括 `multi_region_zone_id` 键。 |
 
 ![Android](/assets/android.svg)
 
-
-| Event | Cause |
+| 事件 | 原因 |
 | ----- | ----- |
-| `android.intent_received` | When the app receives a broadcast intent for a registered intent from [Last Update Sensor](../core/sensors.md#last-update-trigger-sensor). Event data will contain the intent action string and any intent extras, if available. |
-| `android.navigation_started` | When a entity under the `Navigation` category is selected from Android Auto/Automotive. Event data will contain the selected entity ID. |
-| `android.zone_entered` | A zone was entered. Event data will contain all location data including the triggering zone. Available for [`full` flavor](/docs/core/android-flavors) users only. |
-| `android.zone_exited` | A zone was exited. Event data will contain all location data including the triggering zone. Available for [`full` flavor](/docs/core/android-flavors) users only. |
-| `mobile_app.migration_failed` | The app database was corrupted and has been reset during the migration to allow the app to open. Sensors will need to be re-enabled and widgets will need to be recreated. A notification will also be posted on the device informing the user of the issue. |
+| `android.intent_received` | 当应用收到来自 [最后更新传感器](../core/sensors.md#last-update-trigger-sensor) 的注册意图的广播意图时。事件数据将包含意图动作字符串和任何意图附加数据（如果有）。 |
+| `android.navigation_started` | 当从 Android Auto/Automotive 中选择一个 `Navigation` 类别下的实体时。事件数据将包含所选实体的 ID。 |
+| `android.zone_entered` | 进入了一个区域。事件数据将包含所有位置数据，包括触发区域。仅适用于 [`full` 版本](/docs/core/android-flavors) 用户。 |
+| `android.zone_exited` | 离开了一个区域。事件数据将包含所有位置数据，包括触发区域。仅适用于 [`full` 版本](/docs/core/android-flavors) 用户。 |
+| `mobile_app.migration_failed` | 应用数据库已损坏，并在迁移过程中被重置以允许应用打开。传感器需要重新启用，部件需要重新创建。设备上还会发布通知，告知用户出现问题。 |
 
-You can use the Events page within Home Assistant's developer tools to show all information contained with the event for a particular event by subscribing to the event you are interested in and carrying out the appropriate action with on your device.
+您可以使用 Home Assistant 的开发工具中的事件页面，通过订阅您感兴趣的事件并在设备上执行适当的操作，显示特定事件所包含的所有信息。
