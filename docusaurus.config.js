@@ -9,7 +9,7 @@ module.exports = {
   onBrokenLinks: 'ignore',
   i18n: {
     defaultLocale: 'cn',
-    locales: ['cn', 'en'],
+    locales: ['cn'],
   },
   themeConfig: {
     navbar: {
@@ -88,6 +88,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/home-assistant/companion.home-assistant/edit/master/',
+          path: 'docs', // Ensure the path to the docs folder is correct
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

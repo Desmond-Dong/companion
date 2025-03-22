@@ -20,7 +20,7 @@ module.exports = {
       'notifications/actionable-notifications',
       {
         'type': 'category',
-        'label': 'Attachments',
+        'label': '附件',
         'items': [
           'notifications/notification-attachments',
           'notifications/dynamic-content'
