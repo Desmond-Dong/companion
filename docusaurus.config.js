@@ -77,6 +77,12 @@ module.exports = {
         },
       ],
       copyright: `版权所有 © ${new Date().getFullYear()} Home Assistant。由 Docusaurus 构建。`,
+    scripts: [
+      {
+        src: 'https://hm.baidu.com/hm.js?861929bdb98476134bbae53567c75414',
+        async: true,
+      },
+    ],
     },
     image: 'img/default-social.png'
   },
