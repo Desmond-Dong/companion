@@ -87,9 +87,13 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'UA-57927901-7'
-        },
+      scripts: [
+        {
+          src: 'https://hm.baidu.com/hm.js?861929bdb98476134bbae53567c75414',
+          async: true,
+          defer: true
+        }
+      ],
       },
     ],
   ],
